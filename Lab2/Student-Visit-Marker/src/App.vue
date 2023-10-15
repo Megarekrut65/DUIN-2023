@@ -1,5 +1,13 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
+import { ref } from 'vue'
+
+const awesome = ref(false)
+function change() {
+  // update component state
+  awesome.value = !awesome.value
+}
+
 </script>
 
 <template>
@@ -39,7 +47,7 @@ import { RouterLink, RouterView } from 'vue-router'
             </RouterLink>
           </li>
 
-          <div>
+          <div v-if="awesome">
             <li class="nav-small-cap">
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
               <span class="hide-menu">Menu</span>
@@ -47,7 +55,7 @@ import { RouterLink, RouterView } from 'vue-router'
             <li class="sidebar-item">
               <RouterLink class="sidebar-link" to="/saves" aria-expanded="false">
                 <span>
-                  <i class="ti ti-list"></i>
+                  <i class="ti ti-bookmark"></i>
                 </span>
                 <span class="hide-menu">Saves</span>
               </RouterLink>
@@ -81,11 +89,33 @@ import { RouterLink, RouterView } from 'vue-router'
               <span class="hide-menu">Exit</span>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="/logout" aria-expanded="false">
+              <a class="sidebar-link" href="/login" aria-expanded="false">
                 <span>
                   <i class="ti ti-logout"></i>
                 </span>
-                <span class="hide-menu">Logout</span>
+                <span class="hide-menu" @click="change">Logout</span>
+              </a>
+            </li>
+          </div>
+          <div v-else>
+            <li class="nav-small-cap">
+              <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+              <span class="hide-menu">Account</span>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="/login" aria-expanded="false">
+                <span>
+                  <i class="ti ti-login"></i>
+                </span>
+                <span class="hide-menu" @click="change">Login</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="/register" aria-expanded="false">
+                <span>
+                  <i class="ti ti-user"></i>
+                </span>
+                <span class="hide-menu">Register</span>
               </a>
             </li>
           </div>
@@ -101,8 +131,8 @@ import { RouterLink, RouterView } from 'vue-router'
   <!--  Main wrapper -->
   <div class="body-wrapper">
       <!--  Header Start -->
-      <header class="app-header">
-        <nav class="navbar navbar-expand-lg navbar-light">
+      <header class="app-header" style="background-color: rgba(0, 0, 0, 0);">
+        <nav class="navbar navbar-expand-lg">
           <ul class="navbar-nav">
             <li class="nav-item d-block d-xl-none">
               <a class="nav-link sidebartoggler nav-icon-hover" id="headerCollapse" href="javascript:void(0)">

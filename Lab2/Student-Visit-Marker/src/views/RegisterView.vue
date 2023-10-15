@@ -1,0 +1,61 @@
+<script setup>
+import { RouterLink } from 'vue-router';
+import '../assets/css/custom.css'
+import {ref} from 'vue'
+
+const email = ref(""), password = ref(""), name = ref("")
+
+function submit(){
+    console.log(email.value, password.value, name.value)
+
+    return false;
+}
+
+</script>
+
+<template>
+    <main>
+        <div
+            class="position-relative overflow-hidden d-flex align-items-center justify-content-center">
+        <div class="d-flex align-items-center justify-content-center">
+            <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="card mb-0" style="padding-left: 10px; padding-right: 10px;">
+                <div class="card-body">
+                    <div  class="text-nowrap logo-img text-center d-block py-3">
+                    <img src="../assets/logo.png" width="280" alt="logo">
+                    </div>
+                    <p class="text-center">Make it easy</p>
+                    <form @submit="submit" action="#" onsubmit="return false;">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input v-model="name" type="text" class="form-control" name="name" required minlength="5">
+                    </div>
+                    <div class="mb-4">
+                        <label for="email" class="form-label">Email</label>
+                        <input v-model="email" type="email" class="form-control" name="email" required minlength="5">
+                    </div>
+                    <div class="mb-4">
+                        <label for="password" class="form-label">Password</label>
+                        <input v-model="password" type="password" class="form-control" name="password" minlength="8" required>
+                    </div>
+                    <div class="d-flex align-items-center mb-4">
+                        <p class="fs-4 mb-0 fw-bold">Already have an Account?</p>
+                        <RouterLink class="text-primary fw-bold ms-2" to="/login">Sign In</RouterLink>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <input type="submit" class="btn btn-primary py-8 fs-4 mb-4 rounded-2" value="Sign up">
+                        <div>
+                            <img src="../assets/google.svg" width="50" class="custom-btn">
+                        </div>
+                    </div>
+                    
+                    </form>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+    </main>
+</template>

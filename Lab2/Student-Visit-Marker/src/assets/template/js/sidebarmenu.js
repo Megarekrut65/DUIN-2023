@@ -30,9 +30,6 @@ $(function () {
 
   
     $(".sidebar-item a").on("click", function (e) {
-      console.log("CLick")
-      console.log($(this).parent().hasClass("selected"))
-
       if (!$(this).parent().hasClass("selected")) {
         $(".sidebar-item").each(function (e) {
           $(this).removeClass("selected");
