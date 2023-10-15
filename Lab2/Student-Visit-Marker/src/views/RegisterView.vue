@@ -2,11 +2,13 @@
 import { RouterLink } from 'vue-router';
 import '../assets/css/custom.css'
 import {ref} from 'vue'
+import {register} from '../assets/js/register'
 
 const email = ref(""), password = ref(""), name = ref("")
 
 function submit(){
     console.log(email.value, password.value, name.value)
+    register(name.value, email.value, password.value);
 
     return false;
 }
