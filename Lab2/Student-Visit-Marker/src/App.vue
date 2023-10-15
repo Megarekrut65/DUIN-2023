@@ -13,7 +13,7 @@ import { RouterLink, RouterView } from 'vue-router'
     <div>
       <div class="brand-logo d-flex align-items-center justify-content-between">
         <RouterLink to="/" class="text-nowrap logo-img">
-          <img src="src/assets/logo.png" width="180" alt="" />
+          <img src="./assets/logo.png" width="180" alt="" />
         </RouterLink>
         <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
           <i class="ti ti-x fs-8"></i>
@@ -21,9 +21,9 @@ import { RouterLink, RouterView } from 'vue-router'
       </div>
       <!-- Sidebar navigation-->
       <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
-        <ul id="sidebarnav">
+        <ul id="sidebarnav" class="sidebar-nav">
           <li>
-            <span><img src="src/assets/user-1.png" alt="" width="35" height="35" class="rounded-circle"></span>
+            <span><img src="./assets/user-1.png" alt="" width="35" height="35" class="rounded-circle"></span>
             <u class="hide-menu">Username</u>
           </li>
           <li class="nav-small-cap">
@@ -38,54 +38,58 @@ import { RouterLink, RouterView } from 'vue-router'
               <span class="hide-menu">Dashboard</span>
             </RouterLink>
           </li>
-          <li class="nav-small-cap">
-            <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-            <span class="hide-menu">Menu</span>
-          </li>
-          <li class="sidebar-item">
-            <RouterLink class="sidebar-link" to="/saves" aria-expanded="false">
-              <span>
-                <i class="ti ti-list"></i>
-              </span>
-              <span class="hide-menu">Saves</span>
-            </RouterLink>
-          </li>
-          <li class="sidebar-item">
-            <RouterLink class="sidebar-link" to="/templates" aria-expanded="false">
-              <span>
-                <i class="ti ti-cards"></i>
-              </span>
-              <span class="hide-menu">Templates</span>
-            </RouterLink>
-          </li>
-          <li class="sidebar-item">
-            <RouterLink class="sidebar-link" to="/about" aria-expanded="false">
-              <span>
-                <i class="ti ti-alert-circle"></i>
-              </span>
-              <span class="hide-menu">About</span>
-            </RouterLink>
-          </li>
-          <li class="sidebar-item">
-            <RouterLink class="sidebar-link" to="/contacts" aria-expanded="false">
-              <span>
-                <i class="ti ti-mail"></i>
-              </span>
-              <span class="hide-menu">Contacts</span>
-            </RouterLink>
-          </li>
-          <li class="nav-small-cap">
-            <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-            <span class="hide-menu">Exit</span>
-          </li>
-          <li class="sidebar-item">
-            <a class="sidebar-link" href="#" aria-expanded="false">
-              <span>
-                <i class="ti ti-logout"></i>
-              </span>
-              <span class="hide-menu">Logout</span>
-            </a>
-          </li>
+
+          <div>
+            <li class="nav-small-cap">
+              <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+              <span class="hide-menu">Menu</span>
+            </li>
+            <li class="sidebar-item">
+              <RouterLink class="sidebar-link" to="/saves" aria-expanded="false">
+                <span>
+                  <i class="ti ti-list"></i>
+                </span>
+                <span class="hide-menu">Saves</span>
+              </RouterLink>
+            </li>
+            <li class="sidebar-item">
+              <RouterLink class="sidebar-link" to="/templates" aria-expanded="false">
+                <span>
+                  <i class="ti ti-cards"></i>
+                </span>
+                <span class="hide-menu">Templates</span>
+              </RouterLink>
+            </li>
+            <li class="sidebar-item">
+              <RouterLink class="sidebar-link" to="/about" aria-expanded="false">
+                <span>
+                  <i class="ti ti-alert-circle"></i>
+                </span>
+                <span class="hide-menu">About</span>
+              </RouterLink>
+            </li>
+            <li class="sidebar-item">
+              <RouterLink class="sidebar-link" to="/contacts" aria-expanded="false">
+                <span>
+                  <i class="ti ti-mail"></i>
+                </span>
+                <span class="hide-menu">Contacts</span>
+              </RouterLink>
+            </li>
+            <li class="nav-small-cap">
+              <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+              <span class="hide-menu">Exit</span>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="/logout" aria-expanded="false">
+                <span>
+                  <i class="ti ti-logout"></i>
+                </span>
+                <span class="hide-menu">Logout</span>
+              </a>
+            </li>
+          </div>
+
         </ul>
         
       </nav>
@@ -116,4 +120,5 @@ import { RouterLink, RouterView } from 'vue-router'
 
     </div>
 </div>
+
 </template>

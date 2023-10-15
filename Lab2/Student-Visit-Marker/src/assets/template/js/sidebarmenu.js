@@ -14,20 +14,38 @@ $(function () {
       window.location.protocol + "//" + window.location.host + "/",
       ""
     );
-   
-    $("#sidebarnav a").on("click", function (e) {
-      if (!$(this).hasClass("active")) {
+    $(".sidebar-item").each(function () {
+      var current = $(this).children("a")[0].href.replace(
+        window.location.protocol + "//" + window.location.host + "/",
+        ""
+      );
+
+      //console.log(`${current === path}: ${current} - ${path}`)
+      if(current === path){
+        
+        $(this).children("a").addClass("active");
+        $(this).addClass("selected");
+      }
+    });
+
+  
+    $(".sidebar-item a").on("click", function (e) {
+      console.log("CLick")
+      console.log($(this).parent().hasClass("selected"))
+
+      if (!$(this).parent().hasClass("selected")) {
+        $(".sidebar-item").each(function (e) {
+          $(this).removeClass("selected");
+        });
+
         // hide any open menus and remove all other classes
         $("ul", $(this).parents("ul:first")).removeClass("in");
         $("a", $(this).parents("ul:first")).removeClass("active");
+        $(this).parent().addClass("selected");
   
         // open our new menu and add the open class
         $(this).next("ul").addClass("in");
         $(this).addClass("active");
-      } else if ($(this).hasClass("active")) {
-        $(this).removeClass("active");
-        $(this).parents("ul:first").removeClass("active");
-        $(this).next("ul").removeClass("in");
       }
     });
     $("#sidebarnav >li >a.has-arrow").on("click", function (e) {
