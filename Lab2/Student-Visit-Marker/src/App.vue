@@ -1,85 +1,119 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
+  <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+  data-sidebar-position="fixed" data-header-position="fixed">
+    <!--  Body Wrapper -->
+  
+  <!-- Sidebar Start -->
+  <aside class="left-sidebar">
+    <!-- Sidebar scroll-->
+    <div>
+      <div class="brand-logo d-flex align-items-center justify-content-between">
+        <RouterLink to="/" class="text-nowrap logo-img">
+          <img src="src/assets/logo.png" width="180" alt="" />
+        </RouterLink>
+        <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
+          <i class="ti ti-x fs-8"></i>
+        </div>
+      </div>
+      <!-- Sidebar navigation-->
+      <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
+        <ul id="sidebarnav">
+          <li>
+            <span><img src="src/assets/user-1.png" alt="" width="35" height="35" class="rounded-circle"></span>
+            <u class="hide-menu">Username</u>
+          </li>
+          <li class="nav-small-cap">
+            <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+            <span class="hide-menu">Home</span>
+          </li>
+          <li class="sidebar-item">
+            <RouterLink class="sidebar-link" to="/" aria-expanded="false">
+              <span>
+                <i class="ti ti-layout-dashboard"></i>
+              </span>
+              <span class="hide-menu">Dashboard</span>
+            </RouterLink>
+          </li>
+          <li class="nav-small-cap">
+            <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+            <span class="hide-menu">Menu</span>
+          </li>
+          <li class="sidebar-item">
+            <RouterLink class="sidebar-link" to="/saves" aria-expanded="false">
+              <span>
+                <i class="ti ti-list"></i>
+              </span>
+              <span class="hide-menu">Saves</span>
+            </RouterLink>
+          </li>
+          <li class="sidebar-item">
+            <RouterLink class="sidebar-link" to="/templates" aria-expanded="false">
+              <span>
+                <i class="ti ti-cards"></i>
+              </span>
+              <span class="hide-menu">Templates</span>
+            </RouterLink>
+          </li>
+          <li class="sidebar-item">
+            <RouterLink class="sidebar-link" to="/about" aria-expanded="false">
+              <span>
+                <i class="ti ti-alert-circle"></i>
+              </span>
+              <span class="hide-menu">About</span>
+            </RouterLink>
+          </li>
+          <li class="sidebar-item">
+            <RouterLink class="sidebar-link" to="/contacts" aria-expanded="false">
+              <span>
+                <i class="ti ti-mail"></i>
+              </span>
+              <span class="hide-menu">Contacts</span>
+            </RouterLink>
+          </li>
+          <li class="nav-small-cap">
+            <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+            <span class="hide-menu">Exit</span>
+          </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link" href="#" aria-expanded="false">
+              <span>
+                <i class="ti ti-logout"></i>
+              </span>
+              <span class="hide-menu">Logout</span>
+            </a>
+          </li>
+        </ul>
+        
       </nav>
+      <!-- End Sidebar navigation -->
     </div>
-  </header>
+    <!-- End Sidebar scroll-->
+  </aside>
+  <!--  Sidebar End -->
+  <!--  Main wrapper -->
+  <div class="body-wrapper">
+      <!--  Header Start -->
+      <header class="app-header">
+        <nav class="navbar navbar-expand-lg navbar-light">
+          <ul class="navbar-nav">
+            <li class="nav-item d-block d-xl-none">
+              <a class="nav-link sidebartoggler nav-icon-hover" id="headerCollapse" href="javascript:void(0)">
+                <i class="ti ti-menu-2"></i>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </header>
+      <!--  Header End -->
 
-  <RouterView />
+      <div class="container-fluid">
+        <RouterView/>
+      </div>
+
+    </div>
+</div>
 </template>
-
-<style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
-}
-</style>
