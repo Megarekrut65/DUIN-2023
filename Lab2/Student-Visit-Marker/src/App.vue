@@ -1,12 +1,20 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import { ref } from 'vue'
+import {logout, subscribeAuthChange } from "./assets/firebase-js/auth.js"
 
-const awesome = ref(false)
-function change() {
-  // update component state
-  awesome.value = !awesome.value
+const isLogin = ref(true)
+
+const logoutUser = ()=>{
+  logout().then(()=>{
+  
+  }).catch(err=>console.log(err))
 }
+
+subscribeAuthChange((user)=>{
+  isLogin.value = user?true:false
+  console.log(isLogin.value)
+})
 
 </script>
 
@@ -47,7 +55,7 @@ function change() {
             </RouterLink>
           </li>
 
-          <div v-if="awesome">
+          <div v-if="isLogin">
             <li class="nav-small-cap">
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
               <span class="hide-menu">Menu</span>
@@ -93,7 +101,7 @@ function change() {
                 <span>
                   <i class="ti ti-logout"></i>
                 </span>
-                <span class="hide-menu" @click="change">Logout</span>
+                <span class="hide-menu" @click="logoutUser">Logout</span>
               </a>
             </li>
           </div>

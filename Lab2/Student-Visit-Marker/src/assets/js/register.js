@@ -1,16 +1,7 @@
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
-import {init} from "../firebase-js/firebase"
-
-init()
-
-const auth = getAuth()
+import {createNewUser} from "../firebase-js/auth"
 
 export const register = (name, email, password)=>{
-    return createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-        console.log(userCredential)
-    })
-    .catch((error) => {
-        console.log(error)
+    return createNewUser(name, email, password).then(()=>{
+        console.log("Registered")
     })
 }
