@@ -2,3 +2,9 @@
     cursor: pointer;
     opacity: 0.7;
 }
+
+.left-form{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

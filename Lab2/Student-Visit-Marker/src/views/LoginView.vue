@@ -7,7 +7,7 @@ import { login, loginWithGoogle } from '../assets/js/login';
 
 const email = ref(""), password = ref("");
 
-function submit(){
+const submit = ()=>{
     login(email.value, password.value);
 
     return false;

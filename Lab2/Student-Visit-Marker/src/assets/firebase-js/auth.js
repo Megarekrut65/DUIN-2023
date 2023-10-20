@@ -101,10 +101,10 @@ export const logout = ()=>{
     return signOut(auth);
 };
 
+export const getUser = ()=> auth.currentUser;
+
 onAuthStateChanged(auth, (user) => {
     if (user) {
-        const uid = user.uid;
-        console.log(`${uid} - login`);
         callEvents(user);
 
     } else {
