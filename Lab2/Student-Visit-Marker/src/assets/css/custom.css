@@ -8,3 +8,8 @@
     justify-content: space-between;
     align-items: center;
 }
+.color-red{
+    color:tomato;
+    opacity: 1;
+    cursor: help;
+}

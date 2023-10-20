@@ -4,6 +4,7 @@ import { ref } from 'vue';
 import {getText} from "../assets/js/home";
 import StudentList from "../components/StudentList.vue";
 
+
 const file = ref(null);
 
 const submitFile=()=>{
@@ -12,22 +13,30 @@ const submitFile=()=>{
     return false;
 };
 
-let number = 1;
+const studentsList = JSON.parse(localStorage.getItem("students"));
 
-const studentName = ref(""), students = ref([{number:1, name:"Sasha", mark:"X"}]);
+const studentName = ref(""), students = ref(studentsList?studentsList:[]), onlyMarks=ref(false);
 
 const submitStudent=()=>{
-    console.log(studentName.value)
-    students.value.push({number: number++, name: studentName.value, mark:""});
+  students.value.push({name: studentName.value, count:0, mark:"X"});
+  studentName.value = "";
 
-    return false;
+  localStorage.setItem("students", JSON.stringify(students.value));
+
+  return false;
 };
-const removeItem = (item)=>{
-    var index = students.value.indexOf(item);
-    if (index !== -1) {
-        students.value.splice(index, 1);
-    }
-}
+const removeItem = (event, item)=>{
+
+  var index = students.value.indexOf(item);
+  if (index !== -1) {
+    students.value.splice(index, 1);
+    localStorage.setItem("students", JSON.stringify(students.value));
+  }
+};
+
+const checked = (event)=>{
+  onlyMarks.value = event.target.checked;
+};
 
 </script>
 
@@ -40,21 +49,28 @@ const removeItem = (item)=>{
             <form @submit="submitFile" action="#" onsubmit="return false;" class="left-form mb-4">
               <div class="mb-3">
                 <label for="file" class="form-label">Image with students names</label>
-                <input type="file" class="form-control" name="file" ref="file">
+                <input type="file" class="form-control" name="file" ref="file" accept="image/png, image/jpeg">
               </div>
               <div>
-                <input type="submit" class="btn btn-primary py-8 fs-4 mb-1 rounded-2" value="Upload" accept="image/png, image/jpeg">
+                <input type="submit" class="btn btn-primary py-8 fs-4 mb-1 rounded-2" value="Upload" >
               </div>
             </form>
 
             <h2>Student list:</h2>
             
             <form @submit="submitStudent" action="#" onsubmit="return false;" class="left-form mb-4">
-              <input type="text" class="form-control mr-4" name="name" v-model="studentName" required maxlength="100">
-              <input type="submit" class="btn btn-primary py-8 fs-4 mb-1 ml-4 rounded-2" value="Add student">
+              <input type="text" class="form-control mr-4" name="name" v-model="studentName" required maxlength="100" placeholder="Student name...">
+              
+              <div style="width: 100px; display: flex; flex-direction: column;">
+                <label for="marks">Only marks</label>
+                <input type="checkbox" name="marks" @click="checked" />
+                
+              </div>
+              
+              <input type="submit" class="btn btn-primary py-8 fs-4 mb-1 ml-4 rounded-2" value="Add student" >
             </form>
 
-            <StudentList :students=students :remove-item="removeItem"></StudentList>
+            <StudentList :students=students :remove-item="removeItem" :only-marks="onlyMarks"></StudentList>
           </div>
       </div>
   </main>
