@@ -30,26 +30,26 @@ function submit(){
                     <form @submit="submit" action="#" onsubmit="return false;">
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
-                        <input v-model="email" type="email" class="form-control" name="email" required>
+                        <input v-model="email" type="email" class="form-control" name="email" required maxlength="1000">
                     </div>
                     <div class="mb-4">
                         <label for="password" class="form-label">Password</label>
-                        <input v-model="password" type="password" class="form-control" name="password" required>
+                        <input v-model="password" type="password" class="form-control" name="password" required maxlength="1000">
                     </div>
                     <div class="d-flex align-items-center justify-content-between mb-1">
                         
-                        <a class="text-primary fw-bold" >Forgot Password ?</a>
+                        <a class="text-primary fw-bold" >Forgot Password?</a>
                     </div>
-                    <div class="d-flex align-items-center justify-content-between mb-3">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
                         <p class="fs-4 mb-0 fw-bold">New here?</p>
                         <RouterLink class="text-primary fw-bold ms-2" to="/register">
                             Create an account
                         </RouterLink>
                     </div>
                     <div style="display: flex; justify-content: space-between;">
-                        <input type="submit" class="btn btn-primary py-8 fs-4 mb-4 rounded-2" value="Sign In">
+                        <input type="submit" class="btn btn-primary py-8 fs-4 mb-1 rounded-2" value="Sign In">
                         <div>
-                            <img src="../assets/google.svg" width="50" class="custom-btn">
+                            <img src="../assets/google.svg" width="40" class="custom-btn">
                         </div>
                     </div>
                     

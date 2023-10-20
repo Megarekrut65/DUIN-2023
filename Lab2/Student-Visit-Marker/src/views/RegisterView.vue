@@ -31,15 +31,15 @@ function submit(){
                     <form @submit="submit" action="#" onsubmit="return false;">
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
-                        <input v-model="name" type="text" class="form-control" name="name" required minlength="5">
+                        <input v-model="name" type="text" class="form-control" name="name" required minlength="5" maxlength="1000">
                     </div>
                     <div class="mb-4">
                         <label for="email" class="form-label">Email</label>
-                        <input v-model="email" type="email" class="form-control" name="email" required minlength="5">
+                        <input v-model="email" type="email" class="form-control" name="email" required minlength="5" maxlength="1000">
                     </div>
                     <div class="mb-4">
                         <label for="password" class="form-label">Password</label>
-                        <input v-model="password" type="password" class="form-control" name="password" minlength="8" required>
+                        <input v-model="password" type="password" class="form-control" name="password" required minlength="8" maxlength="1000">
                     </div>
                     <div class="d-flex align-items-center mb-4">
                         <p class="fs-4 mb-0 fw-bold">Already have an Account?</p>
