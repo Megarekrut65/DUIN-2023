@@ -1,20 +1,27 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import { ref } from 'vue'
-import {logout, subscribeAuthChange } from "./assets/firebase-js/auth.js"
+import { RouterLink, RouterView } from 'vue-router';
+import { ref } from 'vue';
+import {logout, subscribeAuthChange } from "./assets/firebase-js/auth.js";
 
-const isLogin = ref(true)
+const isLogin = ref(false), username = ref(""), photo = ref("./src/assets/user-1.png");
 
 const logoutUser = ()=>{
   logout().then(()=>{
   
-  }).catch(err=>console.log(err))
-}
+  }).catch(err=>console.log(err));
+};
 
 subscribeAuthChange((user)=>{
-  isLogin.value = user?true:false
-  console.log(isLogin.value)
-})
+  isLogin.value = user?true:false;
+
+  if(user){
+    username.value = user.displayName;
+
+    if(user.photoURL){
+      photo.value = user.photoURL;
+    }
+  }
+});
 
 </script>
 
@@ -38,9 +45,9 @@ subscribeAuthChange((user)=>{
       <!-- Sidebar navigation-->
       <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
         <ul id="sidebarnav" class="sidebar-nav">
-          <li>
-            <span><img src="./assets/user-1.png" alt="" width="35" height="35" class="rounded-circle"></span>
-            <u class="hide-menu">Username</u>
+          <li v-if="isLogin">
+            <span><img :src="photo" alt="" width="35" height="35" class="rounded-circle mr-1"></span>
+            <u class="hide-menu">{{ username }}</u>
           </li>
           <li class="nav-small-cap">
             <i class="ti ti-dots nav-small-cap-icon fs-4"></i>

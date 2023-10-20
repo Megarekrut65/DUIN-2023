@@ -1,16 +1,17 @@
 <script setup>
+import '../assets/css/custom.css';
 
 import { RouterLink } from 'vue-router';
-import '../assets/css/custom.css'
-import {ref} from 'vue'
+import {ref} from 'vue';
+import { login, loginWithGoogle } from '../assets/js/login';
 
-const email = ref(""), password = ref("")
+const email = ref(""), password = ref("");
 
 function submit(){
-    console.log(email.value, password.value)
+    login(email.value, password.value);
 
     return false;
-}
+};
 
 </script>
 
@@ -49,7 +50,7 @@ function submit(){
                     <div style="display: flex; justify-content: space-between;">
                         <input type="submit" class="btn btn-primary py-8 fs-4 mb-1 rounded-2" value="Sign In">
                         <div>
-                            <img src="../assets/google.svg" width="40" class="custom-btn">
+                            <img src="../assets/google.svg" width="40" class="custom-btn" @click="loginWithGoogle">
                         </div>
                     </div>
                     
