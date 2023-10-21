@@ -107,20 +107,21 @@ const submitDetecting = (detected)=>{
                   required maxlength="100" placeholder="Student name..." style="width: 100%;">
                 </div>
                 <div class="col-6 col-lg-2 col-md-2 col-sm-3 mb-4">
-                  <input type="button" class="btn py-8 fs-4 rounded-2" 
+                  <input type="button" class="btn py-8 fs-4 rounded-2 float-right" 
                     v-bind:class="(acceptMarks)?'btn-warning':'btn-outline-dark'" value="Clear marks" @click="removeMarks">
                 </div>
-                <div class="col-6 col-lg-2 col-md-2 col-sm-3 mb-4" style="width: 100px; display: flex; flex-direction: column;">
+                <div class="col-6 col-lg-2 col-md-2 col-sm-3 mb-4 text-center">
                     <label for="marks">Only marks</label>
+                    <br>
                     <input type="checkbox" name="marks" @click="checked" />
                     
                   </div>
                 <div class="col-6 col-lg-2 col-md-2 col-sm-3 mb-4">
-                  <input type="button" class="btn py-8 fs-4rounded-2" 
+                  <input type="button" class="btn py-8 fs-4rounded-2 float-right" 
                     v-bind:class="(acceptClear)?'btn-danger':'btn-outline-dark'" value="Remove all" @click="removeAll">
                 </div>  
                 <div class="col-6 col-lg-2 col-md-2 col-sm-3 mb-4">
-                  <input type="submit" class="btn btn-primary py-8 fs-4 rounded-2" value="Add student" >
+                  <input type="submit" class="btn btn-primary py-8 fs-4 rounded-2 float-right" value="Add student" >
                 </div>   
               </div>
             </form>

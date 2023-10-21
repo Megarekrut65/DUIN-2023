@@ -49,7 +49,7 @@ const getSimilarity = (name, list) =>{
 
 export const getDetected = async(students, file)=>{
     const detected = [];
-    const text = await getText(file);
+    const text = "Олександр Бандалак (Me)\\nKZ Kostiantyn Zhereb (Host)\\nYH Yaroslav Havryliuk\\nв Віктор Свинар\\nЄ Єгор Грушевий\\nКирило Рябов (phone)\\no Олексій Ткачук\\nППолосенко Павло\\nс Соколов Михайло\\nО\\nче до\\nдо\\nчто";//await getText(file);
 
     const lines = text.split("\n").filter(item=>item.trim().length > 0);
 

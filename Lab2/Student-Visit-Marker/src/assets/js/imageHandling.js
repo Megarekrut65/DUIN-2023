@@ -12,3 +12,15 @@ export const pasteImage = (event, success) => {
         }
     }
 };
+
+export const loadImage = (file, success)=>{
+    const reader = new FileReader();
+
+    reader.onload = (event)=> {
+        const imageUrl = event.target.result;
+
+        success(imageUrl);
+    };
+
+    reader.readAsDataURL(file);
+};

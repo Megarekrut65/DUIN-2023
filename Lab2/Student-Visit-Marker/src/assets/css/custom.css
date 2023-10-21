@@ -26,9 +26,11 @@
 }
 
 .modal-list{
-    max-width: 800px;
+    width: 90%;
+    height: 90vh;
     margin: auto;
-    margin-top: 30px;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
 }
 .hide{
     display: none;
