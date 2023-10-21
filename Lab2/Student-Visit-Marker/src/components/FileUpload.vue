@@ -60,8 +60,8 @@ document.addEventListener('paste', event=>pasteImage(event, startDetecting));
         <form @submit="submitFile" action="#" onsubmit="return false;" class="mb-4">
             <label for="file" class="form-label">Select image with students names or paste it from buffer</label>
             <div style="display: flex; align-items: center;">
-                <div class="mr-4"><input type="file" class="form-control" name="file" ref="file" accept="image/png, image/jpeg"></div>
-                <input type="submit" class="btn btn-primary py-8 fs-4 mb-1 rounded-2" value="Upload" >
+                <div class="mr-4"><input type="file" class="form-control" name="file" ref="file" accept="image/png, image/jpeg" required></div>
+                <input type="submit" class="btn btn-primary py-8 fs-4 mb-1 rounded-2" value="Upload"  >
             </div>
         </form>
         <div>

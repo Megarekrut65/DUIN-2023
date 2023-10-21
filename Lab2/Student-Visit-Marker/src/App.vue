@@ -36,7 +36,7 @@ subscribeAuthChange((user)=>{
     <div>
       <div class="brand-logo d-flex align-items-center justify-content-between">
         <RouterLink to="/" class="text-nowrap logo-img">
-          <img src="./assets/logo.png" width="180" alt="" />
+          <img src="./assets/logo.png" style="width: 100%;" alt="" />
         </RouterLink>
         <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
           <i class="ti ti-x fs-8"></i>
@@ -151,7 +151,7 @@ subscribeAuthChange((user)=>{
           <ul class="navbar-nav">
             <li class="nav-item d-block d-xl-none">
               <a class="nav-link sidebartoggler nav-icon-hover" id="headerCollapse" href="javascript:void(0)">
-                <i class="ti ti-menu-2"></i>
+                <i class="ti ti-menu-2" style="background-color: white; padding: 10px; box-shadow: 2px 2px rgba(0, 0, 0, 0.263);"></i>
               </a>
             </li>
           </ul>
