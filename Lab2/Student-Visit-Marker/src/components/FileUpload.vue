@@ -4,6 +4,7 @@ import {getDetected} from "../assets/js/home";
 import SubmitMarks from './SubmitMarks.vue';
 import {toRaw} from "vue";
 import {pasteImage, loadImage} from "../assets/js/imageHandling";
+import LoadingWindow from './LoadingWindow.vue';
 
 const props = defineProps({
     students: {
@@ -16,14 +17,22 @@ const props = defineProps({
     }
 });
 
-const file = ref(null), isActive = ref(false), image = ref("");
+const file = ref(null), isActive = ref(false), image = ref(""), isLoading = ref(false);
 
 const detected = ref([]);
 
 const startDetecting = async(fileBlob)=>{
+    isLoading.value = true;
     
-    detected.value = await getDetected(props.students, fileBlob);
+    try{
+        detected.value = await getDetected(props.students, fileBlob);
+    }
+    catch(err){
+        console.log(err);
+    }
+    
     isActive.value = true;
+    isLoading.value = false;
 
     loadImage(fileBlob, (url)=>image.value = url);
 };
@@ -51,7 +60,9 @@ const cancel = ()=>{
 };
 
 
-document.addEventListener('paste', event=>pasteImage(event, startDetecting));
+document.addEventListener('paste', event=>{
+    if(!isLoading.value) pasteImage(event, startDetecting);
+});
 
 </script>
 
@@ -68,5 +79,6 @@ document.addEventListener('paste', event=>pasteImage(event, startDetecting));
             <SubmitMarks :students="students" :detected="detected" :remove-item="removeItem" :image="image"
                 :is-active="isActive" :submit="submitStudents" :cancel="cancel"></SubmitMarks>
         </div>
+        <LoadingWindow :is-active="isLoading"></LoadingWindow>
     </main>
 </template>
