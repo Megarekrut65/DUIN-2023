@@ -1,17 +1,9 @@
 <script setup>
 import "../assets/css/custom.css";
 import { ref } from 'vue';
-import {getText} from "../assets/js/home";
 import StudentList from "../components/StudentList.vue";
+import FileUpload from "../components/FileUpload.vue";
 
-
-const file = ref(null);
-
-const submitFile=()=>{
-    getText(file.value.files[0]).then(text=>console.log(text))
-
-    return false;
-};
 
 const studentsList = JSON.parse(localStorage.getItem("students"));
 
@@ -24,7 +16,7 @@ const submitStudent=()=>{
 };
 
 const addStudent = (name)=>{
-  students.value.push({name: name, count:0, mark:"X"});
+  students.value.push({name: name, count:0});
   studentName.value = "";
 
   localStorage.setItem("students", JSON.stringify(students.value));
@@ -32,7 +24,7 @@ const addStudent = (name)=>{
 
 const removeItem = (event, item)=>{
 
-  var index = students.value.indexOf(item);
+  const index = students.value.indexOf(item);
   if (index !== -1) {
     students.value.splice(index, 1);
     localStorage.setItem("students", JSON.stringify(students.value));
@@ -48,7 +40,7 @@ const handlePaste=(event)=> {
       const clipboardData = event.clipboardData || window.clipboardData;
       const pastedText = clipboardData.getData("text");
 
-      const items = pastedText.split("\n").filter(item=>item.trim().length > 0);
+      const items = pastedText.split(/\n/).filter(item=>item.trim().length > 0);
       if(items.length < 2){
         studentName.value = pastedText;
         return;
@@ -71,6 +63,32 @@ const removeAll = ()=>{
   
   acceptClear.value = true;
 };
+
+const acceptMarks = ref(false);
+
+const removeMarks = ()=>{
+  if(acceptMarks.value){
+    students.value.forEach(item=>item.count=0);
+    localStorage.setItem("students", JSON.stringify(students.value));
+    acceptMarks.value = false;
+    return;
+  }
+  
+  acceptMarks.value = true;
+};
+
+const submitDetecting = (detected)=>{
+  for(let i in detected){
+    for(let j in students.value){
+      console.log()
+      if(detected[i].name === students.value[j].name){
+        students.value[j].count++;
+      }
+    }
+  }
+  localStorage.setItem("students", JSON.stringify(students.value));
+};
+
 </script>
 
 <template>
@@ -78,36 +96,36 @@ const removeAll = ()=>{
     <div class="card">
           <div class="card-body">
             <h1 class="mb-4">Dashboard</h1>
-            
-            <form @submit="submitFile" action="#" onsubmit="return false;" class="left-form mb-4">
-              <div class="mb-3">
-                <label for="file" class="form-label">Image with students names</label>
-                <input type="file" class="form-control" name="file" ref="file" accept="image/png, image/jpeg">
-              </div>
-              <div>
-                <input type="submit" class="btn btn-primary py-8 fs-4 mb-1 rounded-2" value="Upload" >
-              </div>
-            </form>
+            <FileUpload :students="students" :submit="submitDetecting"></FileUpload>
 
             <h2>Student list:</h2>
             
-            <form @submit="submitStudent" action="#" onsubmit="return false;" class="left-form mb-4">
-              <input type="text" class="form-control mr-4" name="name" v-model="studentName" @paste="handlePaste"
-              required maxlength="100" placeholder="Student name..." style="width: 50%;">
-              
-              <div style="display: flex;">
-                <div style="width: 100px; display: flex; flex-direction: column;">
-                  <label for="marks">Only marks</label>
-                  <input type="checkbox" name="marks" @click="checked" />
-                  
+            <form @submit="submitStudent" action="#" onsubmit="return false;" class="left-form mb-4 container-fluid">           
+              <div class="row" style="width: 100%;">
+                <div class="col-12 col-lg-4 col-md-4 mb-4">
+                  <input type="text" class="form-control" name="name" v-model="studentName" @paste="handlePaste"
+                  required maxlength="100" placeholder="Student name..." style="width: 100%;">
                 </div>
-                <input type="button" class="btn py-8 fs-4 mb-1 ml-4 rounded-2" 
-                  v-bind:class="(acceptClear)?'btn-danger':'btn-outline-dark'" value="Remove all" @click="removeAll">
-                <input type="submit" class="btn btn-primary py-8 fs-4 mb-1 ml-4 rounded-2" value="Add student" >
+                <div class="col-6 col-lg-2 col-md-2 col-sm-3 mb-4">
+                  <input type="button" class="btn py-8 fs-4 rounded-2" 
+                    v-bind:class="(acceptMarks)?'btn-warning':'btn-outline-dark'" value="Clear marks" @click="removeMarks">
+                </div>
+                <div class="col-6 col-lg-2 col-md-2 col-sm-3 mb-4" style="width: 100px; display: flex; flex-direction: column;">
+                    <label for="marks">Only marks</label>
+                    <input type="checkbox" name="marks" @click="checked" />
+                    
+                  </div>
+                <div class="col-6 col-lg-2 col-md-2 col-sm-3 mb-4">
+                  <input type="button" class="btn py-8 fs-4rounded-2" 
+                    v-bind:class="(acceptClear)?'btn-danger':'btn-outline-dark'" value="Remove all" @click="removeAll">
+                </div>  
+                <div class="col-6 col-lg-2 col-md-2 col-sm-3 mb-4">
+                  <input type="submit" class="btn btn-primary py-8 fs-4 rounded-2" value="Add student" >
+                </div>   
               </div>
             </form>
 
-            <StudentList :students=students :remove-item="removeItem" :only-marks="onlyMarks"></StudentList>
+            <StudentList :students="students" :remove-item="removeItem" :only-marks="onlyMarks"></StudentList>
           </div>
       </div>
   </main>

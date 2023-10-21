@@ -13,3 +13,23 @@
     opacity: 1;
     cursor: help;
 }
+.modal-container{
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.258);
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    z-index: 9999;
+}
+
+.modal-list{
+    max-width: 800px;
+    margin: auto;
+    margin-top: 30px;
+}
+.hide{
+    display: none;
+}

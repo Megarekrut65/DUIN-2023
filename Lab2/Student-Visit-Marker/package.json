@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "firebase": "^10.5.0",
+    "string-similarity": "^4.0.4",
+    "uuid": "^9.0.1",
     "vue": "^3.3.4",
     "vue-router": "^4.2.4"
   },
