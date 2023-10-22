@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from '../views/HomeView.vue';
+import {ifAuthenticated} from "../assets/firebase-js/auth";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -20,14 +21,25 @@ const router = createRouter({
       component: () => import('../views/AboutView.vue')
     },
     {
+      path: '/unauthorized',
+      name: 'unauthorized',
+      component: () => import('../views/UnauthorizedView.vue')
+    },
+    {
       path: '/saves',
       name: 'saves',
       component: () => import('../views/SavesView.vue')
     },
     {
-      path: '/templates',
-      name: 'templates',
-      component: () => import('../views/TemplatesView.vue')
+      path: '/images',
+      name: 'images',
+      component: () => import('../views/ImagesView.vue')
+    },
+    {
+      path: '/settings',
+      name: 'settings',
+      component: () => import('../views/SettingsView.vue'),
+      beforeEnter: ifAuthenticated
     },
     {
       path: '/contacts',
@@ -46,5 +58,6 @@ const router = createRouter({
     }
   ]
 });
+
 
 export default router;

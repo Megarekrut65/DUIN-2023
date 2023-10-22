@@ -1,9 +1,9 @@
 <script setup>
 import { ref } from 'vue';
-import SimpleStudentListItem from './SimpleStudentListItem.vue';
+import MarkCountListItem from './MarkCountListItem.vue';
 
 const props = defineProps({
-    students: {
+    marks: {
         type: Array,
         required: true
     },
@@ -17,7 +17,7 @@ const selectedItem = ref(-1);
 
 const remove = (event, data, number)=>{
     if(number === selectedItem.value && event){
-        props.removeItem(event, data);
+        props.removeItem(data);
         selectedItem.value = -1;
         return;
     }
@@ -32,10 +32,10 @@ const remove = (event, data, number)=>{
         <thead class="text-dark fs-4">
             <tr>
                 <th class="border-bottom-0">
-                    <h6 class="fw-semibold mb-0"><i class="ti ti-list-numbers"></i></h6>
+                    <h6 class="fw-semibold mb-0">Count</h6>
                 </th>
-                <th class="border-bottom-0">
-                    <h6 class="fw-semibold mb-0">Full name</h6>
+                <th class="border-bottom-0 text-center">
+                    <h6 class="fw-semibold mb-0">Mark</h6>
                 </th>
                 <th class="border-bottom-0 text-center">
                     <h6 class="fw-semibold mb-0">Remove</h6>
@@ -43,8 +43,9 @@ const remove = (event, data, number)=>{
             </tr>
         </thead>
         <tbody>
-            <SimpleStudentListItem v-for="(data, index) in students" :key="index" :number="index+1" :name="data.name" 
-                :selected-item="selectedItem" :remove-self="(event)=>remove(event, data, index + 1)"></SimpleStudentListItem>
+            <MarkCountListItem v-for="(data, index) in marks" :key="index" :number="index" :mark="data.mark" 
+                :count="data.count" :color = "data.color" :selected-item="selectedItem" 
+                :remove-self="(event)=>remove(event, data, index)"></MarkCountListItem>
         </tbody>
     </table>
 </div>                                                                                             

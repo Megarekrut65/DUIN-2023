@@ -1,6 +1,6 @@
 <script setup>
-import "../assets/css/custom.css";
-import { getColor, getMark } from "../assets/js/mark-manager";
+import "../../assets/css/custom.css";
+import { getColor, getMark } from "../../assets/js/mark-manager";
 
 defineProps({
     onlyMarks:{

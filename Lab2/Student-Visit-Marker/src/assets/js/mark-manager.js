@@ -1,18 +1,43 @@
-const convert = {
-    0:{value:"Absent", color:"tomato"},
-    1:{value:"Present", color:"green"},
-    default:1
+const convert_ = [
+    {count: 0, mark:"Absent", color:"tomato"},
+    {count: 1, mark:"Present", color:"green"}
+];
+
+const loadConvert = ()=>{
+    const item = localStorage.getItem("convert");
+    if(item !== null) return convert_;
+    const list = JSON.parse(item);
+    if(list == null || list.length < 2) return convert_;
+    
+    return list;
 };
 
-export const getMark = (count)=>{
-    if(count in convert) return convert[count].value;
+let convert = loadConvert();
 
-    return convert[convert.default].value;
+export const getMark = (count)=>{
+    for(let i = 0; i < convert.length; i++){
+        if(count <= convert[i].count){
+            return convert[i].mark;
+        }
+    }
+
+    return convert[convert.length - 1].mark;
 };
 
 
 export const getColor = (count)=>{
-    if(count in convert) return convert[count].color;
+    for(let i = 0; i < convert.length; i++){
+        if(count <= convert[i].count){
+            return convert[i].color;
+        }
+    }
 
-    return convert[convert.default].color;
+    return convert[convert.length - 1].color;
 };
+
+export const defaultConvert = ()=> convert;
+
+export const changeConvert = (newConvert)=>{
+    convert = newConvert;
+    localStorage.setItem("convert", JSON.stringify(convert));
+}

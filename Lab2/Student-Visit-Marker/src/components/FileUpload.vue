@@ -1,9 +1,8 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, toRaw } from 'vue';
 import {getDetected} from "../assets/js/home";
 import SubmitMarks from './SubmitMarks.vue';
-import {toRaw} from "vue";
-import {pasteImage, loadImage} from "../assets/js/imageHandling";
+import {pasteImage, loadImage} from "../assets/js/image-handling";
 import LoadingWindow from './LoadingWindow.vue';
 
 const props = defineProps({
@@ -23,7 +22,7 @@ const detected = ref([]);
 
 const startDetecting = async(fileBlob)=>{
     isLoading.value = true;
-    
+
     try{
         detected.value = await getDetected(props.students, fileBlob);
     }
@@ -43,7 +42,7 @@ const submitFile=()=>{
     return false;
 };
 
-const removeItem = (event, item)=>{
+const removeItem = (item)=>{
     const index = detected.value.indexOf(item);
     if (index !== -1) {
         detected.value.splice(index, 1);

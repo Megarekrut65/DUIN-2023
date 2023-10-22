@@ -1,6 +1,6 @@
 <script setup>
 import "../assets/css/custom.css";
-import SimpleStudentList from "./SimpleStudentList.vue";
+import SimpleStudentList from "./student-list/SimpleStudentList.vue";
 
 defineProps({
     students: {

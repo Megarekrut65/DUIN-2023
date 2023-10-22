@@ -62,12 +62,12 @@ subscribeAuthChange((user)=>{
             </RouterLink>
           </li>
 
-          <div v-if="isLogin">
+          <div>
             <li class="nav-small-cap">
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
               <span class="hide-menu">Menu</span>
             </li>
-            <li class="sidebar-item">
+            <li class="sidebar-item" v-if="false">
               <RouterLink class="sidebar-link" to="/saves" aria-expanded="false">
                 <span>
                   <i class="ti ti-bookmark"></i>
@@ -75,12 +75,20 @@ subscribeAuthChange((user)=>{
                 <span class="hide-menu">Saves</span>
               </RouterLink>
             </li>
-            <li class="sidebar-item">
-              <RouterLink class="sidebar-link" to="/templates" aria-expanded="false">
+            <li class="sidebar-item" v-if="isLogin">
+              <RouterLink class="sidebar-link" to="/images" aria-expanded="false">
                 <span>
                   <i class="ti ti-cards"></i>
                 </span>
-                <span class="hide-menu">Templates</span>
+                <span class="hide-menu">Images</span>
+              </RouterLink>
+            </li>
+            <li class="sidebar-item" v-if="isLogin">
+              <RouterLink class="sidebar-link" to="/settings" aria-expanded="false">
+                <span>
+                  <i class="ti ti-adjustments-alt"></i>
+                </span>
+                <span class="hide-menu">Settings</span>
               </RouterLink>
             </li>
             <li class="sidebar-item">
@@ -99,7 +107,8 @@ subscribeAuthChange((user)=>{
                 <span class="hide-menu">Contacts</span>
               </RouterLink>
             </li>
-            <li class="nav-small-cap">
+            <div v-if="isLogin">
+              <li class="nav-small-cap" >
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
               <span class="hide-menu">Exit</span>
             </li>
@@ -111,8 +120,9 @@ subscribeAuthChange((user)=>{
                 <span class="hide-menu" @click="logoutUser">Logout</span>
               </a>
             </li>
+            </div>
           </div>
-          <div v-else>
+          <div v-if="!isLogin">
             <li class="nav-small-cap">
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
               <span class="hide-menu">Account</span>

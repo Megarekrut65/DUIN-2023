@@ -97,6 +97,7 @@ export const logout = ()=>{
         const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
         document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
     }    
+    localStorage.clear();
 
     return signOut(auth);
 };
@@ -111,3 +112,15 @@ onAuthStateChanged(auth, (user) => {
         callEvents(undefined);
     }
 });
+
+export const ifAuthenticated = (to, from, next) => {
+    const unsubscribe = onAuthStateChanged(auth, (user)=>{
+        if(user){
+            next();
+            unsubscribe();
+            return;
+        }
+        next({ name: "unauthorized"});
+        unsubscribe();
+    });
+};
