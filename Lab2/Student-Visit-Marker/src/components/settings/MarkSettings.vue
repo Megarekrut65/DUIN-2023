@@ -37,8 +37,12 @@ const saveSettings = () => {
     result.value = "";
 
     if (marks.value.length >= 2){
-        changeConvert(toRaw(marks.value));
-        result.value = "Saved!";
+        changeConvert(toRaw(marks.value)).then(()=>{
+            result.value = "Saved!";
+        }).catch(err=>{
+            console.log(err);
+            error.value = "Some errors occurred while saving, please reload the page and try again later!";
+        });
         return false;
     } 
     error.value = "There must be at least 2 marks!";

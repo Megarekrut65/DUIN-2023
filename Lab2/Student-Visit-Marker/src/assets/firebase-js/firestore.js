@@ -1,13 +1,13 @@
 import { init } from "./firebase";
 import { 
     getFirestore,
-    updateDoc,
+    setDoc,
     doc,
     getDoc
 } from "firebase/firestore";
 
 const fs = getFirestore(init());
-const settingCollection = "settings";
+const settingCollection = "settings", userCollection = "users";
 
 /**
  * Updates marks in user settings
@@ -17,7 +17,7 @@ const settingCollection = "settings";
  * @returns 
  */
 export const saveMarkSettings = (userId, marks)=>{
-    return updateDoc(doc(fs, settingCollection, userId), {marks:marks});
+    return setDoc(doc(fs, settingCollection, userId), {marks:marks}, {merge:true});
 };
 
 /**
@@ -29,5 +29,28 @@ export const saveMarkSettings = (userId, marks)=>{
 export const getMarkSettings = async(userId)=>{
     const res = await getDoc(doc(fs, settingCollection, userId));
 
-    return res.exists()?res:null;
+    return res.exists()?res.data()["marks"]:null;
+};
+
+/**
+ * Updates student list
+ * 
+ * @param {String} userId 
+ * @param {Array} list 
+ * @returns 
+ */
+export const saveStudentList = (userId, list)=>{
+    return setDoc(doc(fs, userCollection, userId), {list:list}, {merge:true});
+};
+
+/**
+ * Get student list
+ * 
+ * @param {String} userId 
+ * @returns 
+ */
+export const getStudentList = async(userId)=>{
+    const res = await getDoc(doc(fs, userCollection, userId));
+
+    return res.exists()?res.data()["list"]:null;
 };

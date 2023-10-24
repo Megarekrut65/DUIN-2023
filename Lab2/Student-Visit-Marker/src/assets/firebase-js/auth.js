@@ -13,7 +13,7 @@ init();
 
 const auth = getAuth();
 const googleProvider = new GoogleAuthProvider();
-googleProvider.addScope("https://www.googleapis.com/auth/spreadsheets");
+//googleProvider.addScope("https://www.googleapis.com/auth/spreadsheets");
 
 const authChangeEvents = new Set();
 
@@ -124,3 +124,10 @@ export const ifAuthenticated = (to, from, next) => {
         unsubscribe();
     });
 };
+
+export const loadWithUser = (load)=>{
+    const unsubscribe = onAuthStateChanged(auth, (user)=>{
+        load(user);
+        unsubscribe();
+    });
+}
