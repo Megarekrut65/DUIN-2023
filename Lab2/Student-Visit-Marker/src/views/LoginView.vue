@@ -3,7 +3,7 @@ import '../assets/css/custom.css';
 
 import { RouterLink } from 'vue-router';
 import {ref} from 'vue';
-import { login, loginWithGoogle } from '../assets/js/login';
+import { login } from '../assets/js/login';
 
 const email = ref(""), password = ref("");
 
@@ -49,9 +49,6 @@ const submit = ()=>{
                     </div>
                     <div style="display: flex; justify-content: space-between;">
                         <input type="submit" class="btn btn-primary py-8 fs-4 mb-1 rounded-2" value="Sign In">
-                        <div>
-                            <img src="../assets/google.svg" width="40" class="custom-btn" @click="loginWithGoogle">
-                        </div>
                     </div>
                     
                     </form>

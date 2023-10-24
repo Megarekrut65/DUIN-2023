@@ -1,15 +1,14 @@
 <script setup>
 import '../assets/css/custom.css';
-import { ref } from 'vue';
+import { ref, toRaw } from 'vue';
 import StudentList from '../components/student-list/StudentList.vue';
 import FileUpload from '../components/FileUpload.vue';
 import { getMark } from '../assets/js/mark-manager';
 import { copyToClipboard } from '../assets/js/coping';
-
-const studentsList = JSON.parse(localStorage.getItem('students'));
+import { getStudents, saveStudents } from '../assets/js/student-manager';
 
 const studentName = ref(''),
-  students = ref(studentsList ? studentsList : []),
+  students = ref(getStudents()),
   onlyMarks = ref(JSON.parse(localStorage.getItem("onlyMarks")));
 
 const marksClick = ()=>{
@@ -26,14 +25,14 @@ const addStudent = (name) => {
   students.value.push({ name: name, count: 0 });
   studentName.value = '';
 
-  localStorage.setItem('students', JSON.stringify(students.value));
+  saveStudents(toRaw(students.value));
 };
 
 const removeItem = (item) => {
   const index = students.value.indexOf(item);
   if (index !== -1) {
     students.value.splice(index, 1);
-    localStorage.setItem('students', JSON.stringify(students.value));
+    saveStudents(toRaw(students.value));
   }
 };
 
@@ -53,8 +52,9 @@ const handlePaste = (event) => {
   }
 
   for (let i in items) {
-    addStudent(items[i]);
+    students.value.push({ name: items[i], count: 0 });
   }
+  saveStudents(toRaw(students.value));
 };
 
 const acceptClear = ref(false);
@@ -62,7 +62,7 @@ const acceptClear = ref(false);
 const removeAll = () => {
   if (acceptClear.value) {
     students.value = [];
-    localStorage.setItem('students', JSON.stringify(students.value));
+    saveStudents(toRaw(students.value));
     acceptClear.value = false;
     return;
   }
@@ -75,7 +75,7 @@ const acceptMarks = ref(false);
 const removeMarks = () => {
   if (acceptMarks.value) {
     students.value.forEach(item => (item.count = 0));
-    localStorage.setItem('students', JSON.stringify(students.value));
+    saveStudents(toRaw(students.value));
     acceptMarks.value = false;
     return;
   }
@@ -91,7 +91,7 @@ const submitDetecting = (detected) => {
       }
     }
   }
-  localStorage.setItem('students', JSON.stringify(students.value));
+  saveStudents(toRaw(students.value));
 };
 
 const copied = ref("");

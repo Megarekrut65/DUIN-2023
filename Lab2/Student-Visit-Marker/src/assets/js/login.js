@@ -1,16 +1,20 @@
 import {loginGoogle, loginUserEmail} from "../firebase-js/auth";
 import router from "../../router";
-import {getMarkSettings} from "../firebase-js/firestore";
+import {getMarkSettings, getStudentList} from "../firebase-js/firestore";
 
 const success = (credential)=>{
     if(credential?.user) {
-        getMarkSettings(credential.user.uid).then(res=>{
-            if(res){
-                localStorage.setItem("convert", JSON.stringify(res));
+        getMarkSettings(credential.user.uid).then(marks=>{
+            if(marks){
+                localStorage.setItem("convert", JSON.stringify(marks));
             }
-        }).then(()=>{
-            router.push("/");
-        })
+            getStudentList(credential.user.uid).then(students=>{
+                if(students){
+                    localStorage.setItem("students", JSON.stringify(students));
+                }
+                router.push("/");
+            });
+        });
     }
 };
 
