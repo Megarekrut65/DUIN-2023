@@ -1,31 +1,42 @@
 import {loginGoogle, loginUserEmail} from "../firebase-js/auth";
 import router from "../../router";
 import {getMarkSettings, getStudentList} from "../firebase-js/firestore";
+import { getErrorMessage } from "../firebase-js/error-codes/error-messages";
 
 const success = (credential)=>{
     if(credential?.user) {
-        getMarkSettings(credential.user.uid).then(marks=>{
-            if(marks){
-                localStorage.setItem("convert", JSON.stringify(marks));
+        const promiseMarks = getMarkSettings(credential.user.uid);
+        const promiseStudents = getStudentList(credential.user.uid);
+
+        return Promise.all([promiseMarks, promiseStudents])
+        .then((values) => {
+            if(values[0]){
+                localStorage.setItem("convert", JSON.stringify(values[0]));
             }
-            getStudentList(credential.user.uid).then(students=>{
-                if(students){
-                    localStorage.setItem("students", JSON.stringify(students));
-                }
-                router.push("/");
-            });
+            if(values[1]){
+                localStorage.setItem("students", JSON.stringify(values[1]));
+            }
+            router.push("/");
+        })
+        .catch(err=>{
+            throw err;
         });
     }
+};
+
+const error = (err)=>{
+    console.log(err);
+    throw getErrorMessage(err.code);
 };
 
 export const login = (email, password)=>{
     return loginUserEmail(email, password)
     .then(success)
-    .catch(err=>console.log(err));
+    .catch(error);
 };
 
 export const loginWithGoogle = ()=>{
     return loginGoogle()
     .then(success)
-    .catch(err=>console.log(err));
+    .catch(error);
 };

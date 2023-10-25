@@ -27,9 +27,10 @@ export const saveMarkSettings = (userId, marks)=>{
  * @returns 
  */
 export const getMarkSettings = async(userId)=>{
-    const res = await getDoc(doc(fs, settingCollection, userId));
-
-    return res.exists()?res.data()["marks"]:null;
+    return getDoc(doc(fs, settingCollection, userId))
+    .then(res=>{
+        return res.exists()?res.data()["marks"]:null;
+    });
 };
 
 /**

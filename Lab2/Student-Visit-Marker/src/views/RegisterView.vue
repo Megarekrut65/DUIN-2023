@@ -6,8 +6,11 @@ import {register} from '../assets/js/register'
 
 const email = ref(""), password = ref(""), name = ref("");
 
+const error = ref("");
+
 const submit=()=>{
-    register(name.value, email.value, password.value);
+    register(name.value, email.value, password.value)
+    .catch(err=>error.value = err);
 
     return false;
 };
@@ -29,12 +32,12 @@ const submit=()=>{
                     <p class="text-center">Make it easy</p>
                     <form @submit="submit" action="#" onsubmit="return false;">
                     <div class="mb-3">
-                        <label for="name" class="form-label">Name</label>
-                        <input v-model="name" type="text" class="form-control" name="name" required minlength="5" maxlength="1000">
+                        <label for="display-name" class="form-label">Name</label>
+                        <input v-model="name" type="text" class="form-control" name="display-name" required minlength="5" maxlength="200">
                     </div>
                     <div class="mb-4">
-                        <label for="email" class="form-label">Email</label>
-                        <input v-model="email" type="email" class="form-control" name="email" required minlength="5" maxlength="1000">
+                        <label for="name" class="form-label">Email</label>
+                        <input v-model="email" type="email" class="form-control" name="name" required minlength="5" maxlength="200">
                     </div>
                     <div class="mb-4">
                         <label for="password" class="form-label">Password</label>
@@ -45,9 +48,11 @@ const submit=()=>{
                         <RouterLink class="text-primary fw-bold ms-2" to="/login">Sign In</RouterLink>
                     </div>
                     <div style="display: flex; justify-content: space-between;">
-                        <input type="submit" class="btn btn-primary py-8 fs-4 mb-4 rounded-2" value="Sign up">
+                        <input type="submit" class="btn btn-primary py-8 fs-4 rounded-2" value="Sign up">
                     </div>
-                    
+                    <div class="d-flex align-items-center mt-4">
+                        <p class="fs-4 mb-0 text-danger">{{ error }}</p>
+                    </div>
                     </form>
                 </div>
                 </div>

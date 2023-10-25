@@ -6,9 +6,11 @@ import {ref} from 'vue';
 import { login } from '../assets/js/login';
 
 const email = ref(""), password = ref("");
+const error = ref("");
 
 const submit = ()=>{
-    login(email.value, password.value);
+    login(email.value, password.value)
+    .catch(err=>error.value = err);
 
     return false;
 };
@@ -30,17 +32,14 @@ const submit = ()=>{
                     <p class="text-center">Make it easy</p>
                     <form @submit="submit" action="#" onsubmit="return false;">
                     <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input v-model="email" type="email" class="form-control" name="email" required maxlength="1000">
+                        <label for="name" class="form-label">Email</label>
+                        <input v-model="email" type="email" class="form-control" name="name" required maxlength="200">
                     </div>
                     <div class="mb-4">
                         <label for="password" class="form-label">Password</label>
                         <input v-model="password" type="password" class="form-control" name="password" required maxlength="1000">
                     </div>
-                    <div class="d-flex align-items-center justify-content-between mb-1">
-                        
-                        <a class="text-primary fw-bold" >Forgot Password?</a>
-                    </div>
+                    
                     <div class="d-flex align-items-center justify-content-between mb-4">
                         <p class="fs-4 mb-0 fw-bold">New here?</p>
                         <RouterLink class="text-primary fw-bold ms-2" to="/register">
@@ -48,9 +47,11 @@ const submit = ()=>{
                         </RouterLink>
                     </div>
                     <div style="display: flex; justify-content: space-between;">
-                        <input type="submit" class="btn btn-primary py-8 fs-4 mb-1 rounded-2" value="Sign In">
+                        <input type="submit" class="btn btn-primary py-8 fs-4 rounded-2" value="Sign In">
                     </div>
-                    
+                    <div class="d-flex align-items-center mt-4">
+                        <p class="fs-4 mb-0 text-danger">{{ error }}</p>
+                    </div>
                     </form>
                 </div>
                 </div>

@@ -65,9 +65,6 @@ export const createNewUser = (name, email, password)=>{
         callEvents(userCredential.user);
 
         return userCredential;
-    })
-    .catch((error) => {
-        console.log(error);
     });
 };
 
