@@ -52,3 +52,25 @@ export const getStudentList = (userId)=>{
     return getDoc(doc(fs, userCollection, userId))
     .then(res=>res.exists()?res.data()["list"]:null);
 };
+
+/**
+ * Updates other settings
+ * 
+ * @param {String} userId 
+ * @param {Object} otherSettings 
+ * @returns 
+ */
+export const saveOtherSettings = (userId, otherSettings)=>{
+    return setDoc(doc(fs, settingCollection, userId), {otherSettings:otherSettings}, {merge:true});
+};
+
+/**
+ * Get other settings
+ * 
+ * @param {String} userId 
+ * @returns 
+ */
+export const getOtherSettings = (userId)=>{
+    return getDoc(doc(fs, settingCollection, userId))
+    .then(res=>res.exists()?res.data()["otherSettings"]:null);
+};

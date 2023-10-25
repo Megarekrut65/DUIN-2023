@@ -1,14 +1,21 @@
 <script setup>
 import { ref } from 'vue';
+import { getSettings,saveSettings } from '../../assets/js/other-settings';
 
-const value = localStorage.getItem("saveImage");
+const otherSettings = getSettings();
 
-const saveImage = ref(value);
+const saveImage = ref(otherSettings["save-image"]);
+const result = ref(""), error = ref("");
 
-const saveSettings = () => {
+const save = () => {
 
-    localStorage.setItem("saveImage", saveImage.value);
-
+    otherSettings["save-image"] = saveImage.value;
+    saveSettings(otherSettings).then(() => {
+        result.value = "Saved!";
+    }).catch(err => {
+        console.log(err);
+        error.value = "Some errors occurred while saving, please reload the page and try again later!";
+    });
     return false;
 };
 
@@ -19,14 +26,18 @@ const saveSettings = () => {
         <div class="card-body">
             <h3>Other settings</h3>
 
-            <form @submit="saveSettings" action="#" onsubmit="return false;">
+            <form @submit="save" action="#" onsubmit="return false;">
 
                 <div class="form-item">
                     <label>Save all uploaded images?</label>
-                    <input type="checkbox" name="saveImage" v-model="saveImage"/>
+                    <input type="checkbox" name="saveImage" v-model="saveImage" />
+                </div>
+                <div class="mt-4">
+                <p style="color:tomato">{{ error }}</p>
                 </div>
                 <div class="mt-4">
                     <input type="submit" class="btn fs-4 rounded-2 bg-success" value="Save" />
+                    <label style="color:green" class="ml-4">{{ result }}</label>
                 </div>
             </form>
         </div>

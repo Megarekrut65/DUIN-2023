@@ -1,5 +1,5 @@
 import {loadWithUser} from "../firebase-js/auth";
-import {saveMarkSettings} from "../firebase-js/firestore";
+import {getMarkSettings, saveMarkSettings} from "../firebase-js/firestore";
 
 const convert_ = [
     {count: 0, mark:"Absent", color:"tomato"},
@@ -42,13 +42,27 @@ export const getColor = (count)=>{
 
 export const defaultConvert = ()=> convert;
 
-export const changeConvert = async(newConvert)=>{
+export const changeConvert = (newConvert)=>{
     convert = newConvert;
     localStorage.setItem("convert", JSON.stringify(convert));
 
-    loadWithUser((user)=>{
-        if(user){
-            saveMarkSettings(user.uid, newConvert);
-        }
+    return new Promise((resolve, reject)=>{
+        loadWithUser((user)=>{
+            if(user){
+                saveMarkSettings(user.uid, newConvert)
+                .then(resolve).catch(reject);
+            }
+            resolve();
+        });
     });
 };
+
+loadWithUser((user)=>{
+    if(user){
+        getMarkSettings(user.uid).then(res=>{
+            if(res){
+                localStorage.setItem("convert", JSON.stringify(res));
+            }
+        });
+    }
+});

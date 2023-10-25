@@ -5,7 +5,7 @@ export const getStudents = ()=>{
     const item = localStorage.getItem("students");
     if(item == null) return [];
     const list = JSON.parse(item);
-    if(list == null || list.length < 2) return [];
+    if(list == null) return [];
     
     return list;
 };
@@ -13,10 +13,13 @@ export const getStudents = ()=>{
 export const saveStudents = (students)=>{
     localStorage.setItem("students", JSON.stringify(students));
 
-    loadWithUser((user)=>{
-        if(user){
-            saveStudentList(user.uid, students);
-        }
+    return new Promise((resolve, reject)=>{
+        loadWithUser((user)=>{
+            if(user){
+                saveStudentList(user.uid, students)
+                .then(resolve).catch(reject);
+            }
+        });
     });
 };
 
