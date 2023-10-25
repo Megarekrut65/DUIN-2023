@@ -58,7 +58,7 @@ subscribeAuthChange((user)=>{
               <span>
                 <i class="ti ti-layout-dashboard"></i>
               </span>
-              <span class="hide-menu">Dashboard</span>
+              <span class="hide-menu hide-btn">Dashboard</span>
             </RouterLink>
           </li>
 
@@ -72,7 +72,7 @@ subscribeAuthChange((user)=>{
                 <span>
                   <i class="ti ti-bookmark"></i>
                 </span>
-                <span class="hide-menu">Saves</span>
+                <span class="hide-menu hide-btn">Saves</span>
               </RouterLink>
             </li>
             <li class="sidebar-item" v-if="isLogin">
@@ -80,7 +80,7 @@ subscribeAuthChange((user)=>{
                 <span>
                   <i class="ti ti-cards"></i>
                 </span>
-                <span class="hide-menu">Images</span>
+                <span class="hide-menu hide-btn">Images</span>
               </RouterLink>
             </li>
             <li class="sidebar-item" v-if="isLogin">
@@ -88,7 +88,7 @@ subscribeAuthChange((user)=>{
                 <span>
                   <i class="ti ti-adjustments-alt"></i>
                 </span>
-                <span class="hide-menu">Settings</span>
+                <span class="hide-menu hide-btn">Settings</span>
               </RouterLink>
             </li>
             <li class="sidebar-item">
@@ -96,7 +96,7 @@ subscribeAuthChange((user)=>{
                 <span>
                   <i class="ti ti-alert-circle"></i>
                 </span>
-                <span class="hide-menu">About</span>
+                <span class="hide-menu hide-btn">About</span>
               </RouterLink>
             </li>
             <li class="sidebar-item">
@@ -104,7 +104,7 @@ subscribeAuthChange((user)=>{
                 <span>
                   <i class="ti ti-mail"></i>
                 </span>
-                <span class="hide-menu">Contacts</span>
+                <span class="hide-menu hide-btn">Contacts</span>
               </RouterLink>
             </li>
             <div v-if="isLogin">
@@ -117,7 +117,7 @@ subscribeAuthChange((user)=>{
                 <span>
                   <i class="ti ti-logout"></i>
                 </span>
-                <span class="hide-menu" @click="logoutUser">Logout</span>
+                <span class="hide-menu hide-btn" @click="logoutUser">Logout</span>
               </a>
             </li>
             </div>
@@ -132,7 +132,7 @@ subscribeAuthChange((user)=>{
                 <span>
                   <i class="ti ti-login"></i>
                 </span>
-                <span class="hide-menu" @click="change">Login</span>
+                <span class="hide-menu hide-btn" @click="change">Login</span>
               </a>
             </li>
             <li class="sidebar-item">
@@ -140,7 +140,7 @@ subscribeAuthChange((user)=>{
                 <span>
                   <i class="ti ti-user"></i>
                 </span>
-                <span class="hide-menu">Register</span>
+                <span class="hide-menu hide-btn">Register</span>
               </a>
             </li>
           </div>
