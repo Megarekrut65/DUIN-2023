@@ -2,7 +2,7 @@
 import { ref, toRaw } from 'vue';
 import {getDetected} from "../assets/js/home";
 import SubmitMarks from './SubmitMarks.vue';
-import {pasteImage, loadImage} from "../assets/js/image-handling";
+import {pasteImage, loadImage, renameFile} from "../assets/js/image-handling";
 import LoadingWindow from './LoadingWindow.vue';
 
 const props = defineProps({
@@ -21,8 +21,6 @@ const file = ref(null), isActive = ref(false), image = ref(""), isLoading = ref(
 const detected = ref([]);
 
 const startDetecting = async(fileBlob)=>{
-    isLoading.value = true;
-
     try{
         detected.value = await getDetected(props.students, fileBlob);
     }
@@ -37,7 +35,7 @@ const startDetecting = async(fileBlob)=>{
 };
 
 const submitFile=()=>{
-    startDetecting(file.value.files[0]);
+    startDetecting(renameFile(file.value.files[0]));
 
     return false;
 };
@@ -60,7 +58,10 @@ const cancel = ()=>{
 
 
 document.addEventListener('paste', event=>{
-    if(!isLoading.value && !isActive.value) pasteImage(event, startDetecting);
+    if(!isLoading.value && !isActive.value){
+        isLoading.value = true;
+        pasteImage(event, startDetecting);
+    } 
 });
 
 </script>

@@ -6,12 +6,17 @@ export const pasteImage = (event, success) => {
     for (let i = 0; i < items.length; i++) {
         if (items[i].type.indexOf('image') !== -1) {
             const file = items[i].getAsFile();
-            const blob = file.slice(0, file.size, 'image/png'); 
-            const result = new File([blob], uuidv4(), {type: 'image/png'});
-            success(result);
+            success(renameFile(file));
         }
     }
 };
+
+export const renameFile = (file)=>{
+    const blob = file.slice(0, file.size, 'image/png'); 
+    const result = new File([blob], uuidv4(), {type: 'image/png'});
+
+    return result;
+}
 
 export const loadImage = (file, success)=>{
     const reader = new FileReader();

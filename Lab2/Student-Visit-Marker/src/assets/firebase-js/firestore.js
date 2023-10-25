@@ -7,7 +7,7 @@ import {
 } from "firebase/firestore";
 
 const fs = getFirestore(init());
-const settingCollection = "settings", userCollection = "users";
+const settingCollection = "settings", userCollection = "users", saveCollection = "saves";
 
 /**
  * Updates marks in user settings
@@ -73,4 +73,37 @@ export const saveOtherSettings = (userId, otherSettings)=>{
 export const getOtherSettings = (userId)=>{
     return getDoc(doc(fs, settingCollection, userId))
     .then(res=>res.exists()?res.data()["otherSettings"]:null);
+};
+
+/**
+ * Updates saved images
+ * 
+ * @param {String} userId 
+ * @param {Object} image 
+ * @returns 
+ */
+export const saveImage = (userId, id, image)=>{
+    return setDoc(doc(fs, saveCollection, userId), {[id]:image}, {merge:true});
+};
+
+/**
+ * Get saved images
+ * 
+ * @param {String} userId 
+ * @returns 
+ */
+export const getSavedImages = (userId)=>{
+    return getDoc(doc(fs, saveCollection, userId))
+    .then(res=>res.exists()?res.data():null);
+};
+
+/**
+ * Updates saved images
+ * 
+ * @param {String} userId 
+ * @param {Object} image 
+ * @returns 
+ */
+export const changeImages = (userId, images)=>{
+    return setDoc(doc(fs, saveCollection, userId), images);
 };

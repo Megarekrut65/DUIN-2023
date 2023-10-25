@@ -33,7 +33,8 @@ const router = createRouter({
     {
       path: '/images',
       name: 'images',
-      component: () => import('../views/ImagesView.vue')
+      component: () => import('../views/ImagesView.vue'),
+      beforeEnter: ifAuthenticated
     },
     {
       path: '/settings',
