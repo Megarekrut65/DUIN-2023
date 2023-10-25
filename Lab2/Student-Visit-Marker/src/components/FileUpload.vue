@@ -60,7 +60,7 @@ const cancel = ()=>{
 
 
 document.addEventListener('paste', event=>{
-    if(!isLoading.value) pasteImage(event, startDetecting);
+    if(!isLoading.value && !isActive.value) pasteImage(event, startDetecting);
 });
 
 </script>

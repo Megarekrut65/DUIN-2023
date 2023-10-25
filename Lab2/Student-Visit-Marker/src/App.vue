@@ -7,7 +7,7 @@ const isLogin = ref(false), username = ref(""), photo = ref("./src/assets/user-1
 
 const logoutUser = ()=>{
   logout().then(()=>{
-  
+    window.location.reload();
   }).catch(err=>console.log(err));
 };
 

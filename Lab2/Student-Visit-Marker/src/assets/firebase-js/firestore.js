@@ -26,11 +26,9 @@ export const saveMarkSettings = (userId, marks)=>{
  * @param {String} userId 
  * @returns 
  */
-export const getMarkSettings = async(userId)=>{
+export const getMarkSettings = (userId)=>{
     return getDoc(doc(fs, settingCollection, userId))
-    .then(res=>{
-        return res.exists()?res.data()["marks"]:null;
-    });
+    .then(res=>res.exists()?res.data()["marks"]:null);
 };
 
 /**
@@ -50,8 +48,7 @@ export const saveStudentList = (userId, list)=>{
  * @param {String} userId 
  * @returns 
  */
-export const getStudentList = async(userId)=>{
-    const res = await getDoc(doc(fs, userCollection, userId));
-
-    return res.exists()?res.data()["list"]:null;
+export const getStudentList = (userId)=>{
+    return getDoc(doc(fs, userCollection, userId))
+    .then(res=>res.exists()?res.data()["list"]:null);
 };

@@ -98,7 +98,9 @@ export const logout = ()=>{
     }    
     localStorage.clear();
 
-    return signOut(auth);
+    return signOut(auth).then(()=>{
+        if(auth.currentUser) return signOut(auth);
+    });
 };
 
 export const getUser = ()=> auth.currentUser;

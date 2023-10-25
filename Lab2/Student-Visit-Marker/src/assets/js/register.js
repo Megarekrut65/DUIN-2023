@@ -1,10 +1,19 @@
 import {createNewUser} from "../firebase-js/auth";
 import router from "../../router";
 import { getErrorMessage } from "../firebase-js/error-codes/error-messages";
+import {getStudents} from "./student-manager";
 
-const success = (user)=>{
-    if(user) {
-        router.push("/");
+import {saveStudentList} from "../firebase-js/firestore";
+
+const success = (credential)=>{
+    if(credential?.user) {
+        return saveStudentList(credential.user.uid, getStudents())
+        .then(() => {
+            router.push("/");
+        })
+        .catch(err=>{
+            throw err;
+        });
     }
 };
 
