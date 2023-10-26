@@ -1,25 +1,23 @@
 <script setup>
 import { ref } from 'vue';
 import ImageItem from '../components/ImageItem.vue';
-import {getImages} from "../assets/js/image-manager";
+import {getImages, removeImage} from "../assets/js/image-manager";
 
 const images = ref(getImages());
-const selectedItem = ref(-1);
+const selectedItem = ref("");
 
-const removeItem = (item)=>{
-    const index = images.value.indexOf(item);
-    if (index !== -1) {
-        images.value.splice(index, 1);
-    }
+const removeItem = (id)=>{
+    removeImage(id).catch(err=>console.log(err));
+    delete images.value[id];
 };
 
-const remove = (event, data, number)=>{
-    if(number === selectedItem.value && event){
-        removeItem(data);
-        selectedItem.value = -1;
+const remove = (event, data, id)=>{
+    if(id === selectedItem.value && event){
+        removeItem(id);
+        selectedItem.value = "";
         return;
     }
-    selectedItem.value = event?number:-1;
+    selectedItem.value = event?id:"";
 };
 
 </script>

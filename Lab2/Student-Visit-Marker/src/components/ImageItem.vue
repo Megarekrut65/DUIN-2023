@@ -17,7 +17,7 @@ defineProps({
         required: true
     },
     selectedItem: {
-        type: Number,
+        type: String,
         required: true
     }
 });

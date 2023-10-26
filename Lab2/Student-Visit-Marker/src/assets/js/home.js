@@ -1,30 +1,21 @@
-import { getUser } from "../firebase-js/auth";
-import { uploadFile, getFileURL, removeFile } from "../firebase-js/storage";
-import { saveImage } from "../firebase-js/firestore";
+import { removeFile } from "../firebase-js/storage";
 import { extractText } from "./image-to-text";
 import {compareTwoStrings} from "string-similarity";
 import {toRaw} from "vue";
 import {getSettings} from "./other-settings";
-import { v4 as uuidv4 } from "uuid";
-import { formatDateToCustomString } from "./utilities";
+import {addImage} from "./image-manager";
 
 const getText = (file)=>{
-
-    const user = getUser();
-
     const needSaveImage = getSettings()["save-image"];
+    let path = "";
 
-    const path = user?user.uid:"public";
-
-    return uploadFile(file, path).then(async(res)=>{
-        const url = await getFileURL(res.ref);
-        if(needSaveImage && user){
-            saveImage(user.uid, uuidv4(), {name:file.name, url:url, date: formatDateToCustomString(new Date())});
-        }
+    return addImage(file, needSaveImage).then(async(result)=>{
+        const url = result.url;
+        path = result.path;
 
         //const text = await extractText(url);
         const text = `{"lang": "uk", "all_text": "Олександр Бандалак (Me)\\nKZ Kostiantyn Zhereb (Host)\\nYH Yaroslav Havryliuk\\nв Віктор Свинар\\nЄ Єгор Грушевий\\nКирило Рябов (phone)\\no Олексій Ткачук\\nППолосенко Павло\\nс Соколов Михайло\\nО\\nче до\\nдо\\nчто", "annotations": ["Олександр", "Бандалак", "(", "Me", ")", "KZ", "Kostiantyn", "Zhereb", "(", "Host", ")", "YH", "Yaroslav", "Havryliuk", "в", "Віктор", "Свинар", "Є", "Єгор", "Грушевий", "Кирило", "Рябов", "(", "phone", ")", "o", "Олексій", "Ткачук", "ППолосенко", "Павло", "с", "Соколов", "Михайло", "О", "че", "до", "до", "что"]}`
-        
+                
         const obj = JSON.parse(text);
 
         if("all_text" in obj) return obj["all_text"];
@@ -34,7 +25,7 @@ const getText = (file)=>{
         console.log(err);
         return "";
     }).then(text=>{
-        if(!needSaveImage) removeFile(file, path);
+        if(!needSaveImage) removeFile(file.name, path);
 
         return text;
     });

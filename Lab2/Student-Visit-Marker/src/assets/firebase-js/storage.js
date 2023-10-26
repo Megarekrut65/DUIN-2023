@@ -22,8 +22,8 @@ export const uploadFile = (file, direction)=>{
  * @param {String} path 
  * @returns 
  */
-export const removeFile = (file, direction)=>{
-    const fileRef = ref(storage, `temp/${direction}/${file.name}`);
+export const removeFile = (filename, direction)=>{
+    const fileRef = ref(storage, `temp/${direction}/${filename}`);
 
     return deleteObject(fileRef);
 };

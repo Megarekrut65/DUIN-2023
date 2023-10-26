@@ -1,7 +1,8 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router';
 import { ref } from 'vue';
-import {logout, subscribeAuthChange } from "./assets/firebase-js/auth.js";
+import {logout, subscribeAuthChange } from "./assets/firebase-js/auth";
+import {toggleBarEvent} from "./assets/template/js/slidebar";
 
 const isLogin = ref(false), username = ref(""), photo = ref("./src/assets/user-1.png");
 
@@ -80,7 +81,7 @@ subscribeAuthChange((user)=>{
                 <span>
                   <i class="ti ti-cards"></i>
                 </span>
-                <span class="hide-menu hide-btn">Images</span>
+                <span class="hide-menu hide-btn" @click="event=>toggleBarEvent(event.target)">Images</span>
               </RouterLink>
             </li>
             <li class="sidebar-item" v-if="isLogin">
@@ -88,7 +89,7 @@ subscribeAuthChange((user)=>{
                 <span>
                   <i class="ti ti-adjustments-alt"></i>
                 </span>
-                <span class="hide-menu hide-btn">Settings</span>
+                <span class="hide-menu hide-btn" @click="event=>toggleBarEvent(event.target)">Settings</span>
               </RouterLink>
             </li>
             <li class="sidebar-item">
