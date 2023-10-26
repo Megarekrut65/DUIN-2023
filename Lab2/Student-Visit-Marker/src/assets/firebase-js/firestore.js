@@ -1,5 +1,5 @@
 import { init } from "./firebase";
-import { 
+import {
     getFirestore,
     setDoc,
     doc,
@@ -16,8 +16,8 @@ const settingCollection = "settings", userCollection = "users", saveCollection =
  * @param {Object} marks 
  * @returns 
  */
-export const saveMarkSettings = (userId, marks)=>{
-    return setDoc(doc(fs, settingCollection, userId), {marks:marks}, {merge:true});
+export const saveMarkSettings = (userId, marks) => {
+    return setDoc(doc(fs, settingCollection, userId), { marks: marks }, { merge: true });
 };
 
 /**
@@ -26,9 +26,9 @@ export const saveMarkSettings = (userId, marks)=>{
  * @param {String} userId 
  * @returns 
  */
-export const getMarkSettings = (userId)=>{
+export const getMarkSettings = (userId) => {
     return getDoc(doc(fs, settingCollection, userId))
-    .then(res=>res.exists()?res.data()["marks"]:null);
+        .then(res => res.exists() ? res.data()["marks"] : null);
 };
 
 /**
@@ -38,8 +38,8 @@ export const getMarkSettings = (userId)=>{
  * @param {Array} list 
  * @returns 
  */
-export const saveStudentList = (userId, list)=>{
-    return setDoc(doc(fs, userCollection, userId), {list:list}, {merge:true});
+export const saveStudentList = (userId, list) => {
+    return setDoc(doc(fs, userCollection, userId), { list: list }, { merge: true });
 };
 
 /**
@@ -48,9 +48,9 @@ export const saveStudentList = (userId, list)=>{
  * @param {String} userId 
  * @returns 
  */
-export const getStudentList = (userId)=>{
+export const getStudentList = (userId) => {
     return getDoc(doc(fs, userCollection, userId))
-    .then(res=>res.exists()?res.data()["list"]:null);
+        .then(res => res.exists() ? res.data()["list"] : null);
 };
 
 /**
@@ -60,8 +60,8 @@ export const getStudentList = (userId)=>{
  * @param {Object} otherSettings 
  * @returns 
  */
-export const saveOtherSettings = (userId, otherSettings)=>{
-    return setDoc(doc(fs, settingCollection, userId), {otherSettings:otherSettings}, {merge:true});
+export const saveOtherSettings = (userId, otherSettings) => {
+    return setDoc(doc(fs, settingCollection, userId), { otherSettings: otherSettings }, { merge: true });
 };
 
 /**
@@ -70,9 +70,9 @@ export const saveOtherSettings = (userId, otherSettings)=>{
  * @param {String} userId 
  * @returns 
  */
-export const getOtherSettings = (userId)=>{
+export const getOtherSettings = (userId) => {
     return getDoc(doc(fs, settingCollection, userId))
-    .then(res=>res.exists()?res.data()["otherSettings"]:null);
+        .then(res => res.exists() ? res.data()["otherSettings"] : null);
 };
 
 /**
@@ -82,8 +82,8 @@ export const getOtherSettings = (userId)=>{
  * @param {Object} image 
  * @returns 
  */
-export const saveImage = (userId, id, image)=>{
-    return setDoc(doc(fs, saveCollection, userId), {[id]:image}, {merge:true});
+export const saveImage = (userId, id, image) => {
+    return setDoc(doc(fs, saveCollection, userId), { [id]: image }, { merge: true });
 };
 
 /**
@@ -92,9 +92,9 @@ export const saveImage = (userId, id, image)=>{
  * @param {String} userId 
  * @returns 
  */
-export const getSavedImages = (userId)=>{
+export const getSavedImages = (userId) => {
     return getDoc(doc(fs, saveCollection, userId))
-    .then(res=>res.exists()?res.data():null);
+        .then(res => res.exists() ? res.data() : null);
 };
 
 /**
@@ -104,6 +104,6 @@ export const getSavedImages = (userId)=>{
  * @param {Object} image 
  * @returns 
  */
-export const changeImages = (userId, images)=>{
+export const changeImages = (userId, images) => {
     return setDoc(doc(fs, saveCollection, userId), images);
 };

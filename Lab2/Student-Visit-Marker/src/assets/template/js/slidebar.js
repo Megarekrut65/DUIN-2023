@@ -23,23 +23,14 @@ export const toggleBarEvent = (btn)=>{
   mainWrapper.classList.toggle("show-sidebar");
 };
 
-document.addEventListener("DOMContentLoaded", function () {
-  // Admin Panel settings
-
-  //****************************
-  /* This is for the mini-sidebar if width is less than 1170 */
-  //****************************
-  
+document.addEventListener("DOMContentLoaded", ()=> {
 
   setSideBarType();
   window.addEventListener("resize", setSideBarType);
 
-  //****************************
-  /* This is for sidebartoggler */
-  //****************************
   const sideBarToggler = document.querySelectorAll(".sidebartoggler");
   sideBarToggler.forEach(function (toggler) {
-    toggler.addEventListener("click", function () {
+    toggler.addEventListener("click", ()=>{
       const mainWrapper = document.getElementById("main-wrapper");
       mainWrapper.classList.toggle("mini-sidebar");
       if (mainWrapper.classList.contains("mini-sidebar")) {

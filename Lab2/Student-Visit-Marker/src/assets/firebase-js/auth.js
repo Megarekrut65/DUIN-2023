@@ -1,13 +1,14 @@
-import { getAuth, 
-    createUserWithEmailAndPassword, 
-    onAuthStateChanged, 
-    updateProfile, 
+import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    onAuthStateChanged,
+    updateProfile,
     signOut,
     signInWithEmailAndPassword,
     GoogleAuthProvider,
     signInWithPopup
 } from "firebase/auth";
-import {init} from "../firebase-js/firebase";
+import { init } from "../firebase-js/firebase";
 
 init();
 
@@ -22,7 +23,7 @@ const authChangeEvents = new Set();
  * 
  * @param {function} event - function to call it when user change state
  */
-export const subscribeAuthChange = (event)=>{
+export const subscribeAuthChange = (event) => {
     authChangeEvents.add(event);
     event(auth.currentUser);
 };
@@ -32,7 +33,7 @@ export const subscribeAuthChange = (event)=>{
  * 
  * @param {function} event - function to call it when user change state
  */
-export const unsubscribeAuthChange  = (event)=>{
+export const unsubscribeAuthChange = (event) => {
     authChangeEvents.delete(event);
     event(auth.currentUser);
 };
@@ -41,7 +42,7 @@ export const unsubscribeAuthChange  = (event)=>{
  * Call all function that subscribed to user auth change evens
  * @param {*} user 
  */
-const callEvents = (user)=>{
+const callEvents = (user) => {
     authChangeEvents.forEach(event => {
         event(user);
     });
@@ -55,17 +56,17 @@ const callEvents = (user)=>{
  * @param {String} password 
  * @returns promise to answer
  */
-export const createNewUser = (name, email, password)=>{
+export const createNewUser = (name, email, password) => {
     return createUserWithEmailAndPassword(auth, email, password)
-    .then(async(userCredential) => {
-        await updateProfile(userCredential.user, {
-            displayName: name
+        .then(async (userCredential) => {
+            await updateProfile(userCredential.user, {
+                displayName: name
+            });
+
+            callEvents(userCredential.user);
+
+            return userCredential;
         });
-
-        callEvents(userCredential.user);
-
-        return userCredential;
-    });
 };
 
 /**
@@ -74,11 +75,11 @@ export const createNewUser = (name, email, password)=>{
  * @param {String} email 
  * @param {String} password 
  */
-export const loginUserEmail = (email, password)=>{
+export const loginUserEmail = (email, password) => {
     return signInWithEmailAndPassword(auth, email, password);
 };
 
-export const loginGoogle = ()=>{
+export const loginGoogle = () => {
     return signInWithPopup(auth, googleProvider);
 };
 
@@ -87,23 +88,23 @@ export const loginGoogle = ()=>{
  * 
  * @returns promise to answer
  */
-export const logout = ()=>{
+export const logout = () => {
     const cookies = document.cookie.split(";");
-    
+
     for (let i = 0; i < cookies.length; i++) {
         const cookie = cookies[i];
         const eqPos = cookie.indexOf("=");
         const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
         document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
-    }    
+    }
     localStorage.clear();
 
-    return signOut(auth).then(()=>{
-        if(auth.currentUser) return signOut(auth);
+    return signOut(auth).then(() => {
+        if (auth.currentUser) return signOut(auth);
     });
 };
 
-export const getUser = ()=> auth.currentUser;
+export const getUser = () => auth.currentUser;
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
@@ -115,19 +116,19 @@ onAuthStateChanged(auth, (user) => {
 });
 
 export const ifAuthenticated = (to, from, next) => {
-    const unsubscribe = onAuthStateChanged(auth, (user)=>{
-        if(user){
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+        if (user) {
             next();
             unsubscribe();
             return;
         }
-        next({ name: "unauthorized"});
+        next({ name: "unauthorized" });
         unsubscribe();
     });
 };
 
-export const loadWithUser = (load)=>{
-    const unsubscribe = onAuthStateChanged(auth, (user)=>{
+export const loadWithUser = (load) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
         load(user);
         unsubscribe();
     });

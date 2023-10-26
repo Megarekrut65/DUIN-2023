@@ -1,5 +1,5 @@
 import { getStorage, ref, uploadBytes, deleteObject, getDownloadURL } from "firebase/storage";
-import {init} from "../firebase-js/firebase";
+import { init } from "../firebase-js/firebase";
 
 const storage = getStorage(init());
 
@@ -10,7 +10,7 @@ const storage = getStorage(init());
  * @param {String} direction 
  * @returns 
  */
-export const uploadFile = (file, direction)=>{
+export const uploadFile = (file, direction) => {
     const fileRef = ref(storage, `temp/${direction}/${file.name}`);
 
     return uploadBytes(fileRef, file);
@@ -22,7 +22,7 @@ export const uploadFile = (file, direction)=>{
  * @param {String} path 
  * @returns 
  */
-export const removeFile = (filename, direction)=>{
+export const removeFile = (filename, direction) => {
     const fileRef = ref(storage, `temp/${direction}/${filename}`);
 
     return deleteObject(fileRef);
@@ -34,11 +34,11 @@ export const removeFile = (filename, direction)=>{
  * @param {*} imgRef 
  * @returns 
  */
-export const getFileURL= async (imgRef)=>{
-    try{
+export const getFileURL = async (imgRef) => {
+    try {
         const url = await getDownloadURL(imgRef);
         return url;
-    }catch(err){
+    } catch (err) {
         console.log(err);
     }
     return "";

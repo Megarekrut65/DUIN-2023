@@ -4,7 +4,7 @@ import { ref } from 'vue';
 import {logout, subscribeAuthChange } from "./assets/firebase-js/auth";
 import {toggleBarEvent} from "./assets/template/js/slidebar";
 
-const isLogin = ref(false), username = ref(""), photo = ref("./src/assets/user-1.png");
+const isLogin = ref(false), username = ref("");
 
 const logoutUser = ()=>{
   logout().then(()=>{
@@ -17,10 +17,6 @@ subscribeAuthChange((user)=>{
 
   if(user){
     username.value = user.displayName;
-
-    if(user.photoURL){
-      photo.value = user.photoURL;
-    }
   }
 });
 
@@ -47,7 +43,7 @@ subscribeAuthChange((user)=>{
       <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
         <ul id="sidebarnav" class="sidebar-nav">
           <li v-if="isLogin">
-            <span><img :src="photo" alt="" width="35" height="35" class="rounded-circle mr-1"></span>
+            <span><img src="./assets/user.png" alt="" width="35" height="35" class="rounded-circle mr-1"></span>
             <u class="hide-menu">{{ username }}</u>
           </li>
           <li class="nav-small-cap">
