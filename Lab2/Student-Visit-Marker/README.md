@@ -1,10 +1,11 @@
 # Student-Visit-Marker
 
-This project is using for extracting student list from screenshot and marking visits of students in google sheets.
+This project is using for extracting student list from screenshot and marking visits of students.
 
 ## Used api and frameworks
 
 1. [Vue.js](https://vuejs.org/)
-2. [Firebase](https://firebase.google.com/) - Authentication and Storage
-3. [Google cloud](https://console.cloud.google.com/) - Google sheets api
+2. [Firebase](https://firebase.google.com/) - Authentication, Firestore and Storage
+3. [Image to Text API](https://apilayer.com/marketplace/image_to_text-api) - Extracting text from images
 
+App is available at this [page](https://student-visit-marker.web.app/)
