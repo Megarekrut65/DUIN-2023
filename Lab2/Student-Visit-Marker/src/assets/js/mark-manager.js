@@ -62,7 +62,11 @@ loadWithUser((user)=>{
         getMarkSettings(user.uid).then(res=>{
             if(res){
                 localStorage.setItem("convert", JSON.stringify(res));
+                convert = res;
+                return;
             }
+            localStorage.setItem("convert", JSON.stringify(convert_));
+            convert = convert_;
         });
     }
 });

@@ -37,7 +37,7 @@ subscribeAuthChange((user)=>{
     <div>
       <div class="brand-logo d-flex align-items-center justify-content-between">
         <RouterLink to="/" class="text-nowrap logo-img">
-          <img src="./assets/logo.png" style="width: 100%;" alt="" />
+          <img src="./assets/logo.png" style="width: 100%;" alt="logo" />
         </RouterLink>
         <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
           <i class="ti ti-x fs-8"></i>
@@ -54,12 +54,12 @@ subscribeAuthChange((user)=>{
             <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
             <span class="hide-menu">Home</span>
           </li>
-          <li class="sidebar-item">
+          <li class="sidebar-item hide-btn">
             <RouterLink class="sidebar-link" to="/" aria-expanded="false">
               <span>
                 <i class="ti ti-layout-dashboard"></i>
               </span>
-              <span class="hide-menu hide-btn">Dashboard</span>
+              <span class="hide-menu">Dashboard</span>
             </RouterLink>
           </li>
 
@@ -68,44 +68,44 @@ subscribeAuthChange((user)=>{
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
               <span class="hide-menu">Menu</span>
             </li>
-            <li class="sidebar-item" v-if="false">
+            <li class="sidebar-item hide-btn" v-if="false">
               <RouterLink class="sidebar-link" to="/saves" aria-expanded="false">
                 <span>
                   <i class="ti ti-bookmark"></i>
                 </span>
-                <span class="hide-menu hide-btn">Saves</span>
+                <span class="hide-menu">Saves</span>
               </RouterLink>
             </li>
-            <li class="sidebar-item" v-if="isLogin">
+            <li class="sidebar-item hide-btn" v-if="isLogin">
               <RouterLink class="sidebar-link" to="/images" aria-expanded="false">
                 <span>
                   <i class="ti ti-cards"></i>
                 </span>
-                <span class="hide-menu hide-btn" @click="event=>toggleBarEvent(event.target)">Images</span>
+                <span class="hide-menu" @click="event=>toggleBarEvent(event.target)">Images</span>
               </RouterLink>
             </li>
-            <li class="sidebar-item" v-if="isLogin">
+            <li class="sidebar-item hide-btn" v-if="isLogin">
               <RouterLink class="sidebar-link" to="/settings" aria-expanded="false">
                 <span>
                   <i class="ti ti-adjustments-alt"></i>
                 </span>
-                <span class="hide-menu hide-btn" @click="event=>toggleBarEvent(event.target)">Settings</span>
+                <span class="hide-menu" @click="event=>toggleBarEvent(event.target)">Settings</span>
               </RouterLink>
             </li>
-            <li class="sidebar-item">
+            <li class="sidebar-item hide-btn">
               <RouterLink class="sidebar-link" to="/about" aria-expanded="false">
                 <span>
                   <i class="ti ti-alert-circle"></i>
                 </span>
-                <span class="hide-menu hide-btn">About</span>
+                <span class="hide-menu">About</span>
               </RouterLink>
             </li>
-            <li class="sidebar-item">
-              <RouterLink class="sidebar-link" to="/contacts" aria-expanded="false">
+            <li class="sidebar-item hide-btn">
+              <RouterLink class="sidebar-link" to="/help" aria-expanded="false">
                 <span>
-                  <i class="ti ti-mail"></i>
+                  <i class="ti ti-help"></i>
                 </span>
-                <span class="hide-menu hide-btn">Contacts</span>
+                <span class="hide-menu">Help</span>
               </RouterLink>
             </li>
             <div v-if="isLogin">
@@ -113,12 +113,12 @@ subscribeAuthChange((user)=>{
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
               <span class="hide-menu">Exit</span>
             </li>
-            <li class="sidebar-item">
+            <li class="sidebar-item hide-btn">
               <a class="sidebar-link" href="/login" aria-expanded="false">
                 <span>
                   <i class="ti ti-logout"></i>
                 </span>
-                <span class="hide-menu hide-btn" @click="logoutUser">Logout</span>
+                <span class="hide-menu" @click="logoutUser">Logout</span>
               </a>
             </li>
             </div>
@@ -128,20 +128,20 @@ subscribeAuthChange((user)=>{
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
               <span class="hide-menu">Account</span>
             </li>
-            <li class="sidebar-item">
+            <li class="sidebar-item hide-btn">
               <a class="sidebar-link" href="/login" aria-expanded="false">
                 <span>
                   <i class="ti ti-login"></i>
                 </span>
-                <span class="hide-menu hide-btn" @click="change">Login</span>
+                <span class="hide-menu" @click="change">Login</span>
               </a>
             </li>
-            <li class="sidebar-item">
+            <li class="sidebar-item hide-btn">
               <a class="sidebar-link" href="/register" aria-expanded="false">
                 <span>
                   <i class="ti ti-user"></i>
                 </span>
-                <span class="hide-menu hide-btn">Register</span>
+                <span class="hide-menu">Register</span>
               </a>
             </li>
           </div>

@@ -1,7 +1,6 @@
 import { removeFile } from "../firebase-js/storage";
 import { extractText } from "./image-to-text";
 import {compareTwoStrings} from "string-similarity";
-import {toRaw} from "vue";
 import {getSettings} from "./other-settings";
 import {addImage} from "./image-manager";
 
@@ -13,17 +12,19 @@ const getText = (file)=>{
         const url = result.url;
         path = result.path;
 
-        //const text = await extractText(url);
-        const text = `{"lang": "uk", "all_text": "Олександр Бандалак (Me)\\nKZ Kostiantyn Zhereb (Host)\\nYH Yaroslav Havryliuk\\nв Віктор Свинар\\nЄ Єгор Грушевий\\nКирило Рябов (phone)\\no Олексій Ткачук\\nППолосенко Павло\\nс Соколов Михайло\\nО\\nче до\\nдо\\nчто", "annotations": ["Олександр", "Бандалак", "(", "Me", ")", "KZ", "Kostiantyn", "Zhereb", "(", "Host", ")", "YH", "Yaroslav", "Havryliuk", "в", "Віктор", "Свинар", "Є", "Єгор", "Грушевий", "Кирило", "Рябов", "(", "phone", ")", "o", "Олексій", "Ткачук", "ППолосенко", "Павло", "с", "Соколов", "Михайло", "О", "че", "до", "до", "что"]}`
+        const text = await extractText(url);
+        //const text = `{"lang": "uk", "all_text": "Олександр Бандалак (Me)\\nKZ Kostiantyn Zhereb (Host)\\nYH Yaroslav Havryliuk\\nв Віктор Свинар\\nЄ Єгор Грушевий\\nКирило Рябов (phone)\\no Олексій Ткачук\\nППолосенко Павло\\nс Соколов Михайло\\nО\\nче до\\nдо\\nчто", "annotations": ["Олександр", "Бандалак", "(", "Me", ")", "KZ", "Kostiantyn", "Zhereb", "(", "Host", ")", "YH", "Yaroslav", "Havryliuk", "в", "Віктор", "Свинар", "Є", "Єгор", "Грушевий", "Кирило", "Рябов", "(", "phone", ")", "o", "Олексій", "Ткачук", "ППолосенко", "Павло", "с", "Соколов", "Михайло", "О", "че", "до", "до", "что"]}`
                 
         const obj = JSON.parse(text);
 
         if("all_text" in obj) return obj["all_text"];
 
-        throw new Error("There no text!");
+        const message = "message" in obj? obj.message : "Maybe some error has occurred...";
+        throw message;
     }).catch(err=>{
-        console.log(err);
-        return "";
+        if(!needSaveImage) removeFile(file.name, path);
+
+        throw err;
     }).then(text=>{
         if(!needSaveImage) removeFile(file.name, path);
 
@@ -60,7 +61,7 @@ export const getDetected = async(students, file)=>{
 
     for(let i in students){
         const result = getSimilarity(students[i].name, lines);
-        if(result.similarity > 0.5) detected.push(toRaw(students[i]));
+        if(result.similarity > 0.8) detected.push(students[i].name);
     }
 
     return detected;

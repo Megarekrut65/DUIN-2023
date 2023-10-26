@@ -43,9 +43,9 @@ const router = createRouter({
       beforeEnter: ifAuthenticated
     },
     {
-      path: '/contacts',
-      name: 'contacts',
-      component: () => import('../views/ContactsView.vue')
+      path: '/help',
+      name: 'help',
+      component: () => import('../views/HelpView.vue')
     },
     {
       path: '/login',

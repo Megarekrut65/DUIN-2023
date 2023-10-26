@@ -28,7 +28,9 @@ loadWithUser((user)=>{
         getStudentList(user.uid).then(res=>{
             if(res){
                 localStorage.setItem("students", JSON.stringify(res));
+                return;
             }
+            localStorage.setItem("students", null);
         });
     }
 });

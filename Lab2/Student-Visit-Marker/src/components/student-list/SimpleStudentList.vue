@@ -43,7 +43,7 @@ const remove = (event, data, number)=>{
             </tr>
         </thead>
         <tbody>
-            <SimpleStudentListItem v-for="(data, index) in students" :key="index" :number="index+1" :name="data.name" 
+            <SimpleStudentListItem v-for="(data, index) in students" :key="index" :number="index+1" :name="data" 
                 :selected-item="selectedItem" :remove-self="(event)=>remove(event, data, index + 1)"></SimpleStudentListItem>
         </tbody>
     </table>

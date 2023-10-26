@@ -7,8 +7,11 @@ export const pasteImage = (event, success) => {
         if (items[i].type.indexOf('image') !== -1) {
             const file = items[i].getAsFile();
             success(renameFile(file));
+            return;
         }
     }
+
+    success(null);
 };
 
 export const renameFile = (file)=>{

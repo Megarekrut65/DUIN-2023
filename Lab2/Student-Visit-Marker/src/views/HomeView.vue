@@ -86,7 +86,7 @@ const removeMarks = () => {
 const submitDetecting = (detected) => {
   for (let i in detected) {
     for (let j in students.value) {
-      if (detected[i].name === students.value[j].name) {
+      if (detected[i] === students.value[j].name) {
         students.value[j].count++;
       }
     }
@@ -118,7 +118,7 @@ const copy = ()=>{
         <h1 class="mb-4">Dashboard</h1>
         <FileUpload :students="students" :submit="submitDetecting"></FileUpload>
 
-        <h2>Student list <i class="ti ti-copy custom-btn" @click="copy"></i> <span style="color: green;">{{ copied }}</span></h2>
+        <h2>Student list <i class="ti ti-copy custom-btn" @click="copy"></i> <span style="color: green; font-size: 0.7em;">{{ copied }}</span></h2>
 
         <form @submit="submitStudent" action="#" onsubmit="return false;" class="left-form mb-4 container-fluid">
           <div class="row" style="width: 100%; align-items: center">
