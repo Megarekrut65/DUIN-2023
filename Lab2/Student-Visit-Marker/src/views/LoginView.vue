@@ -52,8 +52,14 @@ const submit = () => {
                                     <div class="d-flex align-items-center justify-content-between mb-4">
                                         <p class="fs-4 mb-0 fw-bold">New here?</p>
                                         <RouterLink class="text-primary fw-bold ms-2" to="/register">
-                                            Create an account
+                                            Sing up
                                         </RouterLink>
+                                    </div>
+                                    <div class="d-flex align-items-center mb-4">
+                                        <p class="fs-4 mb-0 fw-bold">
+                                            By clicking 'Sign up', you agree to our privacy 
+                                            <a href="/privacy" target="_blank">policy</a>
+                                        </p>
                                     </div>
                                     <div style="display: flex; justify-content: space-between;">
                                         <input type="submit" class="btn btn-primary py-8 fs-4 rounded-2" value="Sign In">

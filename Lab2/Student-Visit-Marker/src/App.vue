@@ -108,6 +108,14 @@ subscribeAuthChange((user)=>{
                 <span class="hide-menu">Help</span>
               </RouterLink>
             </li>
+            <li class="sidebar-item hide-btn">
+              <RouterLink class="sidebar-link" to="/privacy" aria-expanded="false">
+                <span>
+                  <i class="ti ti-lock-square"></i>
+                </span>
+                <span class="hide-menu">Privacy</span>
+              </RouterLink>
+            </li>
             <div v-if="isLogin">
               <li class="nav-small-cap" >
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
@@ -133,7 +141,7 @@ subscribeAuthChange((user)=>{
                 <span>
                   <i class="ti ti-login"></i>
                 </span>
-                <span class="hide-menu" @click="change">Login</span>
+                <span class="hide-menu" @click="change">Sign In</span>
               </a>
             </li>
             <li class="sidebar-item hide-btn">
@@ -141,7 +149,7 @@ subscribeAuthChange((user)=>{
                 <span>
                   <i class="ti ti-user"></i>
                 </span>
-                <span class="hide-menu">Register</span>
+                <span class="hide-menu">Sign Up</span>
               </a>
             </li>
           </div>
