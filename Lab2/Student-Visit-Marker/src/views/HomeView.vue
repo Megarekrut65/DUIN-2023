@@ -7,7 +7,7 @@ import { getMark } from '../assets/js/mark-manager';
 import { copyToClipboard } from '../assets/js/coping';
 import { getStudents, saveStudents } from '../assets/js/student-manager';
 import StudentsPreview from '../components/StudentsPreview.vue';
-import MessageWindow from '../components/MessageWindow.vue';
+import QuestionWindow from '../components/QuestionWindow.vue';
 
 const studentName = ref(''),
   students = ref(getStudents()),
@@ -71,30 +71,26 @@ const cancelPaste = ()=>{
   pasteEvent.value = {};
 };
 
-const acceptClear = ref(false);
+const question = ref(""), questionSubmit = ref(()=>{}), questionCancel = ref(()=>question.value = "");
 
 const removeAll = () => {
-  if (acceptClear.value) {
+  question.value = "Do you really want to remove all students?";
+  questionSubmit.value = ()=>{
     students.value = [];
     saveStudents(toRaw(students.value));
-    acceptClear.value = false;
-    return;
-  }
-
-  acceptClear.value = true;
+    
+    question.value = "";
+  };
 };
 
-const acceptMarks = ref(false);
-
 const removeMarks = () => {
-  if (acceptMarks.value) {
+  question.value = "Do you really want to remove all students?";
+  questionSubmit.value = ()=>{
     students.value.forEach(item => (item.count = 0));
     saveStudents(toRaw(students.value));
-    acceptMarks.value = false;
-    return;
-  }
-
-  acceptMarks.value = true;
+    
+    question.value = "";
+  };
 };
 
 const submitDetecting = (detected) => {
@@ -124,13 +120,6 @@ const copy = () => {
 };
 
 
-const submitMessage = ()=>{
-
-};
-const cancelMessage = ()=>{
-
-};
-
 </script>
 
 <template>
@@ -153,8 +142,7 @@ const cancelMessage = ()=>{
             </div>
 
             <div class="col-6 col-lg-2 col-md-2 col-sm-4 mb-4">
-              <input type="button" class="btn py-8 fs-4 rounded-2 float-right"
-                v-bind:class="acceptMarks ? 'btn-warning' : 'btn-outline-dark'" value="Clear marks"
+              <input type="button" class="btn py-8 fs-4 rounded-2 float-right btn-warning" value="Clear marks"
                 @click="removeMarks" />
             </div>
 
@@ -167,8 +155,7 @@ const cancelMessage = ()=>{
             </div>
 
             <div class="col-6 col-lg-2 col-md-2 col-sm-4 mb-4">
-              <input type="button" class="btn py-8 fs-4rounded-2 float-right"
-                v-bind:class="acceptClear ? 'btn-danger' : 'btn-outline-dark'" value="Remove all" @click="removeAll" />
+              <input type="button" class="btn py-8 fs-4rounded-2 float-right btn-danger"  value="Remove all" @click="removeAll" />
             </div>
 
           </div>
@@ -178,6 +165,6 @@ const cancelMessage = ()=>{
       </div>
     </div>
     <StudentsPreview :submit="submitPaste" :cancel="cancelPaste" :event="pasteEvent"></StudentsPreview>
-    <MessageWindow></MessageWindow>
+    <QuestionWindow :question="question" :submit="questionSubmit" :cancel="questionCancel"></QuestionWindow>
   </main>
 </template>

@@ -36,7 +36,7 @@ const handlePaste = (event) => {
 
     const items = pastedText.split(/\n/)
         .filter(item => item.trim().length > 0)
-        .map(item => item.replace(/(\r\n|\n|\r)/gm, ""));
+        .map(item => item.replace(/(\r\n|\n|\r)/gm, "").substr(0, 40));
 
     if (items.length < 2) {
         props.submit(items);
