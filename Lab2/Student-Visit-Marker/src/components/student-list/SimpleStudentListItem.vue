@@ -10,11 +10,16 @@ defineProps({
         type: String,
         required: true
     },
-    removeSelf:{
+    removable: {
+        type: Boolean,
+        required: false,
+        value: true
+    },
+    removeSelf: {
         type: Function,
         required: true
     },
-    selectedItem:{
+    selectedItem: {
         type: Number,
         required: true
     }
@@ -23,15 +28,17 @@ defineProps({
 </script>
 
 <template>
-    <tr v-bind:class = "(selectedItem===number)?'bg-danger':''">
-        <td class="border-bottom-0"><h6 class="fw-semibold mb-0">{{ number }}</h6></td>
-        <td class="border-bottom-0" @click="()=>removeSelf(null)">
-            <h6 class="fw-semibold mb-1">{{ name }}</h6>                        
+    <tr v-bind:class="(selectedItem === number) ? 'bg-danger' : ''">
+        <td class="border-bottom-0">
+            <h6 class="fw-semibold mb-0">{{ number }}</h6>
         </td>
-        <td  class="border-bottom-0 text-center">
+        <td class="border-bottom-0" @click="() => removeSelf(null)">
+            <h6 class="fw-semibold mb-1">{{ name }}</h6>
+        </td>
+        <td class="border-bottom-0 text-center" v-if="removable">
             <p class="mb-0 fw-normal">
                 <i class="ti ti-x custom-btn" @click="removeSelf"></i>
             </p>
         </td>
-    </tr>                                                                                                       
+    </tr>
 </template>

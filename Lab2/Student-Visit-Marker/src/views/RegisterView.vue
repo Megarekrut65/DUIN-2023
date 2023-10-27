@@ -40,7 +40,7 @@ const submit = () => {
                                     <div class="mb-3">
                                         <label for="display-name" class="form-label">Name</label>
                                         <input v-model="name" type="text" class="form-control" name="display-name" required
-                                            minlength="5" maxlength="200">
+                                            maxlength="200">
                                     </div>
                                     <div class="mb-4">
                                         <label for="name" class="form-label">Email</label>

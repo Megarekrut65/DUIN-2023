@@ -12,6 +12,10 @@ const props = defineProps({
         type: Array,
         required: true
     },
+    undetected: {
+        type: Array,
+        required: true
+    },
     image: {
         type: String,
         required: true
@@ -53,17 +57,17 @@ const addStudent = ()=>{
 
 <template>
     <main>
-        <div v-bind:class="isActive ? 'modal-container' : 'modal-container hide'">
+        <div v-bind:class="isActive ? 'modal-container' : 'modal-container hide'" style="overflow-y: hidden;">
             <div class="modal-list">
                 <div class="card">
-                    <div class="row">
-                        <div v-bind:class="image !== '' ? 'col-12 col-md-6' : ''" v-if="image !== ''">
+                    <div class="row" style="overflow-y: auto; max-height: 90vh;">
+                        <div v-bind:class="image !== '' ? 'col-12 col-md-4' : ''" v-if="image !== ''">
                             <div class="card-body" style="overflow-x: auto; position: relative;">
                                 <h2>Your image:</h2>
                                 <img v-bind:src="image" alt="image" style="height: 80vh">
                             </div>
                         </div>
-                        <div v-bind:class="image !== '' ? 'col-12 col-md-6' : 'col-12'">
+                        <div v-bind:class="image !== '' ? 'col-12 col-md-4' : 'col-12'">
                             <div v-if="detected.length != 0" class="card-body">
                                 <h2>Students detected:</h2>
 
@@ -95,6 +99,12 @@ const addStudent = ()=>{
                                 <br>
                                 <input type="button" class="btn btn-success py-8 fs-4 mb-1 rounded-2" value="Ok"
                                     @click="submit">
+                            </div>
+                        </div>
+                        <div v-if="undetected.length != 0" class="col-12 col-md-4">
+                            <div class="card-body">
+                                <h2>Undetected lines in image:</h2>
+                                <SimpleStudentList :students="undetected" :remove-item="()=>{}" :removable="false" :only-marks="false"/>
                             </div>
                         </div>
                     </div>

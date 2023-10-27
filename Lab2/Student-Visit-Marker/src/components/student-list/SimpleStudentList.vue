@@ -7,6 +7,11 @@ const props = defineProps({
         type: Array,
         required: true
     },
+    removable:{
+        type: Boolean,
+        required: false,
+        value: true
+    },
     removeItem:{
         type: Function,
         required: true
@@ -37,14 +42,14 @@ const remove = (event, data, number)=>{
                 <th class="border-bottom-0">
                     <h6 class="fw-semibold mb-0">Full name</h6>
                 </th>
-                <th class="border-bottom-0 text-center">
+                <th class="border-bottom-0 text-center" v-if="removable">
                     <h6 class="fw-semibold mb-0">Remove</h6>
                 </th>
             </tr>
         </thead>
         <tbody>
             <SimpleStudentListItem v-for="(data, index) in students" :key="index" :number="index+1" :name="data" 
-                :selected-item="selectedItem" :remove-self="(event)=>remove(event, data, index + 1)"></SimpleStudentListItem>
+                :selected-item="selectedItem" :remove-self="(event)=>remove(event, data, index + 1)" :removable="removable"/>
         </tbody>
     </table>
 </div>                                                                                             

@@ -3,7 +3,7 @@
         <div class="card">
             <div class="card-body">
                 <div style="display: flex; justify-content: center;">
-                    <img src="../assets/logo.png" style="height: 100%;" alt="logo" />
+                    <img src="../assets/logo.png" style="width: 100%;" alt="logo" />
                 </div>
                 
                 <h1 class="mb-4 mt-4">About </h1>

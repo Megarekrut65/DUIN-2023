@@ -18,7 +18,7 @@ const props = defineProps({
 
 const file = ref(null), isActive = ref(false), image = ref(""), isLoading = ref(false);
 
-const detected = ref([]);
+const detected = ref([]), undetected = ref([]);
 const errorMessage = ref("");
 
 const addDetected = (name)=>{
@@ -36,7 +36,9 @@ const startDetecting = async (fileBlob) => {
         return;
     }
     try {
-        detected.value = await getDetected(props.students, fileBlob);
+        const result = await getDetected(props.students, fileBlob);
+        detected.value = result.detected;
+        undetected.value = result.undetected;
 
         loadImage(fileBlob, (url) => image.value = url);
     }
@@ -98,7 +100,7 @@ document.addEventListener('paste', event => {
             </div>
         </form>
         <div>
-            <SubmitMarks :students="students" :detected="detected" :remove-item="removeItem" :image="image"
+            <SubmitMarks :students="students" :detected="detected" :undetected="undetected" :remove-item="removeItem" :image="image"
                 :is-active="isActive" :submit="submitStudents" :cancel="cancel" :error-message="errorMessage" 
                 :add-detected="addDetected" />
         </div>

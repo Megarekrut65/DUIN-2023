@@ -122,27 +122,32 @@ const copy = ()=>{
 
         <form @submit="submitStudent" action="#" onsubmit="return false;" class="left-form mb-4 container-fluid">
           <div class="row" style="width: 100%; align-items: center">
+            
             <div class="col-12 col-lg-6 col-md-6 mb-4" style="display: flex; align-items: center">
               <input type="text" class="form-control" name="name" v-model="studentName" @paste="handlePaste" required
                 maxlength="100" placeholder="Student name..." style="width: 100%" />
               <input type="submit" class="btn btn-primary py-8 fs-4 rounded-2 float-right ml-2" value="Add student" />
             </div>
-            <div class="col-4 col-lg-2 col-md-2 mb-4">
+            
+            <div class="col-6 col-lg-2 col-md-2 col-sm-4 mb-4">
               <input type="button" class="btn py-8 fs-4 rounded-2 float-right"
                 v-bind:class="acceptMarks ? 'btn-warning' : 'btn-outline-dark'" value="Clear marks"
                 @click="removeMarks" />
             </div>
-            <div class="col-4 col-lg-2 col-md-2 mb-4 float-right">
+            
+            <div class="col-6 col-lg-2 col-md-2 col-sm-4 mb-4 float-right">
               <div class="text-center">
                 <label for="marks">Only marks</label>
                 <br />
                 <input type="checkbox" name="marks" v-model="onlyMarks" @change="marksClick"/>
               </div>
             </div>
-            <div class="col-4 col-lg-2 col-md-2 mb-4">
+            
+            <div class="col-6 col-lg-2 col-md-2 col-sm-4 mb-4">
               <input type="button" class="btn py-8 fs-4rounded-2 float-right"
                 v-bind:class="acceptClear ? 'btn-danger' : 'btn-outline-dark'" value="Remove all" @click="removeAll" />
             </div>
+            
           </div>
         </form>
 
