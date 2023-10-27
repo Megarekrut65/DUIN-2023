@@ -46,11 +46,20 @@ const props = defineProps({
     }
 });
 
-const newStudent = ref("");
+const newStudent = ref(""), error=ref("");
 
 const addStudent = ()=>{
-    props.addDetected(newStudent.value);
-    newStudent.value = "";
+    error.value = "";
+
+    const options = props.students.filter(item => !props.detected.includes(item.name)).map(item=>item.name);
+    if(options.includes(newStudent.value)){
+        props.addDetected(newStudent.value);
+        newStudent.value = "";
+        return false;
+    }
+
+    error.value = "Select item from list!";
+    return false;
 };
 
 </script>
@@ -61,25 +70,28 @@ const addStudent = ()=>{
             <div class="modal-list">
                 <div class="card">
                     <div class="row" style="overflow-y: auto; max-height: 90vh;">
-                        <div v-bind:class="image !== '' ? 'col-12 col-md-4' : ''" v-if="image !== ''">
+                        <div v-bind:class="image !== '' ? 'col-12 col-xl-4' : ''" v-if="image !== ''">
                             <div class="card-body" style="overflow-x: auto; position: relative;">
                                 <h2>Your image:</h2>
                                 <img v-bind:src="image" alt="image" style="height: 80vh">
                             </div>
                         </div>
-                        <div v-bind:class="image !== '' ? 'col-12 col-md-4' : 'col-12'">
+                        <div v-bind:class="image !== '' ? 'col-12 col-lg-6 col-xl-4' : 'col-6'">
                             <div v-if="detected.length != 0" class="card-body">
                                 <h2>Students detected:</h2>
 
                                 <form @submit="addStudent" action="#" onsubmit="return false;">
+                                    <span class="text-danger">{{ error }}</span>
                                     <div style="display: flex; justify-content: space-between; align-items: center;">
-                                        <select v-model="newStudent" class="form-control" required>
-                                            <option disabled value="">Add students manually</option>
-                                            <option v-for="(data, index) in students" :key="index">{{ data.name }}</option>
-                                        </select>
+                                        <input v-model="newStudent" class="form-control" required type="list" list="students-list" 
+                                            autocomplete="off">
+                                        <datalist id="students-list">
+                                            <option v-for="(data, index) in students.filter(item => !detected.includes(item.name))" 
+                                                :key="index" v-bind:value="data.name"></option>
+                                        </datalist>
                                         
                                         <input type="submit" class="btn btn-primary py-2 fs-4 rounded-2 float-right ml-2"
-                                            value="Add student" />
+                                            value="Add student"/>
                                     </div>
                                 </form>
                                 
@@ -101,7 +113,7 @@ const addStudent = ()=>{
                                     @click="submit">
                             </div>
                         </div>
-                        <div v-if="undetected.length != 0" class="col-12 col-md-4">
+                        <div v-if="undetected.length != 0" class="col-12 col-lg-6 col-xl-4">
                             <div class="card-body">
                                 <h2>Undetected lines in image:</h2>
                                 <SimpleStudentList :students="undetected" :remove-item="()=>{}" :removable="false" :only-marks="false"/>

@@ -1,0 +1,1 @@
+import{_ as s}from"./_plugin-vue_export-helper-c27b6911.js";import{o as c,c as a,a as e}from"./index-439e7c00.js";const o={},t=e("div",{class:"card"},[e("div",{class:"card-body"},[e("h1",{class:"mb-4"},"Saves")])],-1),r=[t];function n(_,d){return c(),a("main",null,r)}const m=s(o,[["render",n]]);export{m as default};

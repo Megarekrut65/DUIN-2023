@@ -3,7 +3,7 @@ import '../assets/css/custom.css';
 import { ref, toRaw } from 'vue';
 import StudentList from '../components/student-list/StudentList.vue';
 import FileUpload from '../components/FileUpload.vue';
-import { getMark } from '../assets/js/mark-manager';
+import { getMark, getColor } from '../assets/js/mark-manager';
 import { copyToClipboard } from '../assets/js/coping';
 import { getStudents, saveStudents } from '../assets/js/student-manager';
 import StudentsPreview from '../components/StudentsPreview.vue';
@@ -110,13 +110,13 @@ const submitDetecting = (detected) => {
 const copied = ref("");
 
 const convertContent = (item) => {
-  if (onlyMarks.value) return `${getMark(item.count)}`;
+  if (onlyMarks.value) return {mark:getMark(item.count), color:getColor(item.count)};
 
-  return `${item.name}\t${getMark(item.count)}`;
+  return {name:item.name, mark:getMark(item.count), color:getColor(item.count)};
 };
 
 const copy = () => {
-  const content = students.value.map(convertContent).join("\n");
+  const content = students.value.map(convertContent);
   copyToClipboard(content);
   copied.value = "Copied!";
   setTimeout(() => copied.value = "", 2000);

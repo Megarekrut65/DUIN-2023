@@ -3,13 +3,26 @@
  * @param {String} content 
  */
 export const copyToClipboard = (content) => {
-    const area = document.createElement("textarea");
-    document.body.appendChild(area);
+    const dataHTML = content.map(item => `
+    <tr>
+    ${"name" in item?"<td>"+item.name+"</td>":""}<td style="color: ${item.color}">${item.mark}</td>
+    </tr>
+    `).join(' ');
 
-    area.value = content;
-    area.select();
 
-    document.execCommand("copy");
+    const table = document.createElement('table');
+    table.style = "font-family:arial; color: black; font-size:14px;";
+    table.innerHTML = dataHTML;
 
-    document.body.removeChild(area);
+    document.body.appendChild(table);
+
+    const range = document.createRange();
+    range.selectNodeContents(table);
+    const selection = window.getSelection();
+    selection.removeAllRanges();
+    selection.addRange(range);
+
+    document.execCommand('copy');
+
+    document.body.removeChild(table);
 };
