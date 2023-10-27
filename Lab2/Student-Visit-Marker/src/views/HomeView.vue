@@ -34,6 +34,7 @@ const submitStudent = () => {
 
 const addStudent = (name) => {
   students.value.push({ name: name, count: 0 });
+  students.value.sort((a, b) => a.name.localeCompare(b.name));
   studentName.value = '';
 
   saveStudents(toRaw(students.value));
@@ -64,6 +65,8 @@ const submitPaste = (items)=>{
   for (let i in items) {
     students.value.push({ name: items[i], count: 0 });
   }
+  students.value.sort((a, b) => a.name.localeCompare(b.name));
+
   saveStudents(toRaw(students.value));
 };
 

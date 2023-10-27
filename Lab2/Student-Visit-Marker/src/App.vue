@@ -42,9 +42,9 @@ subscribeAuthChange((user) => {
         <!-- Sidebar navigation-->
         <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
           <ul id="sidebarnav" class="sidebar-nav">
-            <li v-if="isLogin">
-              <span><img src="./assets/user.png" alt="" width="35" height="35" class="rounded-circle mr-1"></span>
-              <u class="hide-menu">{{ username }}</u>
+            <li v-if="isLogin" style="display: flex; align-items: center;">
+              <img src="./assets/user.png" alt="" width="35" height="35" class="rounded-circle mr-1">
+              <div class="hide-menu">{{ username }}</div>
             </li>
             <li class="nav-small-cap">
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
@@ -161,11 +161,11 @@ subscribeAuthChange((user) => {
     <!--  Main wrapper -->
     <div class="body-wrapper">
       <!--  Header Start -->
-      <header class="app-header" style="background-color: rgba(0, 0, 0, 0);">
+      <header class="app-header" style="background-color: rgba(0, 0, 0, 0); pointer-events: none; ">
         <nav class="navbar navbar-expand-lg">
           <ul class="navbar-nav">
             <li class="nav-item d-block d-xl-none">
-              <a class="nav-link sidebartoggler nav-icon-hover" id="headerCollapse" href="javascript:void(0)">
+              <a class="nav-link sidebartoggler nav-icon-hover" id="headerCollapse" href="javascript:void(0)" style="pointer-events: auto;">
                 <i class="ti ti-menu-2"
                   style="background-color: white; padding: 10px; box-shadow: 2px 2px rgba(0, 0, 0, 0.263);"></i>
               </a>
