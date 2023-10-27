@@ -10,7 +10,7 @@ const props = defineProps({
     removable:{
         type: Boolean,
         required: false,
-        value: true
+        default: true
     },
     removeItem:{
         type: Function,

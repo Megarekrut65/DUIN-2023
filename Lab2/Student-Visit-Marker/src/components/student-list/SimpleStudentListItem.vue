@@ -13,7 +13,7 @@ defineProps({
     removable: {
         type: Boolean,
         required: false,
-        value: true
+        default: true
     },
     removeSelf: {
         type: Function,
