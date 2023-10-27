@@ -1,1 +1,0 @@
-import{_ as e}from"./_plugin-vue_export-helper-c27b6911.js";import{o,c as t,a as c}from"./index-439e7c00.js";const n={},s=c("h1",null,"You need to log in to access this page!",-1),a=[s];function r(_,i){return o(),t("main",null,a)}const f=e(n,[["render",r]]);export{f as default};
