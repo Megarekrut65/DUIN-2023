@@ -48,30 +48,53 @@ const removeItem = (item) => {
   }
 };
 
-const pasteEvent = ref({});
+const pasteStudents = ref([]);
+
+const removePasteItem = (data) => {
+    const index = pasteStudents.value.indexOf(data);
+    if (index != -1) {
+      pasteStudents.value.splice(index, 1);
+    }
+};
 
 const handlePaste = (event) => {
-  if("preventDefault" in pasteEvent.value) return;
-  pasteEvent.value = event;
+  event.preventDefault();
+    const clipboardData = event.clipboardData || window.clipboardData;
+    const pastedText = clipboardData.getData('text');
+
+    const items = pastedText.split(/\n/)
+        .filter(item => item.trim().length > 0)
+        .map(item => item.replace(/(\r\n|\n|\r)/gm, "").substr(0, 40));
+
+    if (items.length < 2) {
+        submitPaste(items);
+        return;
+    }
+    
+    event.target.blur();
+
+    pasteStudents.value = [];
+    for (let i in items) {
+      pasteStudents.value.push(items[i]);
+    }
 };
 
 const submitPaste = (items)=>{
-  pasteEvent.value = {};
-  if(items.length == 1){
+  if(items){
     studentName.value = items[0];
     return;
   }
 
-  for (let i in items) {
-    students.value.push({ name: items[i], count: 0 });
+  for (let i in pasteStudents.value) {
+    students.value.push({ name: pasteStudents.value[i], count: 0 });
   }
   students.value.sort((a, b) => a.name.localeCompare(b.name));
-
+  pasteStudents.value = [];
   saveStudents(toRaw(students.value));
 };
 
 const cancelPaste = ()=>{
-  pasteEvent.value = {};
+  pasteStudents.value = [];
 };
 
 const question = ref(""), questionSubmit = ref(()=>{}), questionCancel = ref(()=>question.value = "");
@@ -141,11 +164,11 @@ const copy = () => {
             <div class="col-12 col-lg-6 col-md-6 mb-4" style="display: flex; align-items: center">
               <input ref="nameInput" type="text" class="form-control" name="name" v-model="studentName" @paste="handlePaste" required
                 maxlength="40" placeholder="Student name..." style="width: 100%" />
-              <input type="submit" class="btn btn-primary py-8 fs-4 rounded-2 float-right ml-2" value="Add student" />
+              <input type="submit" class="btn btn-primary py-2 fs-4 rounded-2 float-right ml-2" value="Add student" />
             </div>
 
             <div class="col-6 col-lg-2 col-md-2 col-sm-4 mb-4">
-              <input type="button" class="btn py-8 fs-4 rounded-2 float-right btn-warning" value="Clear marks"
+              <input type="button" class="btn py-2 fs-4 rounded-2 float-right btn-warning" value="Clear marks"
                 @click="removeMarks" />
             </div>
 
@@ -158,7 +181,7 @@ const copy = () => {
             </div>
 
             <div class="col-6 col-lg-2 col-md-2 col-sm-4 mb-4">
-              <input type="button" class="btn py-8 fs-4rounded-2 float-right btn-danger"  value="Remove all" @click="removeAll" />
+              <input type="button" class="btn py-2 fs-4rounded-2 float-right btn-danger"  value="Remove all" @click="removeAll" />
             </div>
 
           </div>
@@ -167,7 +190,7 @@ const copy = () => {
         <StudentList :students="students" :remove-item="removeItem" :only-marks="onlyMarks"></StudentList>
       </div>
     </div>
-    <StudentsPreview :submit="submitPaste" :cancel="cancelPaste" :event="pasteEvent"></StudentsPreview>
+    <StudentsPreview :submit="submitPaste" :cancel="cancelPaste" :students="pasteStudents" :remove-item="removePasteItem"></StudentsPreview>
     <QuestionWindow :question="question" :submit="questionSubmit" :cancel="questionCancel"></QuestionWindow>
   </main>
 </template>

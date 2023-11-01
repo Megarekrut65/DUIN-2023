@@ -96,7 +96,7 @@ document.addEventListener('paste', event => {
             <div style="display: flex; align-items: center;">
                 <div class="mr-4"><input type="file" class="form-control" name="file" ref="file"
                         accept="image/png, image/jpeg" required></div>
-                <input type="submit" class="btn btn-primary py-8 fs-4 mb-1 rounded-2" value="Upload">
+                <input type="submit" class="btn btn-primary py-2 fs-4 mb-1 rounded-2" value="Upload">
             </div>
         </form>
         <div>
