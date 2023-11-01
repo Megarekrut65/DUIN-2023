@@ -1,0 +1,9 @@
+#hint_id_password1{
+    display: none;
+}
+#hint_id_password2{
+    display: none;
+}
+.asteriskField{
+    color: red;
+}

@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 
 import environ
+
 env = environ.Env()
 environ.Env.read_env()
 
@@ -32,17 +33,21 @@ DEBUG = True
 ALLOWED_HOSTS = ['127.0.0.1']
 
 handler404 = 'tutors_tool.views.not_found_404'
-LOGIN_REDIRECT_URL = '/tutors'
+LOGIN_REDIRECT_URL = "/tutors"
+LOGOUT_REDIRECT_URL = "/login"
 # Application definition
 
 INSTALLED_APPS = [
     'tutors.apps.TutorsConfig',
-    'django.contrib.admin',
+    # 'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'users.apps.UsersConfig',
+    'crispy_forms',
+    'crispy_bootstrap4'
 ]
 
 MIDDLEWARE = [
@@ -126,8 +131,12 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+STATICFILES_DIRS = [BASE_DIR / 'static']
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+AUTH_USER_MODEL = 'users.User'

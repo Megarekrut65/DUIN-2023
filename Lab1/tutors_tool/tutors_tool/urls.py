@@ -19,11 +19,14 @@ from django.urls import path, include
 
 from tutors_tool import views
 
+
 urlpatterns = [
+    path("", views.index, name="index"),
     path("tutors/", include("tutors.urls")),
+    path("", include("users.urls")),
     path("privacy/", views.privacy),
-    path('admin/', admin.site.urls),
+    # path('admin/', admin.site.urls)
 ]
 urlpatterns += [
-    path('accounts/', include('django.contrib.auth.urls')),
+    path('', include('django.contrib.auth.urls')),
 ]
