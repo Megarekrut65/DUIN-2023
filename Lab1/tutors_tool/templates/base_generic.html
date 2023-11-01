@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <title>{% block title %}Tutors Tool{% endblock %}</title>
+</head>
+
+<body>
+
+    <div id="sidebar">
+        {% block sidebar %}
+        <ul>
+            {% if user.is_authenticated %}
+                <li>User: {{ user.get_username }}</li>
+             <li><a href="{% url 'logout' %}?next={{ request.path }}">Logout</a></li>
+           {% else %}
+             <li><a href="{% url 'login' %}?next={{ request.path }}">Login</a></li>
+           {% endif %}
+            <li><a href="/">Home</a></li>
+            <li><a href="/blog/">Blog</a></li>
+        </ul>
+        {% endblock %}
+    </div>
+
+    <div id="content">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
