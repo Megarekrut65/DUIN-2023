@@ -8,7 +8,7 @@ from .models import Choice, Question, Subject
 
 
 class SubjectsView(generic.ListView):
-    paginate_by = 1
+    paginate_by = 12
     template_name = "tutors/subjects.html"
     context_object_name = "subjects_list"
 

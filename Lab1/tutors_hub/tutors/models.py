@@ -20,8 +20,11 @@ class Subject(models.Model):
     teacher = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     description = models.CharField(max_length=5000)
+
     lesson_price = models.IntegerField(default=0)
     lesson_duration = models.IntegerField(default=60)
+    work_schedule = models.CharField(max_length=1000)
+
     published = models.DateTimeField("date published")
 
 
