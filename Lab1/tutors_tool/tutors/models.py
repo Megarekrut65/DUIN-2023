@@ -1,4 +1,5 @@
 from django.db import models
+from users.models import User
 
 
 class Question(models.Model):
@@ -16,9 +17,11 @@ class Choice(models.Model):
 
 
 class Subject(models.Model):
+    teacher = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     description = models.CharField(max_length=5000)
     lesson_price = models.IntegerField(default=0)
     lesson_duration = models.IntegerField(default=60)
     published = models.DateTimeField("date published")
+
 

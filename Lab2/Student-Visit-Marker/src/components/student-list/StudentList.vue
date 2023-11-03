@@ -15,6 +15,10 @@ const props = defineProps({
     removeItem:{
         type: Function,
         required: true
+    },
+    changeDetected:{
+        type: Function,
+        required: true
     }
 });
 
@@ -32,7 +36,7 @@ const remove = (event, data, number)=>{
 </script>
 
 <template>
-<div class="table-responsive mt-4">
+<div class="table-responsive mt-4" @click="(event)=>event.target.classList.contains('ti-x')?()=>{}:remove()">
     <table class="table text-nowrap mb-0 align-middle">
         <thead class="text-dark fs-4">
             <tr>
@@ -55,7 +59,8 @@ const remove = (event, data, number)=>{
         </thead>
         <tbody>
             <StudentListItem v-for="(data, index) in students" :key="index" :number="index+1" :only-marks="onlyMarks"
-                :name="data.name" :count="data.count" :selected-item="selectedItem"
+                :name="data.name" :count="data.count" :selected-item="selectedItem" 
+                :change-detected="(delta)=>changeDetected(delta, data)"
                 :remove-self="(event)=>remove(event, data, index + 1)"></StudentListItem>
         </tbody>
     </table>

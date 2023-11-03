@@ -2,8 +2,28 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.views import generic
+from django.db.models import Q
 
-from .models import Choice, Question
+from .models import Choice, Question, Subject
+
+
+class SubjectsView(generic.ListView):
+    paginate_by = 1
+    template_name = "tutors/subjects.html"
+    context_object_name = "subjects_list"
+
+    def get_queryset(self):
+        pattern = self.request.GET.get("pattern", None)
+        pattern = "" if pattern is None else pattern
+
+        return Subject.objects\
+            .filter(Q(title__icontains=pattern) | Q(description__icontains=pattern))\
+            .order_by("-published")
+
+
+class SubjectView(generic.DetailView):
+    model = Subject
+    template_name = "tutors/subject.html"
 
 
 class IndexView(generic.ListView):

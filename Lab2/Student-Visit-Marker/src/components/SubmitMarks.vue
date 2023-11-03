@@ -76,7 +76,7 @@ const addStudent = ()=>{
                                 <img v-bind:src="image" alt="image" style="height: 80vh">
                             </div>
                         </div>
-                        <div v-bind:class="image !== '' ? 'col-12 col-lg-6 col-xl-4' : 'col-6'">
+                        <div v-bind:class="image !== '' ? 'col-12 col-lg-6 col-xl-4' : undetected.length != 0?'col-6':'col-12'">
                             <div v-if="detected.length != 0" class="card-body">
                                 <h2>Students detected:</h2>
 

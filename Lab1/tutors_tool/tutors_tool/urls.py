@@ -22,7 +22,7 @@ from tutors_tool import views
 
 urlpatterns = [
     path("", views.index, name="index"),
-    path("tutors/", include("tutors.urls")),
+    path("", include("tutors.urls")),
     path("", include("users.urls")),
     path("privacy/", views.privacy),
     # path('admin/', admin.site.urls)

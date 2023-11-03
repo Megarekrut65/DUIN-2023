@@ -32,7 +32,7 @@ const remove = (event, data, number)=>{
 </script>
 
 <template>
-<div class="table-responsive mt-4">
+<div class="table-responsive mt-4" @click="(event)=>event.target.classList.contains('ti-x')?()=>{}:remove()">
     <table class="table text-nowrap mb-0 align-middle">
         <thead class="text-dark fs-4">
             <tr>

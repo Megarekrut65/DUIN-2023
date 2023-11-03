@@ -21,10 +21,11 @@ const nameInput = ref();
 
 const submitStudent = () => {
   if(studentName.value.trim().length == 0){
-    nameInput.value.setCustomValidity("Name can't be empty!");
+    nameInput.value.value = "";
+
     nameInput.value.reportValidity();
     nameInput.value.focus();
-    studentName.value = "";
+
     return false;
   }
   addStudent(studentName.value.trim());
@@ -46,6 +47,15 @@ const removeItem = (item) => {
     students.value.splice(index, 1);
     saveStudents(toRaw(students.value));
   }
+};
+
+const changeDetected = (delta, item)=>{
+  const index = students.value.indexOf(item);
+  if (index == -1) return;
+
+  students.value[index].count += delta;
+  if(students.value[index].count < 0) students.value[index].count = 0;
+  saveStudents(toRaw(students.value));
 };
 
 const pasteStudents = ref([]);
@@ -110,7 +120,7 @@ const removeAll = () => {
 };
 
 const removeMarks = () => {
-  question.value = "Do you really want to remove all students?";
+  question.value = "Do you really want to clear all marks?";
   questionSubmit.value = ()=>{
     students.value.forEach(item => (item.count = 0));
     saveStudents(toRaw(students.value));
@@ -187,7 +197,7 @@ const copy = () => {
           </div>
         </form>
 
-        <StudentList :students="students" :remove-item="removeItem" :only-marks="onlyMarks"></StudentList>
+        <StudentList :students="students" :remove-item="removeItem" :only-marks="onlyMarks" :change-detected="changeDetected"></StudentList>
       </div>
     </div>
     <StudentsPreview :submit="submitPaste" :cancel="cancelPaste" :students="pasteStudents" :remove-item="removePasteItem"></StudentsPreview>

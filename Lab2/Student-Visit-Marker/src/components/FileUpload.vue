@@ -26,6 +26,7 @@ const addDetected = (name)=>{
 };
 
 const startDetecting = async (fileBlob) => {
+    errorMessage.value = "";
     image.value = "";
     detected.value = [];
 
@@ -75,6 +76,15 @@ const cancel = () => {
 
 
 document.addEventListener('paste', event => {
+    image.value = "";
+    
+    if (props.students.length == 0){
+
+        errorMessage.value = "First provide students in students list!";
+        isActive.value = true;
+        isLoading.value = false;
+        return;
+    }
     if (!isLoading.value && !isActive.value) {
         isLoading.value = true;
         pasteImage(event, (fileBlob) => {

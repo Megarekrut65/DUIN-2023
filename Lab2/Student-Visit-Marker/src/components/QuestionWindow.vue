@@ -20,7 +20,7 @@ defineProps({
 
 <template>
     <main>
-        <div v-bind:class="question !== ''? 'modal-container' : 'modal-container hide'">
+        <div v-bind:class="question !== ''? 'modal-container' : 'modal-container hide'" @click="cancel">
             <div class="modal-list" style="max-width: 400px; width: 100vh; height: auto;">
                 <div class="card" style="margin-top: 30vh;">
                     <div class="card-body text-center">

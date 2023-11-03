@@ -27,6 +27,10 @@ defineProps({
     selectedItem:{
         type: Number,
         required: true
+    },
+    changeDetected:{
+        type: Function,
+        required: true
     }
 });
 
@@ -35,14 +39,18 @@ defineProps({
 <template>
     <tr v-bind:class = "(selectedItem===number)?'bg-danger':''">
         <td v-if="!onlyMarks" class="border-bottom-0"><h6 class="fw-semibold mb-0">{{ number }}</h6></td>
-        <td v-if="!onlyMarks" class="border-bottom-0" @click="()=>removeSelf(null)">
+        <td v-if="!onlyMarks" class="border-bottom-0">
             <h6 class="fw-semibold mb-1">{{ name }}</h6>                        
         </td>
         <td class="border-bottom-0 text-center">
             <p class="mb-0 fw-normal" v-bind:style="{color:getColor(count)}">{{ getMark(count)}}</p>
         </td>
         <td v-if="!onlyMarks" class="border-bottom-0 text-center">
-            <p class="mb-0 fw-normal">{{ count }}</p>
+            <p class="mb-0 fw-normal no-select">
+                <i class="ti ti-minus custom-btn text-danger" @click="()=>changeDetected(-1)"></i>
+                {{ count }}
+                <i class="ti ti-plus custom-btn text-success" @click="()=>changeDetected(1)"></i>
+            </p>
         </td>
         <td v-if="!onlyMarks" class="border-bottom-0 text-center">
             <p class="mb-0 fw-normal">
@@ -51,3 +59,8 @@ defineProps({
         </td>
     </tr>                                                                                                       
 </template>
+<style>
+.no-select{
+    user-select: none;
+}
+</style>

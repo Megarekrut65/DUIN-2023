@@ -1,0 +1,94 @@
+{% extends "templates/base_generic.html" %}
+
+{% block title %}
+Subjects | Tutors tool
+{% endblock %}
+
+{% block content %}
+    <div class="container px-4 px-lg-5" style="margin-top: 100px">
+    <div class="row">
+        <div class="col-12">
+            <form action="{% url 'subjects' %}" method="GET">
+                <div class="input-group mb-3">
+                  <input type="text" name="pattern" class="form-control" placeholder="Type what you want to find..." aria-label="Recipient's username" aria-describedby="basic-addon2">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                  </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% if subjects_list %}
+    <div class="row gx-4 gx-lg-5">
+        {% for subject in subjects_list %}
+        <div class="col-md-4 mb-5">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h2 class="card-title">{{ subject.title }}</h2>
+                    <p class="card-text">{{ subject.description }}</p>
+                    <h4>${{ subject.lesson_price }}</h4>
+                    <h4>{{ subject.lesson_duration }} m.</h4>
+                </div>
+                <div class="card-footer" style="display: flex; justify-content: space-between; align-items: center">
+                    <a class="btn btn-primary btn-sm" href="{% url 'subject' subject.id %}">More Info</a>
+                    <p>{{ subject.teacher.fullname }}</p>
+                </div>
+            </div>
+       </div>
+        {% endfor %}
+    </div>
+    <div class="row">
+        <div class="col-12">
+        <nav>
+          <ul class="pagination justify-content-center">
+              {% if page_obj.has_previous %}
+                   <li class="page-item">
+                      <a class="page-link" href="{% if request.GET.pattern %}?pattern={{ request.GET.pattern }}&{% else %}?{% endif %}page=1" tabindex="-1">First</a>
+                  </li>
+                  <li class="page-item">
+                      <a class="page-link" href="{% if request.GET.pattern %}?pattern={{ request.GET.pattern }}&{% else %}?{% endif %}page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a>
+                  </li>
+              {% else %}
+                  <li class="page-item disabled">
+                      <a class="page-link" href="#" tabindex="-1">First</a>
+                  </li>
+                  <li class="page-item disabled">
+                      <a class="page-link" href="#" tabindex="-1">...</a>
+                  </li>
+              {% endif %}
+
+
+                <li class="page-item active"><a class="page-link" href="#">{{ page_obj.number }}</a></li>
+
+
+              {% if page_obj.has_next %}
+                   <li class="page-item">
+                      <a class="page-link" href="{% if request.GET.pattern %}?pattern={{ request.GET.pattern }}&{% else %}?{% endif %}page={{ page_obj.next_page_number }}" tabindex="-1">{{ page_obj.next_page_number }}</a>
+                  </li>
+                  <li class="page-item">
+                      <a class="page-link" href="{% if request.GET.pattern %}?pattern={{ request.GET.pattern }}&{% else %}?{% endif %}page={{ page_obj.paginator.num_pages }}" tabindex="-1">Last</a>
+                  </li>
+              {% else %}
+                  <li class="page-item disabled">
+                      <a class="page-link" href="#" tabindex="-1">...</a>
+                  </li>
+                  <li class="page-item disabled">
+                      <a class="page-link" href="#" tabindex="-1">Last</a>
+                  </li>
+              {% endif %}
+          </ul>
+        </nav>
+        </div>
+    </div>
+{% else %}
+    <div class="card text-white bg-secondary my-5 py-4 text-center">
+        <div class="card-body">
+            <p class="text-white m-0">
+                Subjects are missing!
+            </p>
+        </div>
+    </div>
+
+{% endif %}
+    </div>
+{% endblock %}
