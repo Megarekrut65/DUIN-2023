@@ -26,5 +26,6 @@ class Subject(models.Model):
     work_schedule = models.CharField(max_length=1000)
 
     published = models.DateTimeField("date published")
+    visible = models.BooleanField(default=True)
 
 

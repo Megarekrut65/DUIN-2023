@@ -17,6 +17,7 @@ class SubjectsView(generic.ListView):
         pattern = "" if pattern is None else pattern
 
         return Subject.objects\
+            .filter(visible=True)\
             .filter(Q(title__icontains=pattern) | Q(description__icontains=pattern))\
             .order_by("-published")
 

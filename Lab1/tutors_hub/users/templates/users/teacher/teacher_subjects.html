@@ -5,6 +5,25 @@
     <p>Add new one</p>
 
     <div>
-        
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Price, $</th>
+                <th scope="col">Duration, m</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for subject in subjects %}
+            <tr>
+                <th scope="row">1</th>
+                <td>{{ subject.title }}</td>
+                <td>{{ subject.lesson_price }}</td>
+                <td>{{ subject.lesson_duration }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
     </div>
 {% endblock %}

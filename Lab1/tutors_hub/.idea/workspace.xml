@@ -2,16 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="746adc9d-b280-400e-a733-ce15fd23ecf6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/users/templates/users/teacher/teacher.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/templates/users/teacher/teacher_home.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/templates/users/teacher/teacher_subjects.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/437f571e-876a-4bb3-b613-1aa7f056ba59.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/tutors/migrations/0004_subject_visible.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/custom.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/custom.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base_generic.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base_generic.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tutors_hub/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/tutors_hub/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/templates/users/teacher.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tutors/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/tutors/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tutors/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/tutors/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/templates/users/teacher/teacher_subjects.html" beforeDir="false" afterPath="$PROJECT_DIR$/users/templates/users/teacher/teacher_subjects.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -115,7 +110,7 @@
       <workItem from="1699021577227" duration="13303000" />
       <workItem from="1699038207876" duration="244000" />
       <workItem from="1699038566752" duration="1461000" />
-      <workItem from="1699098778343" duration="5016000" />
+      <workItem from="1699098778343" duration="6280000" />
     </task>
     <servers />
   </component>

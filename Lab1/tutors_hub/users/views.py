@@ -2,6 +2,7 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
+from tutors.models import Subject
 from users.forms import RegisterForm
 from users.models import User
 
@@ -38,6 +39,7 @@ def account_subjects(request):
         return render(request, "users/student.html")
 
     if request.user.role == User.Types.Teacher:
-        return render(request, "users/teacher/teacher_subjects.html")
+        subjects = Subject.objects.filter(teacher=request.user)
+        return render(request, "users/teacher/teacher_subjects.html", {"subjects": subjects})
 
     return render(request, "registration/login.html")
