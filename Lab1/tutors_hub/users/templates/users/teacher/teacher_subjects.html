@@ -1,27 +1,42 @@
 {% extends "users/teacher/teacher.html" %}
+{% load custom_filters %}
+
 
 {% block teacher_content %}
     <h1>Subjects</h1>
-    <p>Add new one</p>
+    <a href="/account/subject">Add new</a>
 
     <div>
         <table class="table">
             <thead>
             <tr>
-                <th scope="col">#</th>
                 <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Schedule</th>
                 <th scope="col">Price, $</th>
                 <th scope="col">Duration, m</th>
+                <th></th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
             {% for subject in subjects %}
-            <tr>
-                <th scope="row">1</th>
-                <td>{{ subject.title }}</td>
-                <td>{{ subject.lesson_price }}</td>
-                <td>{{ subject.lesson_duration }}</td>
-            </tr>
+                <tr class="{% if subject.visible %}table-success{% else %}table-secondary{% endif %}">
+                    <td>{{ subject.title|truncate:20 }}</td>
+                    <td>{{ subject.description|truncate:20 }}</td>
+                    <td>{{ subject.work_schedule|truncate:20 }}</td>
+                    <td>{{ subject.lesson_price }}</td>
+                    <td>{{ subject.lesson_duration }}</td>
+                    <th><a href="/account/subject/{{ subject.id }}"><i class="ti ti-pencil"></i></a></th>
+                    <th>
+                        <form method="POST" action="/account/subject/delete/{{ subject.id }}">
+                            {% csrf_token %}
+                            <button class="btn-link" type="submit">
+                                <i class="ti ti-x"></i>
+                            </button>
+                        </form>
+                    </th>
+                </tr>
             {% endfor %}
             </tbody>
         </table>

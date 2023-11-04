@@ -2,11 +2,32 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="746adc9d-b280-400e-a733-ce15fd23ecf6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/tutors/migrations/0004_subject_visible.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/css/fonts/tabler-icons.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/css/fonts/tabler-icons.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/css/fonts/tabler-icons.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/css/fonts/tabler-icons.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/css/fonts/tabler-icons.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/css/tabler-icons.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/users/templates/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/users/templates/users/teacher/teacher_subject.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/users/templatetags/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/users/templatetags/custom_filters.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base_generic.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base_generic.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tutors/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/tutors/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tutors/migrations/0002_subject_teacher.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tutors/migrations/0003_subject_work_schedule.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tutors/migrations/0004_subject_visible.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/tutors/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/tutors/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tutors/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/tutors/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tutors/templates/tutors/subjects.html" beforeDir="false" afterPath="$PROJECT_DIR$/tutors/templates/tutors/subjects.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/decorators.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/decorators.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/migrations/0002_user_fullname_alter_user_email.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/migrations/0003_user_role.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/migrations/0004_alter_user_role.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/users/templates/users/teacher/teacher_subjects.html" beforeDir="false" afterPath="$PROJECT_DIR$/users/templates/users/teacher/teacher_subjects.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -20,8 +41,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -47,7 +68,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/repos/Megarekrut65/DUIN-2023/Lab1/tutors_hub/users/templates/users",
+    "last_opened_file_path": "D:/repos/Megarekrut65/DUIN-2023/Lab1/tutors_hub/users/templates/users/teacher",
     "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   },
   "keyToStringList": {
@@ -58,15 +79,16 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\repos\Megarekrut65\DUIN-2023\Lab1\tutors_hub\users\templates\users\teacher" />
       <recent name="D:\repos\Megarekrut65\DUIN-2023\Lab1\tutors_hub\users\templates\users" />
       <recent name="D:\repos\Megarekrut65\DUIN-2023\Lab1\tutors_tool\users\templates\users" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\repos\Megarekrut65\DUIN-2023\Lab1\tutors_hub\users\templatetags" />
+      <recent name="D:\repos\Megarekrut65\DUIN-2023\Lab1\tutors_hub\users\templates" />
       <recent name="D:\repos\Megarekrut65\DUIN-2023\Lab1\tutors_hub\users\templates\users\teacher" />
       <recent name="D:\repos\Megarekrut65\DUIN-2023\Lab1\tutors_tool\tutors\templates\tutors" />
       <recent name="D:\repos\Megarekrut65\DUIN-2023\Lab1\tutors_tool\static" />
-      <recent name="D:\repos\Megarekrut65\DUIN-2023\Lab1\tutors_tool\users\templates" />
-      <recent name="D:\repos\Megarekrut65\DUIN-2023\Lab1\tutors_tool\templates" />
     </key>
   </component>
   <component name="RunManager">
@@ -111,6 +133,9 @@
       <workItem from="1699038207876" duration="244000" />
       <workItem from="1699038566752" duration="1461000" />
       <workItem from="1699098778343" duration="6280000" />
+      <workItem from="1699105851680" duration="8000" />
+      <workItem from="1699116182179" duration="1025000" />
+      <workItem from="1699127720868" duration="8134000" />
     </task>
     <servers />
   </component>

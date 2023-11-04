@@ -1,26 +1,16 @@
-from django.contrib.auth import REDIRECT_FIELD_NAME
-from django.contrib.auth.decorators import user_passes_test
+from functools import wraps
+from django.http import HttpResponseForbidden
 
 from users.models import User
 
 
-def for_students(function=None, redirect_field_name=REDIRECT_FIELD_NAME, login_url='login'):
-    actual_decorator = user_passes_test(
-        lambda u: u.role == User.Types.Student,
-        login_url=login_url,
-        redirect_field_name=redirect_field_name
-    )
-    if function:
-        return actual_decorator(function)
-    return actual_decorator
+def teacher_required(view_func):
+    @wraps(view_func)
+    def _wrapped_view(request, *args, **kwargs):
+        # Check if the user has the role "TEACHER"
+        if request.user.role == User.Types.Teacher:
+            return view_func(request, *args, **kwargs)
+        else:
+            return HttpResponseForbidden("You don't have permission to access this page.")
 
-
-def for_teachers(function=None, redirect_field_name=REDIRECT_FIELD_NAME, login_url='login'):
-    actual_decorator = user_passes_test(
-        lambda u: u.role == User.Types.Teacher,
-        login_url=login_url,
-        redirect_field_name=redirect_field_name
-    )
-    if function:
-        return actual_decorator(function)
-    return actual_decorator
+    return _wrapped_view
