@@ -1,0 +1,21 @@
+{% extends "templates/base_generic.html" %}
+
+{% block content %}
+    <div class="container-fluid" style="margin-top: 50px;">
+        <div class="row justify-content-start">
+            <div class="col-12 col-lg-3 col-xl-2 bg-info bg-gradient p-4 custom-side">
+                <h2>Dashboard</h2>
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 navbar-dark">
+                    <li class="nav-item"><a class="nav-link custom-link" href="{% url 'account' %}">Schedule</a></li>
+                    <li class="nav-item"><a class="nav-link custom-link" href="/account/subjects">Your subjects</a></li>
+                    <li class="nav-item"><a class="nav-link custom-link" href="/account/subjects">Your students</a></li>
+                    <li class="nav-item"><a class="nav-link custom-link" href="/account/subjects">Report tool</a></li>
+                </ul>
+            </div>
+            <div class="col-12 col-lg-9 col-xl-10 p-4">
+                {% block teacher_content %}{% endblock %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

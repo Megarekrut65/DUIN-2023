@@ -33,8 +33,9 @@ DEBUG = True
 ALLOWED_HOSTS = ['127.0.0.1']
 
 handler404 = 'tutors_hub.views.not_found_404'
-LOGIN_REDIRECT_URL = "/tutors"
+LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/login"
+LOGIN_URL = "/login"
 # Application definition
 
 INSTALLED_APPS = [

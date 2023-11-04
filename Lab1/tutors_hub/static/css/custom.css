@@ -11,9 +11,16 @@
     display: none;
 }
 
+.custom-side{
+    min-height: 0;
+}
+
 @media (min-width: 992px) {
     .separate{
         display: block;
+    }
+    .custom-side{
+        min-height: 100vh;
     }
 }
 .btn-link{
@@ -24,4 +31,11 @@
 }
 .btn-link:hover{
     text-decoration: none;
+}
+
+.custom-link{
+    color: black;
+}
+.custom-link:hover{
+    color: darkgray;
 }
