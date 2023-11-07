@@ -61,6 +61,7 @@ def delete_subject(request, subject_id):
     if request.method == "POST":
         subject = Subject.objects.get(pk=subject_id)
         if subject:
+            print(subject)
             subject.delete()
             return HttpResponseRedirect("/account/subjects")
 

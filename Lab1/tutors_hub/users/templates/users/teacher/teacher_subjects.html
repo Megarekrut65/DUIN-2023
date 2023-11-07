@@ -3,8 +3,8 @@
 
 
 {% block teacher_content %}
-    <h1>Subjects</h1>
-    <a href="/account/subject">Add new</a>
+    <h1>Subjects<a href="/account/subject" class="btn-link"><i class="ti ti-circle-plus"></i></a></h1>
+
 
     <div>
         <table class="table">
@@ -29,12 +29,14 @@
                     <td>{{ subject.lesson_duration }}</td>
                     <th><a href="/account/subject/{{ subject.id }}"><i class="ti ti-pencil"></i></a></th>
                     <th>
-                        <form method="POST" action="/account/subject/delete/{{ subject.id }}">
+                        <form id="remove-form-{{ subject.id }}" method="POST" action="/account/subject/delete/{{ subject.id }}">
                             {% csrf_token %}
-                            <button class="btn-link" type="submit">
-                                <i class="ti ti-x"></i>
-                            </button>
                         </form>
+                        <button class="btn-link" type="button"
+                                onclick="openModal('Do you really want to remove subject {{ subject.title|truncate:20 }}?',
+                                        'remove-form-{{ subject.id }}')">
+                            <i class="ti ti-x"></i>
+                        </button>
                     </th>
                 </tr>
             {% endfor %}
