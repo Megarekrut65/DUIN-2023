@@ -2,6 +2,7 @@ from functools import wraps
 from django.http import HttpResponseForbidden
 
 from users.models import User
+from django.contrib.auth.decorators import login_required
 
 
 def teacher_required(view_func):
@@ -27,3 +28,16 @@ def student_required(view_func):
 
     return _wrapped_view
 
+
+class TeacherRequiredMixin:
+    @classmethod
+    def as_view(cls, **initkwargs):
+        view = super().as_view(**initkwargs)
+        return login_required(teacher_required(view))
+
+
+class StudentRequiredMixin:
+    @classmethod
+    def as_view(cls, **initkwargs):
+        view = super().as_view(**initkwargs)
+        return login_required(student_required(view))

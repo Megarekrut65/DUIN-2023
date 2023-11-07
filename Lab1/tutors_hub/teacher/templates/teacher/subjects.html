@@ -1,0 +1,99 @@
+{% extends "teacher/teacher.html" %}
+{% load custom_filters %}
+
+
+{% block teacher_content %}
+    <h1>Subjects<a href="/account/subject" class="btn-link"><i class="ti ti-circle-plus"></i></a></h1>
+
+
+    <div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Schedule</th>
+                <th scope="col">Price, $</th>
+                <th scope="col">Duration, m</th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for subject in subjects %}
+                <tr class="{% if subject.visible %}table-success{% else %}table-secondary{% endif %}">
+                    <td>{{ subject.title|truncate:20 }}</td>
+                    <td>{{ subject.description|truncate:20 }}</td>
+                    <td>{{ subject.work_schedule|truncate:20 }}</td>
+                    <td>{{ subject.lesson_price }}</td>
+                    <td>{{ subject.lesson_duration }}</td>
+                    <th><a href="/account/subject/{{ subject.id }}"><i class="ti ti-pencil"></i></a></th>
+                    <th>
+                        <form id="remove-form-{{ subject.id }}" method="POST" action="/account/subject/{{ subject.id }}/delete">
+                            {% csrf_token %}
+                        </form>
+                        <button class="btn-link" type="button"
+                                onclick="openModal('Do you really want to remove subject {{ subject.title|truncate:20 }}?',
+                                        'remove-form-{{ subject.id }}')">
+                            <i class="ti ti-x"></i>
+                        </button>
+                    </th>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% if subjects %}
+    <div class="row">
+        <div class="col-12">
+        <nav>
+          <ul class="pagination justify-content-center">
+              {% if page_obj.has_previous %}
+                   <li class="page-item">
+                      <a class="page-link" href="{% if request.GET.pattern %}?pattern={{ request.GET.pattern }}&{% else %}?{% endif %}page=1" tabindex="-1">First</a>
+                  </li>
+                  <li class="page-item">
+                      <a class="page-link" href="{% if request.GET.pattern %}?pattern={{ request.GET.pattern }}&{% else %}?{% endif %}page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a>
+                  </li>
+              {% else %}
+                  <li class="page-item disabled">
+                      <a class="page-link" href="#" tabindex="-1">First</a>
+                  </li>
+                  <li class="page-item disabled">
+                      <a class="page-link" href="#" tabindex="-1">...</a>
+                  </li>
+              {% endif %}
+
+
+                <li class="page-item active"><a class="page-link" href="#">{{ page_obj.number }}</a></li>
+
+
+              {% if page_obj.has_next %}
+                   <li class="page-item">
+                      <a class="page-link" href="{% if request.GET.pattern %}?pattern={{ request.GET.pattern }}&{% else %}?{% endif %}page={{ page_obj.next_page_number }}" tabindex="-1">{{ page_obj.next_page_number }}</a>
+                  </li>
+                  <li class="page-item">
+                      <a class="page-link" href="{% if request.GET.pattern %}?pattern={{ request.GET.pattern }}&{% else %}?{% endif %}page={{ page_obj.paginator.num_pages }}" tabindex="-1">Last</a>
+                  </li>
+              {% else %}
+                  <li class="page-item disabled">
+                      <a class="page-link" href="#" tabindex="-1">...</a>
+                  </li>
+                  <li class="page-item disabled">
+                      <a class="page-link" href="#" tabindex="-1">Last</a>
+                  </li>
+              {% endif %}
+          </ul>
+        </nav>
+        </div>
+    </div>
+    {% else %}
+    <div class="card text-white bg-secondary my-5 py-4 text-center">
+        <div class="card-body">
+            <p class="text-white m-0">
+                Subjects are missing!
+            </p>
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}

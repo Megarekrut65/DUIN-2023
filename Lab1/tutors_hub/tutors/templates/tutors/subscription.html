@@ -1,0 +1,25 @@
+{% extends "templates/base_generic.html" %}
+
+{% block title %}
+    {{ subscription.subject.title }} | Tutors tool
+{% endblock %}
+
+{% block content %}
+    <header class="{% if subscription.active %}bg-primary{% else %}bg-secondary{% endif %} bg-gradient text-white"
+            style="margin-top: 50px; margin-bottom: 50px; padding: 50px 30px 30px;">
+        <div class="container px-4 text-center">
+            <h1 class="fw-bolder"><a class="text-white" href="/subject/{{ subscription.subject.id }}">{{ subscription.subject.title }}</a></h1>
+            <p class="lead">Teacher: {{ subscription.subject.teacher.fullname }}</p>
+            <p class="lead">Student: {{ subscription.student.fullname }}</p>
+            {% if subscription.active and user.role == 'STUDENT' %}
+                <input type="button" class="btn btn-danger" value="Unsubscribe">
+            {% elif subscription.active and user.role == 'TEACHER' %}
+                <input type="button" class="btn btn-danger" value="Unsubscribe student">
+            {% elif not subscription.active %}
+                <input type="button" class="btn btn-outline-dark" value="Unsubscribed">
+            {% endif %}
+
+        </div>
+    </header>
+
+{% endblock %}

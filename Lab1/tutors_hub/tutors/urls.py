@@ -4,6 +4,7 @@ from . import views
 
 urlpatterns = [
     path("tutors/", views.IndexView.as_view(), name="tutors"),
+    path("subscription/<int:pk>/", views.SubscriptionView.as_view(), name="subscription"),
     path("subject/<int:subject_id>/", views.subject_view, name="subject"),
     path("subject/<int:subject_id>/subscribe", views.subscribe_on_subject, name="subject_subscribe"),
     path("subject/<int:subscription_id>/unsubscribe", views.unsubscribe_on_subject, name="subject_unsubscribe"),

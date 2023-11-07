@@ -23,10 +23,10 @@ def register(response):
 @login_required
 def account(request):
     if request.user.role == User.Types.Student:
-        return render(request, "student/student_home.html")
+        return render(request, "student/home.html")
 
     if request.user.role == User.Types.Teacher:
-        return render(request, "teacher/teacher_home.html")
+        return render(request, "teacher/home.html")
 
     return render(request, "registration/login.html")
 

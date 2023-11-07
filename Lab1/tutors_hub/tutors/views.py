@@ -81,6 +81,11 @@ def unsubscribe_on_subject(request, subscription_id):
     return "404.html"
 
 
+class SubscriptionView(generic.DetailView):
+    model = Subscription
+    template_name = "tutors/subscription.html"
+
+
 class IndexView(generic.ListView):
     template_name = "tutors/index.html"
     context_object_name = "latest_question_list"
@@ -88,6 +93,8 @@ class IndexView(generic.ListView):
     def get_queryset(self):
         """Return the last five published questions."""
         return Question.objects.order_by("-pub_date")[:5]
+
+
 
 
 class DetailView(generic.DetailView):
