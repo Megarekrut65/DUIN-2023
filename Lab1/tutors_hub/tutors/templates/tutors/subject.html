@@ -12,6 +12,22 @@
             <p class="lead">{{ subject.lesson_price }} for {{ subject.lesson_duration }} minutes</p>
             <p class="lead">By {{ subject.teacher.fullname }}</p>
             <p class="lead">{{ subject.published }}</p>
+            {% if available %}
+            {% if active %}
+                <input type="button" class="btn btn-outline-dark" value="Subscribed" disabled>
+            {% else %}
+                <details>
+                  <summary>Want subscribe?</summary>
+                  <form method="POST" action="/subject/{{ subject.id }}/subscribe" style="display: flex; flex-direction: column; align-items: center">
+                    {% csrf_token %}
+                      <label for="comment">Write your comment for teacher</label>
+                      <textarea name="comment" maxlength="1000" cols="40" rows="5"></textarea>
+                      <input type="submit" class="btn btn-success m-1" value="Subscribe">
+                </form>
+                </details>
+            {% endif %}
+            {% endif %}
+
         </div>
     </header>
 

@@ -1,4 +1,4 @@
-{% extends "users/teacher/teacher.html" %}
+{% extends "teacher/teacher.html" %}
 {% load custom_filters %}
 
 
@@ -29,7 +29,7 @@
                     <td>{{ subject.lesson_duration }}</td>
                     <th><a href="/account/subject/{{ subject.id }}"><i class="ti ti-pencil"></i></a></th>
                     <th>
-                        <form id="remove-form-{{ subject.id }}" method="POST" action="/account/subject/delete/{{ subject.id }}">
+                        <form id="remove-form-{{ subject.id }}" method="POST" action="/account/subject/{{ subject.id }}/delete">
                             {% csrf_token %}
                         </form>
                         <button class="btn-link" type="button"

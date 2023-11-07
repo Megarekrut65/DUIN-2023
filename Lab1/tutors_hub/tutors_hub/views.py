@@ -1,8 +1,18 @@
 from django.shortcuts import render
+from django.template import RequestContext
 
 
-def not_found_404(request, exception):
-    return render(request, "templates/404.html", status=404)
+def handler404(request, exception, template_name="templates/404.html"):
+    response = render(request, template_name)
+    response.status_code = 404
+    return response
+
+
+def csrf_failure(request, reason=""):
+    context = RequestContext(request)
+    response = render(request, "templates/403.html", context)
+    response.status_code = 403
+    return response
 
 
 def privacy(request):

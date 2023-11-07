@@ -19,11 +19,15 @@ from django.urls import path, include
 
 from tutors_hub import views
 
+handler404 = 'tutors_hub.views.handler404'
+handler403 = 'tutors_hub.views.handler404'
 
 urlpatterns = [
     path("", views.index, name="index"),
     path("", include("tutors.urls")),
     path("", include("users.urls")),
+    path("account/", include("teacher.urls")),
+    path("account/", include("student.urls")),
     path("privacy/", views.privacy),
     # path('admin/', admin.site.urls)
 ]

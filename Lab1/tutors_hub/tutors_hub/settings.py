@@ -32,7 +32,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1']
 
-handler404 = 'tutors_hub.views.not_found_404'
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/login"
 LOGIN_URL = "/login"
@@ -40,6 +39,8 @@ LOGIN_URL = "/login"
 
 INSTALLED_APPS = [
     'tutors.apps.TutorsConfig',
+    'teacher.apps.TeacherConfig',
+    'student.apps.StudentConfig',
     # 'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -60,6 +61,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CSRF_FAILURE_VIEW = 'tutors_hub.views.csrf_failure'
 
 ROOT_URLCONF = 'tutors_hub.urls'
 

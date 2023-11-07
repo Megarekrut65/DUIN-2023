@@ -30,3 +30,11 @@ class Subject(models.Model):
     visible = models.BooleanField(default=True)
 
 
+class Subscription(models.Model):
+    student = models.ForeignKey(User, on_delete=models.CASCADE)
+    subject = models.ForeignKey(Subject, on_delete=models.SET_NULL, null=True)
+    comment = models.CharField(max_length=1000)
+    subscribed = models.DateTimeField()
+
+    active = models.BooleanField(default=True)
+    lesson_count = models.IntegerField(default=0)

@@ -2,12 +2,52 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="746adc9d-b280-400e-a733-ce15fd23ecf6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/static/js/modal-window.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/student/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/student/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/student/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/student/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/student/templates/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/student/templates/student/student.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/student/templates/student/student_home.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/student/templates/student/student_subscriptions.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/student/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/student/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/student/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/teacher/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/teacher/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/teacher/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/teacher/forms.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/teacher/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/teacher/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/teacher/templates/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/teacher/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/teacher/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/teacher/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/403.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/403_csrf.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/base_error.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tutors/migrations/0002_subscription.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tutors/templatetags/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/5d5966b8-0877-44f0-8caf-e9604d59385b.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/5d5966b8-0877-44f0-8caf-e9604d59385b.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/custom.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/custom.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/templates/users/teacher/teacher.html" beforeDir="false" afterPath="$PROJECT_DIR$/users/templates/users/teacher/teacher.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/templates/users/teacher/teacher_subject.html" beforeDir="false" afterPath="$PROJECT_DIR$/users/templates/users/teacher/teacher_subject.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/templates/users/teacher/teacher_subjects.html" beforeDir="false" afterPath="$PROJECT_DIR$/users/templates/users/teacher/teacher_subjects.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/404.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/404.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tutors/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/tutors/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tutors/templates/tutors/subject.html" beforeDir="false" afterPath="$PROJECT_DIR$/tutors/templates/tutors/subject.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tutors/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/tutors/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tutors/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/tutors/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tutors_hub/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/tutors_hub/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tutors_hub/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/tutors_hub/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tutors_hub/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/tutors_hub/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/decorators.py" beforeDir="false" afterPath="$PROJECT_DIR$/tutors_hub/decorators.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/templates/users/student.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/templates/users/teacher/teacher.html" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/templates/teacher/teacher.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/templates/users/teacher/teacher_home.html" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/templates/teacher/teacher_home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/templates/users/teacher/teacher_subject.html" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/templates/teacher/teacher_subject.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/templates/users/teacher/teacher_subjects.html" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/templates/teacher/teacher_subjects.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/templatetags/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/student/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/templatetags/custom_filters.py" beforeDir="false" afterPath="$PROJECT_DIR$/tutors/templatetags/custom_filters.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -22,8 +62,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="HTML File" />
-        <option value="Python Script" />
         <option value="JavaScript File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -41,35 +81,37 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/repos/Megarekrut65/DUIN-2023/Lab1/tutors_hub/users/templates/users/teacher&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/repos/Megarekrut65/DUIN-2023/Lab1/tutors_hub/student",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;postgresql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\repos\Megarekrut65\DUIN-2023\Lab1\tutors_hub\users\templates\users\teacher" />
-      <recent name="D:\repos\Megarekrut65\DUIN-2023\Lab1\tutors_hub\users\templates\users" />
-      <recent name="D:\repos\Megarekrut65\DUIN-2023\Lab1\tutors_tool\users\templates\users" />
+      <recent name="D:\repos\Megarekrut65\DUIN-2023\Lab1\tutors_hub\student" />
+      <recent name="D:\repos\Megarekrut65\DUIN-2023\Lab1\tutors_hub\teacher" />
+      <recent name="D:\repos\Megarekrut65\DUIN-2023\Lab1\tutors_hub\templates" />
+      <recent name="D:\repos\Megarekrut65\DUIN-2023\Lab1\tutors_hub\users\templates" />
+      <recent name="D:\repos\Megarekrut65\DUIN-2023\Lab1\tutors_hub\users\templates\users\student" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\repos\Megarekrut65\DUIN-2023\Lab1\tutors_hub\users\templatetags" />
-      <recent name="D:\repos\Megarekrut65\DUIN-2023\Lab1\tutors_hub\users\templates" />
-      <recent name="D:\repos\Megarekrut65\DUIN-2023\Lab1\tutors_hub\users\templates\users\teacher" />
-      <recent name="D:\repos\Megarekrut65\DUIN-2023\Lab1\tutors_tool\tutors\templates\tutors" />
-      <recent name="D:\repos\Megarekrut65\DUIN-2023\Lab1\tutors_tool\static" />
+      <recent name="D:\repos\Megarekrut65\DUIN-2023\Lab1\tutors_hub\student\templates" />
+      <recent name="D:\repos\Megarekrut65\DUIN-2023\Lab1\tutors_hub\tutors" />
+      <recent name="D:\repos\Megarekrut65\DUIN-2023\Lab1\tutors_hub\tutors_hub" />
+      <recent name="D:\repos\Megarekrut65\DUIN-2023\Lab1\tutors_hub\teacher\templates" />
+      <recent name="D:\repos\Megarekrut65\DUIN-2023\Lab1\tutors_hub\users\templates\users" />
     </key>
   </component>
   <component name="RunManager">
@@ -118,7 +160,7 @@
       <workItem from="1699116182179" duration="1025000" />
       <workItem from="1699127720868" duration="8134000" />
       <workItem from="1699299705101" duration="5000" />
-      <workItem from="1699350633150" duration="3111000" />
+      <workItem from="1699350633150" duration="11185000" />
     </task>
     <servers />
   </component>

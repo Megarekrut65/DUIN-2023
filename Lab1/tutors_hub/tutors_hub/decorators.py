@@ -14,3 +14,16 @@ def teacher_required(view_func):
             return HttpResponseForbidden("You don't have permission to access this page.")
 
     return _wrapped_view
+
+
+def student_required(view_func):
+    @wraps(view_func)
+    def _wrapped_view(request, *args, **kwargs):
+        # Check if the user has the role "STUDENT"
+        if request.user.role == User.Types.Student:
+            return view_func(request, *args, **kwargs)
+        else:
+            return HttpResponseForbidden("You don't have permission to access this page.")
+
+    return _wrapped_view
+
