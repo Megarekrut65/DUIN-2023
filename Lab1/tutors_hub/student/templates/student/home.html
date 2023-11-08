@@ -1,5 +1,62 @@
 {% extends "student/student.html" %}
+{% load custom_filters %}
 
 {% block student_content %}
-    <h1>Home</h1>
+    <h1>Schedule</h1>
+
+    <div>
+        <form id="date-form" action="/student/schedule" method="GET" class="form-inline mb-4">
+            <div class="form-group">
+                <input type="date" class="form-control" name="date">
+                <input type="submit" value="Show" class="btn btn-outline-success">
+            </div>
+        </form>
+    <script>
+        const form = document.getElementById("date-form");
+        const date = form.querySelector("input[type=date]");
+        date.value = "{{ current }}";
+
+        form.onsubmit = (event)=>{
+            event.preventDefault()
+
+            window.location.href = `/student/schedule/${date.value}`;
+        }
+    </script>
+
+        <nav>
+            <ul class="pagination">
+                {% for day in days %}
+                <li class="page-item">
+                    <a class="page-link {% if day.selected %}bg-primary text-dark{% endif %}" href="/student/schedule/{{ day.date }}">
+                        <span>{{ day.name }}</span>
+                        <span>{{ day.date }}</span>
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </nav>
+    </div>
+
+    <div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Time</th>
+                <th scope="col">Subject</th>
+                <th scope="col">Teacher</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for schedule in schedules %}
+                <tr class="{% if schedule.done %}table-success{% endif %}">
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ schedule.start_time|time_range:schedule.end_time}}</td>
+                    <td title="{{ schedule.subscription.subject.title }}">{{ schedule.subscription.subject.title|truncate:20 }}</td>
+                    <td title="{{ schedule.subscription.subject.teacher.fullname }}">{{ schedule.subscription.subject.teacher.fullname|truncate:20 }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}

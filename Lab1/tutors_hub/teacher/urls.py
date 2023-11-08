@@ -9,12 +9,12 @@ urlpatterns = [
     path("schedule/create", views.create_schedule, name="create_schedule"),
     path("schedule/create/<str:date>", views.create_schedule, name="create_schedule"),
 
-    path("schedule", views.account_schedule, name="teacher"),
+    path("schedule/", views.account_schedule, name="teacher"),
     path("schedule/<str:date>", views.account_schedule, name="schedule"),
 
-    path("students", views.StudentsView.as_view(), name="account_students"),
+    path("students/", views.StudentsView.as_view(), name="account_students"),
 
-    path("subjects", views.SubjectsView.as_view(), name="account_subjects"),
+    path("subjects/", views.SubjectsView.as_view(), name="account_subjects"),
 
     path("subject/<int:subject_id>", views.change_subject, name="change_subject"),
     path("subject/", views.create_subject, name="create_subject"),

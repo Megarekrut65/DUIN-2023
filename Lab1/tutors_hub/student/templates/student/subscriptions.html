@@ -27,12 +27,12 @@
                     <th><a href="/subscription/{{ subscription.id }}">View</a></th>
                     <th>
                         {% if subscription.active %}
-                        <form id="unsubscribe-form-{{ subject.id }}" method="POST" action="/subject/{{ subscription.id }}/unsubscribe">
+                        <form id="unsubscribe-form-{{ subscription.id }}" method="POST" action="/subject/{{ subscription.id }}/unsubscribe">
                             {% csrf_token %}
                         </form>
                         <button class="btn-link" type="button"
                                 onclick="openModal('Do you really want to unsubscribe from {{ subscription.subject.title|truncate:20 }}?',
-                                        'unsubscribe-form-{{ subject.id }}')">
+                                        'unsubscribe-form-{{ subscription.id }}')">
                             Unsubscribe
                         </button>
                         {% else %}

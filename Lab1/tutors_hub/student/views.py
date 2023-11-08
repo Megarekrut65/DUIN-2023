@@ -1,9 +1,15 @@
+import datetime
+
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.views import generic
 
-from tutors.models import Subscription
+from tutors.models import Subscription, Schedule
+from tutors.utilities import get_week_days
 from tutors_hub.decorators import StudentRequiredMixin, student_required
+
+
+date_format = "%Y-%m-%d"
 
 
 class StudentsView(StudentRequiredMixin, generic.ListView):
@@ -17,5 +23,18 @@ class StudentsView(StudentRequiredMixin, generic.ListView):
 
 @student_required
 @login_required
-def home(request):
-    return render(request, "student/home.html")
+def account_schedule(request, date=None):
+    try:
+        date = datetime.datetime.strptime(date, date_format)
+    except:
+        date = datetime.datetime.now()
+
+    days = get_week_days(date)
+    days = [{"name": day.strftime("%A"), "date": day.strftime(date_format), "selected": (date == day)} for day in days]
+
+    schedules = Schedule.objects\
+        .filter(date=date.date(), subscription__student=request.user)\
+        .order_by("start_time")
+
+    return render(request, "student/home.html",
+                  {"schedules": schedules, "days": days, "current": date.strftime(date_format)})

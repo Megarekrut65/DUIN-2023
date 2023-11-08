@@ -76,7 +76,7 @@ def unsubscribe_on_subject(request, subscription_id):
             subscription.active = False
             subscription.save()
 
-        return HttpResponseRedirect("/account/subscriptions")
+        return HttpResponseRedirect("/student/subscriptions")
 
     return "404.html"
 
