@@ -9,6 +9,7 @@
         <table class="table">
             <thead>
             <tr>
+                <th scope="col">#</th>
                 <th scope="col">Title</th>
                 <th scope="col">Subscribed</th>
                 <th scope="col">Lesson count</th>
@@ -19,6 +20,7 @@
             <tbody>
             {% for subscription in subscriptions %}
                 <tr class="{% if subscription.active %}table-success{% else %}table-secondary{% endif %}">
+                    <td>{{ forloop.counter }}</td>
                     <td>{{ subscription.subject.title|truncate:20 }}</td>
                     <td>{{ subscription.subscribed }}</td>
                     <td>{{ subscription.lesson_count }}</td>

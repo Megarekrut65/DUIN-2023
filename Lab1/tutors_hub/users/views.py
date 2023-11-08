@@ -1,5 +1,6 @@
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 
 from users.forms import RegisterForm
@@ -20,14 +21,5 @@ def register(response):
     return render(response, "users/register.html", {"form": form})
 
 
-@login_required
-def account(request):
-    if request.user.role == User.Types.Student:
-        return render(request, "student/home.html")
-
-    if request.user.role == User.Types.Teacher:
-        return render(request, "teacher/home.html")
-
-    return render(request, "registration/login.html")
 
 

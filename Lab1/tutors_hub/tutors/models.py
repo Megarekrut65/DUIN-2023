@@ -38,3 +38,12 @@ class Subscription(models.Model):
 
     active = models.BooleanField(default=True)
     lesson_count = models.IntegerField(default=0)
+
+
+class Schedule(models.Model):
+    subscription = models.ForeignKey(Subscription, on_delete=models.SET_NULL, null=True)
+    datetime = models.DateTimeField()
+    time_range = models.CharField(max_length=20)
+
+    done = models.BooleanField(default=False)
+

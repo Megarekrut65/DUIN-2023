@@ -2,26 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="746adc9d-b280-400e-a733-ce15fd23ecf6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/teacher/templates/teacher/students.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tutors/templates/tutors/subscription.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tutors/migrations/0003_schedule.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tutors/migrations/0004_schedule_time_range.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tutors/utilities.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/5d5966b8-0877-44f0-8caf-e9604d59385b.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/5d5966b8-0877-44f0-8caf-e9604d59385b.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/student/templates/student/student.html" beforeDir="false" afterPath="$PROJECT_DIR$/student/templates/student/student.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/student/templates/student/student_home.html" beforeDir="false" afterPath="$PROJECT_DIR$/student/templates/student/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/student/templates/student/student_subscriptions.html" beforeDir="false" afterPath="$PROJECT_DIR$/student/templates/student/subscriptions.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/student/templates/student/subscriptions.html" beforeDir="false" afterPath="$PROJECT_DIR$/student/templates/student/subscriptions.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/student/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/student/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/student/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/student/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teacher/templates/teacher/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/templates/teacher/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teacher/templates/teacher/students.html" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/templates/teacher/students.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teacher/templates/teacher/subjects.html" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/templates/teacher/subjects.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/teacher/templates/teacher/teacher.html" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/templates/teacher/teacher.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/teacher/templates/teacher/teacher_home.html" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/templates/teacher/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/teacher/templates/teacher/teacher_subject.html" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/templates/teacher/subject.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/teacher/templates/teacher/teacher_subjects.html" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/templates/teacher/subjects.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/teacher/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/teacher/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base_error.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base_error.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/base_generic.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base_generic.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/privacy.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/privacy.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tutors/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/tutors/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tutors/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/tutors/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tutors_hub/decorators.py" beforeDir="false" afterPath="$PROJECT_DIR$/tutors_hub/decorators.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tutors/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/tutors/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tutors_hub/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/tutors_hub/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -55,23 +54,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "DefaultHtmlFileTemplate": "HTML File",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/repos/Megarekrut65/DUIN-2023/Lab1/tutors_hub/student",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/repos/Megarekrut65/DUIN-2023/Lab1/tutors_hub/student&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "postgresql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\repos\Megarekrut65\DUIN-2023\Lab1\tutors_hub\student" />
@@ -134,7 +133,8 @@
       <workItem from="1699116182179" duration="1025000" />
       <workItem from="1699127720868" duration="8134000" />
       <workItem from="1699299705101" duration="5000" />
-      <workItem from="1699350633150" duration="14674000" />
+      <workItem from="1699350633150" duration="16875000" />
+      <workItem from="1699444157211" duration="4567000" />
     </task>
     <servers />
   </component>

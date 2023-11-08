@@ -1,9 +1,12 @@
+import datetime
+
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views import generic
 
-from tutors.models import Subject, Subscription
+from tutors.models import Subject, Subscription, Schedule
+from tutors.utilities import get_week_days
 from tutors_hub.decorators import teacher_required, TeacherRequiredMixin
 from .forms import SubjectForm
 
@@ -72,6 +75,23 @@ class StudentsView(TeacherRequiredMixin, generic.ListView):
     context_object_name = "subscriptions"
 
     def get_queryset(self):
-        subjects = Subject.objects.filter(teacher= self.request.user)
+        subjects = Subject.objects.filter(teacher=self.request.user)
         return Subscription.objects.filter(subject__in=subjects).order_by("-active", "-subscribed")
 
+
+@teacher_required
+@login_required
+def account_schedule(request, date=None):
+    format_ = "%Y-%m-%d"
+    try:
+        date = datetime.datetime.strptime(date, format_)
+    except:
+        date = datetime.datetime.now()
+
+    days = get_week_days(date)
+    days = [{"name": day.strftime("%A"), "date": day.strftime(format_), "selected": (date == day)} for day in days]
+
+    schedules = Schedule.objects.filter(datetime__date=date.date())
+
+    return render(request, "teacher/home.html",
+                  {"schedules": schedules, "days": days, "current": date.strftime(format_)})

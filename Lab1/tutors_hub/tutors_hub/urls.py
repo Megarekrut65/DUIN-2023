@@ -26,8 +26,8 @@ urlpatterns = [
     path("", views.index, name="index"),
     path("", include("tutors.urls")),
     path("", include("users.urls")),
-    path("account/", include("teacher.urls")),
-    path("account/", include("student.urls")),
+    path("teacher/", include("teacher.urls")),
+    path("student/", include("student.urls")),
     path("privacy/", views.privacy),
     # path('admin/', admin.site.urls)
 ]
