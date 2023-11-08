@@ -29,8 +29,8 @@
                     <td>{{ subject.work_schedule|truncate:20 }}</td>
                     <td>{{ subject.lesson_price }}</td>
                     <td>{{ subject.lesson_duration }}</td>
-                    <th><a href="/teacher/subject/{{ subject.id }}"><i class="ti ti-pencil"></i></a></th>
-                    <th>
+                    <td><a href="/teacher/subject/{{ subject.id }}"><i class="ti ti-pencil"></i></a></td>
+                    <td>
                         <form id="remove-form-{{ subject.id }}" method="POST" action="/teacher/subject/{{ subject.id }}/delete">
                             {% csrf_token %}
                         </form>
@@ -39,7 +39,7 @@
                                         'remove-form-{{ subject.id }}')">
                             <i class="ti ti-x"></i>
                         </button>
-                    </th>
+                    </td>
                 </tr>
             {% endfor %}
             </tbody>

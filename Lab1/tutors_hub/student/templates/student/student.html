@@ -16,13 +16,15 @@
         </div>
     </div>
     <div class="modal-container hide" onclick="closeModal()" id="modal-window">
-        <div class="modal-list" style="max-width: 400px; width: 100vh; height: auto;">
+        <div class="modal-list">
             <div class="card" style="margin-top: 30vh;">
                 <div class="card-body text-center">
                     <h4 id="modal-question"></h4>
 
-                    <input id="modal-submit" type="button" class="btn btn-success py-8 fs-4 mb-1 rounded-2" value="Ok">
-                    <input type="button" class="btn btn-danger py-8 fs-4 mb-1 rounded-2" value="Cancel">
+                    <div style="display: flex; justify-content: center">
+                        <input id="modal-submit" type="button" class="btn btn-success py-8 fs-4 mb-1 rounded-2 mr-4" value="Ok">
+                        <input type="button" class="btn btn-danger py-8 fs-4 mb-1 rounded-2 ml-4" value="Cancel">
+                    </div>
                     </form>
                 </div>
             </div>

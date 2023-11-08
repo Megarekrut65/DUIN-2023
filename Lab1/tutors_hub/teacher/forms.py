@@ -1,9 +1,10 @@
 import datetime
 
 import django.forms as forms
+from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator
 
-from tutors.models import Subject, Schedule
+from tutors.models import Subject, Schedule, Subscription
 from tutors.utilities import get_time_range
 
 
@@ -57,6 +58,9 @@ class ScheduleForm(forms.ModelForm):
         instance.time_range = get_time_range(date, instance.subscription.subject.lesson_duration)
 
         if commit:
+            if instance.done:
+                instance.subscription.lesson_count += 1
+                instance.subscription.save()
             instance.save()
         return instance
 
@@ -67,3 +71,31 @@ class ScheduleForm(forms.ModelForm):
                                                         attrs={"placeholder": "00:00", "value": "00:00"}))
     end_time = forms.TimeField(widget=forms.TimeInput(format="%H:%M",
                                                       attrs={"placeholder": "00:00", "value": "00:00"}))
+
+    def clean(self):
+        cleaned_data = super().clean()
+        teacher = cleaned_data.get("subscription").subject.teacher
+        date = cleaned_data.get("date")
+        items = Schedule.objects.filter(subscription__subject__teacher=teacher, date=date).order_by("start_time")
+        start_time = cleaned_data.get("start_time")
+        end_time = cleaned_data.get("end_time")
+
+        if start_time >= end_time:
+            raise ValidationError("There is incorrect time range!")
+
+        id_ = self.instance.id
+
+        for item in items:
+            if item.id == id_:
+                continue
+
+            if item.start_time <= start_time <= item.end_time \
+                    or item.start_time <= end_time <= item.end_time:
+                raise ValidationError("In this time you already have lesson!")
+
+
+class ScheduleFormUser(ScheduleForm):
+    def __init__(self, user=None, **kwargs):
+        super(ScheduleForm, self).__init__(**kwargs)
+        if user:
+            self.fields["subscription"].queryset = Subscription.objects.filter(subject__teacher=user, active=True)

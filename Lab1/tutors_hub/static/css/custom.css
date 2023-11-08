@@ -55,9 +55,13 @@
 }
 
 .modal-list{
-    width: 90%;
-    height: 90vh;
-    margin: 5vh auto;
+    width: 100vh;
+    height: auto;
+    margin: 2vh auto;
+    padding: 1vh;
+
+    white-space: pre-line;
+    max-width: 700px;
 }
 .hide{
     display: none;

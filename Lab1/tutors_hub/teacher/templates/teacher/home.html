@@ -2,7 +2,7 @@
 {% load custom_filters %}
 
 {% block teacher_content %}
-    <h1>Schedule<a href="/teacher/schedule/create" class="btn-link"><i class="ti ti-circle-plus"></i></a></h1>
+    <h1>Schedule<a href="/teacher/schedule/create/{{ current }}" class="btn-link"><i class="ti ti-circle-plus"></i></a></h1>
 
     <div>
         <form id="date-form" action="/teacher/schedule" method="GET" class="form-inline mb-4">
@@ -57,8 +57,20 @@
                     <td title="{{ schedule.subscription.subject.title }}">{{ schedule.subscription.subject.title|truncate:20 }}</td>
                     <td title="{{ schedule.subscription.student.fullname }}">{{ schedule.subscription.student.fullname|truncate:20 }}</td>
                     {% if not schedule.done %}
-                        <td><i class="ti ti-pencil"></i></td>
-                        <th><i class="ti ti-x"></i></th>
+                        <td><a href="/teacher/schedule/{{ schedule.id }}/edit" class="bnt-link"><i class="ti ti-pencil"></i></a></td>
+                        <td>
+                            <form id="remove-form-{{ schedule.id }}" method="POST" action="/teacher/schedule/{{ schedule.id }}/delete">
+                                {% csrf_token %}
+                            </form>
+                            <button class="btn-link" type="button"
+                                    onclick="openModal('Do you really want to remove schedule\n {{ schedule.date }} {{ schedule.start_time|time_range:schedule.end_time}}?',
+                                            'remove-form-{{ schedule.id }}')">
+                                <i class="ti ti-x"></i>
+                            </button>
+                        </td>
+                    {% else %}
+                        <td></td>
+                        <th></th>
                     {% endif %}
                 </tr>
             {% endfor %}

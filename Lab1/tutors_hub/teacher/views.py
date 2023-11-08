@@ -8,8 +8,9 @@ from django.views import generic
 from tutors.models import Subject, Subscription, Schedule
 from tutors.utilities import get_week_days
 from tutors_hub.decorators import teacher_required, TeacherRequiredMixin
-from .forms import SubjectForm, ScheduleForm
+from .forms import SubjectForm, ScheduleForm, ScheduleFormUser
 
+date_format = "%Y-%m-%d"
 
 @teacher_required
 @login_required
@@ -35,7 +36,6 @@ def delete_subject(request, subject_id):
     if request.method == "POST":
         subject = Subject.objects.get(pk=subject_id)
         if subject:
-            print(subject)
             subject.delete()
             return HttpResponseRedirect("/teacher/subjects")
 
@@ -52,7 +52,7 @@ def change_subject(request, subject_id):
 
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect("/account/subjects")
+            return HttpResponseRedirect("/teacher/subjects")
         return render(request, "teacher/subject.html", {"form": form})
     else:
         form = SubjectForm(instance=subject)
@@ -82,24 +82,25 @@ class StudentsView(TeacherRequiredMixin, generic.ListView):
 @teacher_required
 @login_required
 def account_schedule(request, date=None):
-    format_ = "%Y-%m-%d"
     try:
-        date = datetime.datetime.strptime(date, format_)
+        date = datetime.datetime.strptime(date, date_format)
     except:
         date = datetime.datetime.now()
 
     days = get_week_days(date)
-    days = [{"name": day.strftime("%A"), "date": day.strftime(format_), "selected": (date == day)} for day in days]
+    days = [{"name": day.strftime("%A"), "date": day.strftime(date_format), "selected": (date == day)} for day in days]
 
-    schedules = Schedule.objects.filter(date=date.date(), subscription__subject__teacher=request.user)
+    schedules = Schedule.objects\
+        .filter(date=date.date(), subscription__subject__teacher=request.user)\
+        .order_by("start_time")
 
     return render(request, "teacher/home.html",
-                  {"schedules": schedules, "days": days, "current": date.strftime(format_)})
+                  {"schedules": schedules, "days": days, "current": date.strftime(date_format)})
 
 
 @teacher_required
 @login_required
-def create_schedule(request):
+def create_schedule(request, date=None):
     if request.method == "POST":
         form = ScheduleForm(request.POST)
         if form.is_valid():
@@ -108,9 +109,40 @@ def create_schedule(request):
             return render(request, "teacher/schedule.html", {"form": form})
 
         date = schedule.date
-        return HttpResponseRedirect("/teacher/schedule/" + date.strftime("%Y-%m-%d"))
+        return HttpResponseRedirect("/teacher/schedule/" + date.strftime(date_format))
     else:
-        form = ScheduleForm()
+        date = datetime.datetime.strptime(date, date_format).date() if date else datetime.datetime.now().date()
+        form = ScheduleFormUser(request.user, initial={"date": date})
 
     return render(request, "teacher/schedule.html", {"form": form})
+
+
+@teacher_required
+@login_required
+def change_schedule(request, schedule_id):
+    schedule = Schedule.objects.get(pk=schedule_id)
+
+    if request.method == "POST":
+        form = ScheduleForm(request.POST, instance=schedule)
+
+        if form.is_valid():
+            schedule = form.save()
+            return HttpResponseRedirect("/teacher/schedule/" + schedule.date.strftime(date_format))
+        return render(request, "teacher/schedule.html", {"form": form})
+    else:
+        form = ScheduleFormUser(user=request.user, instance=schedule)
+
+    return render(request, "teacher/schedule.html", {"form": form})
+
+
+@teacher_required
+@login_required
+def delete_schedule(request, schedule_id):
+    if request.method == "POST":
+        schedule = Schedule.objects.get(pk=schedule_id)
+        if schedule and not schedule.done:
+            schedule.delete()
+            return HttpResponseRedirect("/teacher/schedule")
+
+    return "404.html"
 
