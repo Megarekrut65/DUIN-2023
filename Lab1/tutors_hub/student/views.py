@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.views import generic
 
 from tutors.models import Subscription, Schedule
-from tutors.utilities import get_week_days
+from tutors_hub.utilities import get_week_days
 from tutors_hub.decorators import StudentRequiredMixin, student_required
 
 
@@ -36,5 +36,5 @@ def account_schedule(request, date=None):
         .filter(date=date.date(), subscription__student=request.user)\
         .order_by("start_time")
 
-    return render(request, "student/home.html",
+    return render(request, "student/schedule_tab.html",
                   {"schedules": schedules, "days": days, "current": date.strftime(date_format)})

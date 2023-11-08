@@ -1,5 +1,9 @@
 {% extends "templates/base_generic.html" %}
 
+{% block title %}
+Student account | Tutors tool
+{% endblock %}
+
 {% block content %}
     <div class="container-fluid" style="margin-top: 50px;">
         <div class="row justify-content-start">
@@ -15,20 +19,4 @@
             </div>
         </div>
     </div>
-    <div class="modal-container hide" onclick="closeModal()" id="modal-window">
-        <div class="modal-list">
-            <div class="card" style="margin-top: 30vh;">
-                <div class="card-body text-center">
-                    <h4 id="modal-question"></h4>
-
-                    <div style="display: flex; justify-content: center">
-                        <input id="modal-submit" type="button" class="btn btn-success py-8 fs-4 mb-1 rounded-2 mr-4" value="Ok">
-                        <input type="button" class="btn btn-danger py-8 fs-4 mb-1 rounded-2 ml-4" value="Cancel">
-                    </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script src="/static/js/modal-window.js"></script>
 {% endblock %}

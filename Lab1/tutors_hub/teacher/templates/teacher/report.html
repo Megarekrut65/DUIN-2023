@@ -4,9 +4,9 @@
 {% load crispy_forms_tags %}
 
 {% block teacher_content %}
-    <h2>Subject</h2>
+    <h2>Report tool</h2>
     <div>
-        <form method="post" class="p-4 m-4">
+        <form method="post" class="p-4 m-4" target="_blank">
         {% csrf_token %}
             {{form|crispy}}
             <button type="submit" class="btn btn-success">Submit</button>

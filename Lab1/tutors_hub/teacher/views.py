@@ -6,11 +6,13 @@ from django.shortcuts import render
 from django.views import generic
 
 from tutors.models import Subject, Subscription, Schedule
-from tutors.utilities import get_week_days
+from tutors_hub.utilities import get_week_days, get_time_range
 from tutors_hub.decorators import teacher_required, TeacherRequiredMixin
-from .forms import SubjectForm, ScheduleForm, ScheduleFormUser
+from .forms import SubjectForm, ScheduleForm, ScheduleFormUser, ReportForm, ReportFormUser
+from .models import Report
 
 date_format = "%Y-%m-%d"
+
 
 @teacher_required
 @login_required
@@ -94,7 +96,7 @@ def account_schedule(request, date=None):
         .filter(date=date.date(), subscription__subject__teacher=request.user)\
         .order_by("start_time")
 
-    return render(request, "teacher/home.html",
+    return render(request, "teacher/schedule_tab.html",
                   {"schedules": schedules, "days": days, "current": date.strftime(date_format)})
 
 
@@ -145,4 +147,55 @@ def delete_schedule(request, schedule_id):
             return HttpResponseRedirect("/teacher/schedule")
 
     return "404.html"
+
+
+def get_report_doc(report):
+    start = report.start_lesson
+    end = report.end_lesson
+
+    lessons = Schedule.objects.filter(subscription=report.subscription)
+    lessons = lessons[start:end+1]
+
+    lessons = [{"number": start + i,
+                "date": lesson.date.strftime(date_format),
+                "time_range": get_time_range(lesson.start_time, lesson.end_time)}
+               for i, lesson in enumerate(lessons)]
+
+    return {"report": report, "lessons": lessons}
+
+
+@teacher_required
+@login_required
+def report_doc(request, report_id):
+    report = Report.objects.get(pk=report_id)
+    if report:
+        return render(request, "teacher/report_doc.html", get_report_doc(report))
+
+    return "404.html"
+
+
+@teacher_required
+@login_required
+def create_report(request):
+    reports = Report.objects.filter(teacher=request.user)
+
+    if len(reports) == 0:
+        report = Report()
+        report.teacher = request.user
+        report.save()
+    else:
+        report = reports[0]
+
+    if request.method == "POST":
+        form = ReportForm(request.POST, instance=report)
+        if form.is_valid():
+            form.save()
+        else:
+            return render(request, "teacher/report.html", {"form": form})
+
+        return HttpResponseRedirect(f"/teacher/report/{report.id}/doc")
+    else:
+        form = ReportFormUser(request.user, instance=report)
+
+    return render(request, "teacher/report.html", {"form": form})
 

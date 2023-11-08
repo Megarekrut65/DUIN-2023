@@ -18,5 +18,8 @@ urlpatterns = [
 
     path("subject/<int:subject_id>", views.change_subject, name="change_subject"),
     path("subject/", views.create_subject, name="create_subject"),
-    path("subject/<int:subject_id>/delete", views.delete_subject, name="delete_subject")
+    path("subject/<int:subject_id>/delete", views.delete_subject, name="delete_subject"),
+
+    path("report/", views.create_report, name="create_report"),
+    path("report/<int:report_id>/doc", views.report_doc, name="report_doc"),
 ]

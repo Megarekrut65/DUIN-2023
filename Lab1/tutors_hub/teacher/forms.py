@@ -4,8 +4,9 @@ import django.forms as forms
 from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator
 
+from teacher.models import Report
 from tutors.models import Subject, Schedule, Subscription
-from tutors.utilities import get_time_range
+from tutors_hub.utilities import get_time_range
 
 
 class SubjectForm(forms.ModelForm):
@@ -99,3 +100,21 @@ class ScheduleFormUser(ScheduleForm):
         super(ScheduleForm, self).__init__(**kwargs)
         if user:
             self.fields["subscription"].queryset = Subscription.objects.filter(subject__teacher=user, active=True)
+
+
+class ReportForm(forms.ModelForm):
+    class Meta:
+        model = Report
+        fields = "__all__"
+        exclude = ["teacher"]
+
+    header = forms.CharField(widget=forms.Textarea(), required=False)
+    footer = forms.CharField(widget=forms.Textarea(), required=False)
+
+
+class ReportFormUser(ReportForm):
+    def __init__(self, user=None, **kwargs):
+        super(ReportFormUser, self).__init__(**kwargs)
+        if user:
+            self.fields["subscription"].queryset = Subscription.objects.filter(subject__teacher=user)
+
