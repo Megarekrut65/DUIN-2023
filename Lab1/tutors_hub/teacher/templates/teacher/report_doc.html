@@ -8,14 +8,18 @@
     <title>Report | Tutors Tool</title>
 
     <link rel="icon" type="image/x-icon" href="/static/assets/icon.ico"/>
-
+    <style>
+        p{
+            white-space: pre-line;
+        }
+    </style>
 </head>
 <body>
 
 <p>{{ report.header }}</p>
 
 {% for lesson in lessons %}
-    <div>{{ report.lesson_prefix }}{{ lesson.number }}. {{ lesson.date }}, {{ lesson.time_range }}{{ report.lesson_suffix }}</div>
+    <div>{{ report.lesson_prefix }} {{ lesson.number }}. {{ lesson.date }}, {{ lesson.time_range }}{{ report.lesson_suffix }}</div>
 {% endfor %}
 
 <p>{{ report.footer }}</p>

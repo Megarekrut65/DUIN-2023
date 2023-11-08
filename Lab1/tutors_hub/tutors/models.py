@@ -17,8 +17,8 @@ class Subject(models.Model):
 
 
 class Subscription(models.Model):
-    student = models.ForeignKey(User, on_delete=models.CASCADE)
-    subject = models.ForeignKey(Subject, on_delete=models.SET_NULL, null=True)
+    student = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
     comment = models.CharField(max_length=1000)
     subscribed = models.DateTimeField()
 
@@ -30,7 +30,7 @@ class Subscription(models.Model):
 
 
 class Schedule(models.Model):
-    subscription = models.ForeignKey(Subscription, on_delete=models.SET_NULL, null=True)
+    subscription = models.ForeignKey(Subscription, on_delete=models.CASCADE)
 
     date = models.DateField()
 

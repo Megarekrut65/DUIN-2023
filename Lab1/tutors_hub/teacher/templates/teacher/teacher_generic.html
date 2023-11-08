@@ -1,7 +1,7 @@
 {% extends "templates/base_generic.html" %}
 
 {% block title %}
-Teacher account | Tutors tool
+    Teacher account | Tutors tool
 {% endblock %}
 
 {% block content %}
@@ -10,10 +10,26 @@ Teacher account | Tutors tool
             <div class="col-12 col-lg-3 col-xl-2 bg-info bg-gradient p-4 custom-side">
                 <h2>Dashboard</h2>
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0 navbar-dark">
-                    <li class="nav-item"><a class="nav-link custom-link" href="{% url 'teacher' %}">Schedule</a></li>
-                    <li class="nav-item"><a class="nav-link custom-link" href="/teacher/subjects">Your subjects</a></li>
-                    <li class="nav-item"><a class="nav-link custom-link" href="/teacher/students">Your students</a></li>
-                    <li class="nav-item"><a class="nav-link custom-link" href="/teacher/report">Report tool</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link custom-link" href="{% url 'teacher' %}">
+                            <i class="ti ti-calendar-event"></i>Schedule
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link custom-link" href="/teacher/subjects">
+                            <i class="ti ti-books"></i>Your subjects
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link custom-link" href="/teacher/students">
+                            <i class="ti ti-school"></i>Your students
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link custom-link" href="/teacher/report">
+                            <i class="ti ti-checkup-list"></i>Report tool
+                        </a>
+                    </li>
                 </ul>
             </div>
             <div class="col-12 col-lg-9 col-xl-10 p-4">

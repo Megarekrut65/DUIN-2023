@@ -2,7 +2,8 @@
 {% load custom_filters %}
 
 {% block teacher_content %}
-    <h1>Schedule<a href="/teacher/schedule/create/{{ current }}" class="btn-link"><i class="ti ti-circle-plus"></i></a></h1>
+    <h1 class="mb-4">Schedule<a href="/teacher/schedule/create/{{ current }}" class="btn-link"><i
+            class="ti ti-circle-plus"></i></a></h1>
 
     <div>
         <form id="date-form" action="/teacher/schedule" method="GET" class="form-inline mb-4">
@@ -11,71 +12,85 @@
                 <input type="submit" value="Show" class="btn btn-outline-success">
             </div>
         </form>
-    <script>
-        const form = document.getElementById("date-form");
-        const date = form.querySelector("input[type=date]");
-        date.value = "{{ current }}";
+        <script>
+            const form = document.getElementById("date-form");
+            const date = form.querySelector("input[type=date]");
+            date.value = "{{ current }}";
 
-        form.onsubmit = (event)=>{
-            event.preventDefault()
+            form.onsubmit = (event) => {
+                event.preventDefault()
 
-            window.location.href = `/teacher/schedule/${date.value}`;
-        }
-    </script>
+                window.location.href = `/teacher/schedule/${date.value}`;
+            }
+        </script>
 
         <nav>
             <ul class="pagination">
                 {% for day in days %}
-                <li class="page-item">
-                    <a class="page-link {% if day.selected %}bg-primary text-dark{% endif %}" href="/teacher/schedule/{{ day.date }}">
-                        <span>{{ day.name }}</span>
-                        <span>{{ day.date }}</span>
-                    </a>
-                </li>
+                    <li class="page-item">
+                        <a class="page-link {% if day.selected %}bg-primary text-dark{% endif %}"
+                           href="/teacher/schedule/{{ day.date }}">
+                            <span>{{ day.name }}</span>
+                            <span>{{ day.date }}</span>
+                        </a>
+                    </li>
                 {% endfor %}
             </ul>
         </nav>
     </div>
 
     <div>
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Time</th>
-                <th scope="col">Subject</th>
-                <th scope="col">Student</th>
-                <th></th>
-                <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for schedule in schedules %}
-                <tr class="{% if schedule.done %}table-success{% endif %}">
-                    <td>{{ forloop.counter }}</td>
-                    <td>{{ schedule.start_time|time_range:schedule.end_time}}</td>
-                    <td title="{{ schedule.subscription.subject.title }}">{{ schedule.subscription.subject.title|truncate:20 }}</td>
-                    <td title="{{ schedule.subscription.student.fullname }}">{{ schedule.subscription.student.fullname|truncate:20 }}</td>
-                    {% if not schedule.done %}
-                        <td><a href="/teacher/schedule/{{ schedule.id }}/edit" class="bnt-link"><i class="ti ti-pencil"></i></a></td>
-                        <td>
-                            <form id="remove-form-{{ schedule.id }}" method="POST" action="/teacher/schedule/{{ schedule.id }}/delete">
-                                {% csrf_token %}
-                            </form>
-                            <button class="btn-link" type="button"
-                                    onclick="openModal('Do you really want to remove schedule\n {{ schedule.date }} {{ schedule.start_time|time_range:schedule.end_time}}?',
-                                            'remove-form-{{ schedule.id }}')">
-                                <i class="ti ti-x"></i>
-                            </button>
-                        </td>
-                    {% else %}
-                        <td></td>
-                        <th></th>
-                    {% endif %}
+        {% if schedules %}
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Time</th>
+                    <th scope="col">Subject</th>
+                    <th scope="col">Student</th>
+                    <th></th>
+                    <th></th>
                 </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                {% for schedule in schedules %}
+                    <tr class="{% if schedule.done %}table-success{% endif %}">
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ schedule.start_time|time_range:schedule.end_time }}</td>
+                        <td title="{{ schedule.subscription.subject.title }}">{{ schedule.subscription.subject.title|truncate:20 }}</td>
+                        <td title="{{ schedule.subscription.student.fullname }}">{{ schedule.subscription.student.fullname|truncate:20 }}</td>
+                        {% if not schedule.done %}
+                            <td><a href="/teacher/schedule/{{ schedule.id }}/edit" class="bnt-link"><i
+                                    class="ti ti-pencil"></i></a></td>
+                            <td>
+                                <form id="remove-form-{{ schedule.id }}" method="POST"
+                                      action="/teacher/schedule/{{ schedule.id }}/delete">
+                                    {% csrf_token %}
+                                </form>
+                                <button class="btn-link" type="button"
+                                        onclick="openModal('Do you really want to remove schedule\n {{ schedule.date }} {{ schedule.start_time|time_range:schedule.end_time }}?',
+                                                'remove-form-{{ schedule.id }}')">
+                                    <i class="ti ti-x"></i>
+                                </button>
+                            </td>
+                        {% else %}
+                            <td></td>
+                            <th></th>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+        {% else %}
+            <div class="card text-white bg-secondary my-5 py-4 text-center">
+                <div class="card-body">
+                    <p class="text-white m-0">
+                        There no lessons today!
+                    </p>
+                </div>
+            </div>
+        {% endif %}
     </div>
 
 {% endblock %}

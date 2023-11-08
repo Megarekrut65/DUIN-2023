@@ -13,6 +13,7 @@ class Report(models.Model):
 
     start_lesson = models.IntegerField(default=1)
     end_lesson = models.IntegerField(default=10)
+    start_from_one = models.BooleanField(default=False)
 
     lesson_prefix = models.CharField(max_length=100, default="Lesson #")
     lesson_suffix = models.CharField(max_length=100, default=".")

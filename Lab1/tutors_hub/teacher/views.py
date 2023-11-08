@@ -78,6 +78,7 @@ class StudentsView(TeacherRequiredMixin, generic.ListView):
 
     def get_queryset(self):
         subjects = Subject.objects.filter(teacher=self.request.user)
+
         return Subscription.objects.filter(subject__in=subjects).order_by("-active", "-subscribed")
 
 
@@ -156,10 +157,18 @@ def get_report_doc(report):
     lessons = Schedule.objects.filter(subscription=report.subscription)
     lessons = lessons[start:end+1]
 
-    lessons = [{"number": start + i,
+    begin = 1 if report.start_from_one else start
+
+    lessons = [{"number": begin + i,
                 "date": lesson.date.strftime(date_format),
                 "time_range": get_time_range(lesson.start_time, lesson.end_time)}
                for i, lesson in enumerate(lessons)]
+
+    student_name = report.subscription.student.fullname
+    subject_name = report.subscription.subject.title
+
+    report.header = report.header.replace("$student", student_name).replace("$subject", subject_name)
+    report.footer = report.footer.replace("$student", student_name).replace("$subject", subject_name)
 
     return {"report": report, "lessons": lessons}
 
