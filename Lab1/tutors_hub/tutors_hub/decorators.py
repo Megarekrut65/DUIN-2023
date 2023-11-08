@@ -9,7 +9,7 @@ def teacher_required(view_func):
     @wraps(view_func)
     def _wrapped_view(request, *args, **kwargs):
         # Check if the user has the role "TEACHER"
-        if request.user.role == User.Types.Teacher:
+        if hasattr(request.user, "role") and request.user.role == User.Types.Teacher:
             return view_func(request, *args, **kwargs)
         else:
             return HttpResponseForbidden("You don't have permission to access this page.")
@@ -21,7 +21,7 @@ def student_required(view_func):
     @wraps(view_func)
     def _wrapped_view(request, *args, **kwargs):
         # Check if the user has the role "STUDENT"
-        if request.user.role == User.Types.Student:
+        if hasattr(request.user, "role") and request.user.role == User.Types.Student:
             return view_func(request, *args, **kwargs)
         else:
             return HttpResponseForbidden("You don't have permission to access this page.")

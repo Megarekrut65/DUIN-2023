@@ -4,6 +4,7 @@ from . import views
 
 urlpatterns = [
     path("", views.account_schedule, name="teacher"),
+    path("schedule/create", views.create_schedule, name="create_schedule"),
     path("schedule", views.account_schedule, name="teacher"),
     path("schedule/<str:date>", views.account_schedule, name="schedule"),
     path("students", views.StudentsView.as_view(), name="account_students"),

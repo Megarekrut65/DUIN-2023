@@ -8,7 +8,7 @@ from django.views import generic
 from tutors.models import Subject, Subscription, Schedule
 from tutors.utilities import get_week_days
 from tutors_hub.decorators import teacher_required, TeacherRequiredMixin
-from .forms import SubjectForm
+from .forms import SubjectForm, ScheduleForm
 
 
 @teacher_required
@@ -22,7 +22,7 @@ def create_subject(request):
             subject.save()
         else:
             return render(request, "teacher/subject.html", {"form": form})
-        return HttpResponseRedirect("/account/subjects")
+        return HttpResponseRedirect("/teacher/subjects")
     else:
         form = SubjectForm()
 
@@ -37,7 +37,7 @@ def delete_subject(request, subject_id):
         if subject:
             print(subject)
             subject.delete()
-            return HttpResponseRedirect("/account/subjects")
+            return HttpResponseRedirect("/teacher/subjects")
 
     return "404.html"
 
@@ -91,7 +91,26 @@ def account_schedule(request, date=None):
     days = get_week_days(date)
     days = [{"name": day.strftime("%A"), "date": day.strftime(format_), "selected": (date == day)} for day in days]
 
-    schedules = Schedule.objects.filter(datetime__date=date.date())
+    schedules = Schedule.objects.filter(date=date.date(), subscription__subject__teacher=request.user)
 
     return render(request, "teacher/home.html",
                   {"schedules": schedules, "days": days, "current": date.strftime(format_)})
+
+
+@teacher_required
+@login_required
+def create_schedule(request):
+    if request.method == "POST":
+        form = ScheduleForm(request.POST)
+        if form.is_valid():
+            schedule = form.save()
+        else:
+            return render(request, "teacher/schedule.html", {"form": form})
+
+        date = schedule.date
+        return HttpResponseRedirect("/teacher/schedule/" + date.strftime("%Y-%m-%d"))
+    else:
+        form = ScheduleForm()
+
+    return render(request, "teacher/schedule.html", {"form": form})
+

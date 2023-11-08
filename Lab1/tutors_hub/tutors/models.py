@@ -3,20 +3,6 @@ from django.db import models
 from users.models import User
 
 
-class Question(models.Model):
-    question_text = models.CharField(max_length=200)
-    pub_date = models.DateTimeField("date published")
-
-    def __str__(self):
-        return f"{self.question_text} - {self.pub_date}"
-
-
-class Choice(models.Model):
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    choice_text = models.CharField(max_length=200)
-    votes = models.IntegerField(default=0)
-
-
 class Subject(models.Model):
     teacher = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
@@ -39,11 +25,17 @@ class Subscription(models.Model):
     active = models.BooleanField(default=True)
     lesson_count = models.IntegerField(default=0)
 
+    def __str__(self):
+        return f"{self.subject.title} - {self.student.fullname} ({self.lesson_count})"
+
 
 class Schedule(models.Model):
     subscription = models.ForeignKey(Subscription, on_delete=models.SET_NULL, null=True)
-    datetime = models.DateTimeField()
-    time_range = models.CharField(max_length=20)
+
+    date = models.DateField()
+
+    start_time = models.TimeField()
+    end_time = models.TimeField()
 
     done = models.BooleanField(default=False)
 

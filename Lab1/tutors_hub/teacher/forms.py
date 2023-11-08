@@ -3,7 +3,8 @@ import datetime
 import django.forms as forms
 from django.core.validators import MinValueValidator
 
-from tutors.models import Subject
+from tutors.models import Subject, Schedule
+from tutors.utilities import get_time_range
 
 
 class SubjectForm(forms.ModelForm):
@@ -41,3 +42,28 @@ class SubjectForm(forms.ModelForm):
 
     def clean_title(self):
         return self.cleaned_data.get("title").strip()
+
+
+class ScheduleForm(forms.ModelForm):
+    class Meta:
+        model = Schedule
+        fields = "__all__"
+        exclude = ["time_range"]
+
+    def save(self, commit=True):
+        instance = super(ScheduleForm, self).save(commit=False)
+
+        date = datetime.datetime.combine(datetime.date(1, 1, 1), instance.start_time)
+        instance.time_range = get_time_range(date, instance.subscription.subject.lesson_duration)
+
+        if commit:
+            instance.save()
+        return instance
+
+    subscription = forms.Select()
+    date = forms.DateField(widget=forms.DateInput(format="%Y-%m-%d",
+                                                  attrs={"placeholder": "2023-01-01", "value": "2023-01-01"}))
+    start_time = forms.TimeField(widget=forms.TimeInput(format="%H:%M",
+                                                        attrs={"placeholder": "00:00", "value": "00:00"}))
+    end_time = forms.TimeField(widget=forms.TimeInput(format="%H:%M",
+                                                      attrs={"placeholder": "00:00", "value": "00:00"}))
