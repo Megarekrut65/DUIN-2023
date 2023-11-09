@@ -2,14 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="746adc9d-b280-400e-a733-ce15fd23ecf6" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/System/cert.pem" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/System/key.pem" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/System/server.conf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/System/ssl.conf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/serve.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ssl_manager.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/student/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/student/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/student/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/student/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/teacher/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/teacher/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/teacher/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tutors/templatetags/custom_filters.py" beforeDir="false" afterPath="$PROJECT_DIR$/tutors/templatetags/custom_filters.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tutors/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/tutors/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tutors_hub/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/tutors_hub/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,7 +75,29 @@
       <recent name="D:\repos\Megarekrut65\DUIN-2023\Lab1\tutors_hub\users\templates\users" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.serve">
+    <configuration name="serve" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="tutors_tool" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/serve.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="tutors_hub" type="Python.DjangoServer" factoryName="Django server">
       <module name="tutors_tool" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -100,6 +122,11 @@
       <option name="customRunCommand" value="" />
       <method v="2" />
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.serve" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -126,7 +153,7 @@
       <workItem from="1699451033154" duration="536000" />
       <workItem from="1699451647542" duration="2522000" />
       <workItem from="1699455166623" duration="15789000" />
-      <workItem from="1699529572571" duration="9437000" />
+      <workItem from="1699529572571" duration="10064000" />
     </task>
     <servers />
   </component>
@@ -149,5 +176,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/tutors_hub$serve.coverage" NAME="serve Coverage Results" MODIFIED="1699547143588" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
