@@ -7,6 +7,9 @@ register = template.Library()
 
 @register.filter
 def truncate(value, length=20):
+    """
+        Truncate passed string
+    """
     if len(value) > length:
         return value[:length] + "..."
     return value
@@ -14,4 +17,7 @@ def truncate(value, length=20):
 
 @register.filter
 def time_range(start, end):
+    """
+        Make time range from two times as 00:00-00:00
+    """
     return get_time_range(start, end)

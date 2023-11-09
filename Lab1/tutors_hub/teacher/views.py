@@ -17,6 +17,9 @@ date_format = "%Y-%m-%d"
 @teacher_required
 @login_required
 def create_subject(request):
+    """
+        Creates subject for current teacher and saves it to database
+    """
     if request.method == "POST":
         form = SubjectForm(request.POST)
         if form.is_valid():
@@ -87,6 +90,9 @@ class StudentsView(TeacherRequiredMixin, generic.ListView):
 @teacher_required
 @login_required
 def account_schedule(request, date=None):
+    """
+        View for teacher schedule
+    """
     try:
         date = datetime.datetime.strptime(date, date_format)
     except:
@@ -160,6 +166,9 @@ def delete_schedule(request, schedule_id):
 
 
 def get_report_doc(report):
+    """
+        Returns dic for report doc page
+    """
     start = report.start_lesson
     end = report.end_lesson
 

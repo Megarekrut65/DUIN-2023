@@ -9,6 +9,9 @@ from tutors.models import Subject, Schedule, Subscription
 
 
 class SubjectForm(forms.ModelForm):
+    """
+        Form for managing Subject
+    """
     class Meta:
         model = Subject
         fields = "__all__"
@@ -46,6 +49,9 @@ class SubjectForm(forms.ModelForm):
 
 
 class ScheduleForm(forms.ModelForm):
+    """
+        Form for managing Schedule
+    """
     class Meta:
         model = Schedule
         fields = "__all__"
@@ -92,6 +98,9 @@ class ScheduleForm(forms.ModelForm):
 
 
 class ScheduleFormUser(ScheduleForm):
+    """
+        Adds to subscription only active subscription of current teacher
+    """
     def __init__(self, user=None, **kwargs):
         super(ScheduleForm, self).__init__(**kwargs)
         if user:
@@ -99,6 +108,9 @@ class ScheduleFormUser(ScheduleForm):
 
 
 class ReportForm(forms.ModelForm):
+    """
+        Form for managing Report
+    """
     class Meta:
         model = Report
         fields = "__all__"
@@ -109,6 +121,9 @@ class ReportForm(forms.ModelForm):
 
 
 class ReportFormUser(ReportForm):
+    """
+        Adds to subscription only subscription of current teacher
+    """
     def __init__(self, user=None, **kwargs):
         super(ReportFormUser, self).__init__(**kwargs)
         if user:

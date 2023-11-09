@@ -28,14 +28,14 @@ class SubjectsView(generic.ListView):
 
 
 def get_active(request, subject):
+    """
+        Returns true if user have active subscription to this subject
+    """
     active = False
     if request.user:
-        subscriptions = Subscription.objects.filter(subject=subject, student=request.user)
+        subscriptions = Subscription.objects.filter(subject=subject, student=request.user, active=True)
 
-        for sub in subscriptions:
-            if sub.active:
-                active = True
-                break
+        active = len(subscriptions) > 0
 
     return active
 
@@ -83,6 +83,9 @@ def unsubscribe_on_subject(request, subscription_id):
 @teacher_required
 @login_required
 def complete_lesson(request, schedule_id):
+    """
+        Marks current lesson as completed
+    """
     if request.POST:
         schedule = get_object_or_404(Schedule, pk=schedule_id)
 

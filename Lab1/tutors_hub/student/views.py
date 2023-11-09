@@ -11,7 +11,10 @@ from tutors_hub.utilities import get_week_days
 date_format = "%Y-%m-%d"
 
 
-class StudentsView(StudentRequiredMixin, generic.ListView):
+class SubscriptionsView(StudentRequiredMixin, generic.ListView):
+    """
+        View for page with user's subscriptions
+    """
     paginate_by = 24
     template_name = "student/subscriptions.html"
     context_object_name = "subscriptions"
@@ -23,6 +26,9 @@ class StudentsView(StudentRequiredMixin, generic.ListView):
 @student_required
 @login_required
 def account_schedule(request, date=None):
+    """
+        View with user's schedule. Can get default date to show
+    """
     try:
         date = datetime.datetime.strptime(date, date_format)
     except:

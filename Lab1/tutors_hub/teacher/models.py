@@ -5,6 +5,9 @@ from users.models import User
 
 
 class Report(models.Model):
+    """
+        Model for report in database
+    """
     teacher = models.ForeignKey(User, on_delete=models.CASCADE)
     subscription = models.ForeignKey(Subscription, on_delete=models.SET_NULL, null=True)
 
