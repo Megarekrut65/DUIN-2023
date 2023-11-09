@@ -9,11 +9,11 @@
     <header class="{% if subscription.active %}bg-primary{% else %}bg-secondary{% endif %} bg-gradient text-white"
             style="margin-top: 50px; margin-bottom: 50px; padding: 50px 30px 30px;">
         <div class="container px-4 text-center">
-            <h1 class="fw-bolder"><a class="text-white"
+            <h1 class="fw-bolder"><a class="text-white" style="word-break: break-word"
                                      href="/subject/{{ subscription.subject.id }}">{{ subscription.subject.title }}</a>
             </h1>
-            <p class="lead">Teacher: {{ subscription.subject.teacher.fullname }}</p>
-            <p class="lead">Student: {{ subscription.student.fullname }}</p>
+            <p class="lead" style="word-break: break-word">Teacher: {{ subscription.subject.teacher.fullname }}</p>
+            <p class="lead" style="word-break: break-word">Student: {{ subscription.student.fullname }}</p>
             {% if subscription.active and user.role == 'STUDENT' %}
                 <form id="unsubscribe-form-{{ subscription.id }}" method="POST"
                       action="/subject/{{ subscription.id }}/unsubscribe">

@@ -24,7 +24,7 @@
             {% for subject in subjects %}
                 <tr class="{% if subject.visible %}table-success{% else %}table-secondary{% endif %}">
                     <td>{{ forloop.counter }}</td>
-                    <td>{{ subject.title|truncate:20 }}</td>
+                    <td><a class="btn-link" href="/subject/{{ subject.id }}">{{ subject.title|truncate:20 }}</a></td>
                     <td>{{ subject.description|truncate:20 }}</td>
                     <td>{{ subject.work_schedule|truncate:20 }}</td>
                     <td>{{ subject.lesson_price }}</td>

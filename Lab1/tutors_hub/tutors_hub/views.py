@@ -9,7 +9,7 @@ def handler404(request, exception, template_name="templates/404.html"):
 
 
 def csrf_failure(request, reason=""):
-    context = RequestContext(request)
+    context = RequestContext(request).__dict__
     response = render(request, "templates/403.html", context)
     response.status_code = 403
     return response

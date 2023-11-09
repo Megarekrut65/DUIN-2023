@@ -2,9 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="746adc9d-b280-400e-a733-ce15fd23ecf6" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tutors_hub/decorators.py" beforeDir="false" afterPath="$PROJECT_DIR$/tutors_hub/decorators.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teacher/templates/teacher/subjects.html" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/templates/teacher/subjects.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base_generic.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base_generic.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tutors/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/tutors/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tutors/templates/tutors/subject.html" beforeDir="false" afterPath="$PROJECT_DIR$/tutors/templates/tutors/subject.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tutors/templates/tutors/subjects.html" beforeDir="false" afterPath="$PROJECT_DIR$/tutors/templates/tutors/subjects.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tutors/templates/tutors/subscription.html" beforeDir="false" afterPath="$PROJECT_DIR$/tutors/templates/tutors/subscription.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tutors_hub/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/tutors_hub/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,7 +128,7 @@
       <workItem from="1699451033154" duration="536000" />
       <workItem from="1699451647542" duration="2522000" />
       <workItem from="1699455166623" duration="15789000" />
-      <workItem from="1699529572571" duration="6635000" />
+      <workItem from="1699529572571" duration="8515000" />
     </task>
     <servers />
   </component>

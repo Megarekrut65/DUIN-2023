@@ -27,7 +27,7 @@ class Subscription(models.Model):
     lesson_count = models.IntegerField(default=0)
 
     def __str__(self):
-        return f"{self.subject.title} - {self.student.fullname} ({self.lesson_count})"
+        return f"{self.subject.title[:30]} - {self.student.fullname[:30]} ({self.lesson_count})"
 
 
 class Schedule(models.Model):

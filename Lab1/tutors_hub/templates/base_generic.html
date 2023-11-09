@@ -1,3 +1,4 @@
+{% load custom_filters %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,7 +35,7 @@
                     {% if user.is_authenticated %}
                         <a class="nav-link"
                            href="/{% if user.role == 'TEACHER' %}teacher{% elif user.role == 'STUDENT' %}student{% endif %}">
-                            {{ user.fullname }} - {{ user.email }}
+                            {{ user.fullname|truncate:30 }} - {{ user.email|truncate:30}}
                         </a>
                     {% else %}<a class="nav-link" href="{% url 'login' %}?next={{ request.path }}">Login</a>
                     {% endif %}

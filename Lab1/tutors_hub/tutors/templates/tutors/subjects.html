@@ -33,7 +33,7 @@ Subjects | Tutors tool
                 </div>
                 <div class="card-footer" style="display: flex; justify-content: space-between; align-items: center">
                     <a class="btn btn-primary btn-sm" href="{% url 'subject' subject.id %}">More Info</a>
-                    <p>{{ subject.teacher.fullname }}</p>
+                    <p style="word-break: break-word">{{ subject.teacher.fullname|truncate:20 }}</p>
                 </div>
             </div>
        </div>

@@ -5,12 +5,12 @@
 {% endblock %}
 
 {% block content %}
-    <header class="bg-primary bg-gradient text-white"
+    <header class="{% if available and active%}bg-success{% else %}bg-primary{% endif %} bg-gradient text-white"
             style="margin-top: 50px; margin-bottom: 50px; padding: 50px 30px 30px;">
         <div class="container px-4 text-center">
-            <h1 class="fw-bolder">{{ subject.title }}</h1>
+            <h1 class="fw-bolder" style="word-break: break-word">{{ subject.title }}</h1>
             <p class="lead">{{ subject.lesson_price }} for {{ subject.lesson_duration }} minutes</p>
-            <p class="lead">By {{ subject.teacher.fullname }}</p>
+            <p class="lead" style="word-break: break-word">By {{ subject.teacher.fullname }}</p>
             <p class="lead">{{ subject.published }}</p>
             {% if available %}
             {% if active %}
@@ -21,7 +21,7 @@
                   <form method="POST" action="/subject/{{ subject.id }}/subscribe" style="display: flex; flex-direction: column; align-items: center">
                     {% csrf_token %}
                       <label for="comment">Write your comment for teacher</label>
-                      <textarea name="comment" maxlength="1000" cols="40" rows="5"></textarea>
+                      <textarea name="comment" maxlength="500" cols="40" rows="5"></textarea>
                       <input type="submit" class="btn btn-success m-1" value="Subscribe">
                 </form>
                 </details>
