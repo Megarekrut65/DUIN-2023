@@ -6,7 +6,7 @@
       <auth-provider>no-auth</auth-provider>
       <schema-mapping />
     </data-source>
-    <data-source name="tutors_hub@localhost" uuid="cca81bb6-f37d-491d-ac73-4db0978c2b72">
+    <data-source name="tutors_hub@localhost" uuid="0b1b8052-bd4a-40b3-bd31-0acb848e19b2">
       <database-info product="PostgreSQL" version="14.5" jdbc-version="4.2" driver-name="PostgreSQL JDBC Driver" driver-version="42.6.0" dbms="POSTGRES" exact-version="14.5" exact-driver-version="42.6">
         <identifier-quote-string>&quot;</identifier-quote-string>
       </database-info>

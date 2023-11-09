@@ -9,7 +9,7 @@
             style="margin-top: 50px; margin-bottom: 50px; padding: 50px 30px 30px;">
         <div class="container px-4 text-center">
             <h1 class="fw-bolder" style="word-break: break-word">{{ subject.title }}</h1>
-            <p class="lead">{{ subject.lesson_price }} for {{ subject.lesson_duration }} minutes</p>
+            <p class="lead">${{ subject.lesson_price }} for {{ subject.lesson_duration }} minutes</p>
             <p class="lead" style="word-break: break-word">By {{ subject.teacher.fullname }}</p>
             <p class="lead">{{ subject.published }}</p>
             {% if available %}

@@ -68,7 +68,7 @@ def change_subject(request, subject_id):
 
 
 class SubjectsView(TeacherRequiredMixin, generic.ListView):
-    paginate_by = 24
+    paginate_by = 12
     template_name = "teacher/subjects.html"
     context_object_name = "subjects"
 
@@ -77,7 +77,7 @@ class SubjectsView(TeacherRequiredMixin, generic.ListView):
 
 
 class StudentsView(TeacherRequiredMixin, generic.ListView):
-    paginate_by = 24
+    paginate_by = 12
     template_name = "teacher/students.html"
     context_object_name = "subscriptions"
 
@@ -170,10 +170,13 @@ def get_report_doc(report):
         Returns dic for report doc page
     """
     start = report.start_lesson
+    if start <= 0:
+        start = 1
+
     end = report.end_lesson
 
     lessons = Schedule.objects.filter(subscription=report.subscription)
-    lessons = lessons[start:end + 1]
+    lessons = lessons[start-1:end]
 
     begin = 1 if report.start_from_one else start
 

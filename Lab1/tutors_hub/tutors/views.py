@@ -24,7 +24,7 @@ class SubjectsView(generic.ListView):
         return Subject.objects \
             .filter(visible=True) \
             .filter(Q(title__icontains=pattern) | Q(description__icontains=pattern)) \
-            .order_by("-published")
+            .order_by("title")
 
 
 def get_active(request, subject):
@@ -92,6 +92,8 @@ def complete_lesson(request, schedule_id):
         if schedule and schedule.subscription.subject.teacher == request.user:
             schedule.done = True
             schedule.save()
+            schedule.subscription.lesson_count += 1
+            schedule.subscription.save()
 
         return HttpResponseRedirect("/subscription/" + str(schedule.subscription.id))
 

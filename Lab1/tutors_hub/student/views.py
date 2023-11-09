@@ -15,7 +15,7 @@ class SubscriptionsView(StudentRequiredMixin, generic.ListView):
     """
         View for page with user's subscriptions
     """
-    paginate_by = 24
+    paginate_by = 12
     template_name = "student/subscriptions.html"
     context_object_name = "subscriptions"
 
