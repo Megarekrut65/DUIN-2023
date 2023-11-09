@@ -5,9 +5,8 @@ from django.shortcuts import render
 from django.views import generic
 
 from tutors.models import Subscription, Schedule
-from tutors_hub.utilities import get_week_days
 from tutors_hub.decorators import StudentRequiredMixin, student_required
-
+from tutors_hub.utilities import get_week_days
 
 date_format = "%Y-%m-%d"
 

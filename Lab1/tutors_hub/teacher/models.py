@@ -8,7 +8,7 @@ class Report(models.Model):
     teacher = models.ForeignKey(User, on_delete=models.CASCADE)
     subscription = models.ForeignKey(Subscription, on_delete=models.SET_NULL, null=True)
 
-    header = models.CharField(max_length=100, default="")
+    header = models.CharField(max_length=100, default="$student in $subject")
     footer = models.CharField(max_length=100, default="")
 
     start_lesson = models.IntegerField(default=1)

@@ -1,8 +1,9 @@
 from functools import wraps
+
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
 
 from users.models import User
-from django.contrib.auth.decorators import login_required
 
 
 def teacher_required(view_func):

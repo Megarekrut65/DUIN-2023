@@ -10,7 +10,7 @@
       <jdbc-url>jdbc:sqlite:D:\repos\Megarekrut65\DUIN-2023\Lab1\tutors_tool\db.sqlite3</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="tutors_hub@localhost" uuid="2a9094f0-ad57-45ef-81d6-55891b147381">
+    <data-source source="LOCAL" name="tutors_hub@localhost" uuid="cca81bb6-f37d-491d-ac73-4db0978c2b72">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>

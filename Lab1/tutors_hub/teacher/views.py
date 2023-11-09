@@ -2,12 +2,12 @@ import datetime
 
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views import generic
 
 from tutors.models import Subject, Subscription, Schedule
-from tutors_hub.utilities import get_week_days, get_time_range
 from tutors_hub.decorators import teacher_required, TeacherRequiredMixin
+from tutors_hub.utilities import get_week_days, get_time_range
 from .forms import SubjectForm, ScheduleForm, ScheduleFormUser, ReportForm, ReportFormUser
 from .models import Report
 
@@ -36,8 +36,8 @@ def create_subject(request):
 @login_required
 def delete_subject(request, subject_id):
     if request.method == "POST":
-        subject = Subject.objects.get(pk=subject_id)
-        if subject:
+        subject = get_object_or_404(Subject, pk=subject_id)
+        if subject and subject.teacher == request.user:
             subject.delete()
             return HttpResponseRedirect("/teacher/subjects")
 
@@ -47,7 +47,9 @@ def delete_subject(request, subject_id):
 @teacher_required
 @login_required
 def change_subject(request, subject_id):
-    subject = Subject.objects.get(pk=subject_id)
+    subject = get_object_or_404(Subject, pk=subject_id)
+    if not subject or subject.teacher != request.user:
+        return "404.html"
 
     if request.method == "POST":
         form = SubjectForm(request.POST, instance=subject)
@@ -114,7 +116,11 @@ def create_schedule(request, date=None):
         date = schedule.date
         return HttpResponseRedirect("/teacher/schedule/" + date.strftime(date_format))
     else:
-        date = datetime.datetime.strptime(date, date_format).date() if date else datetime.datetime.now().date()
+        try:
+            date = datetime.datetime.strptime(date, date_format).date()
+        except:
+            date = datetime.datetime.now().date()
+
         form = ScheduleFormUser(request.user, initial={"date": date})
 
     return render(request, "teacher/schedule.html", {"form": form})
@@ -123,7 +129,10 @@ def create_schedule(request, date=None):
 @teacher_required
 @login_required
 def change_schedule(request, schedule_id):
-    schedule = Schedule.objects.get(pk=schedule_id)
+    schedule = get_object_or_404(Schedule, pk=schedule_id)
+
+    if not schedule or schedule.subscription.subject.teacher != request.user:
+        return "404.html"
 
     if request.method == "POST":
         form = ScheduleForm(request.POST, instance=schedule)
@@ -142,8 +151,8 @@ def change_schedule(request, schedule_id):
 @login_required
 def delete_schedule(request, schedule_id):
     if request.method == "POST":
-        schedule = Schedule.objects.get(pk=schedule_id)
-        if schedule and not schedule.done:
+        schedule = get_object_or_404(Schedule, pk=schedule_id)
+        if schedule and not schedule.done and schedule.subscription.subject.teacher == request.user:
             schedule.delete()
             return HttpResponseRedirect("/teacher/schedule")
 
@@ -176,8 +185,8 @@ def get_report_doc(report):
 @teacher_required
 @login_required
 def report_doc(request, report_id):
-    report = Report.objects.get(pk=report_id)
-    if report:
+    report = get_object_or_404(Report, pk=report_id)
+    if report and report.teacher == request.user:
         return render(request, "teacher/report_doc.html", get_report_doc(report))
 
     return "404.html"

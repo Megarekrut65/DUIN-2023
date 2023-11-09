@@ -6,7 +6,6 @@ from django.core.validators import MinValueValidator
 
 from teacher.models import Report
 from tutors.models import Subject, Schedule, Subscription
-from tutors_hub.utilities import get_time_range
 
 
 class SubjectForm(forms.ModelForm):

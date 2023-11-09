@@ -1,15 +1,15 @@
 import datetime
 
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render
-from django.urls import reverse
-from django.views import generic
+from django.core.paginator import Paginator
 from django.db.models import Q
+from django.http import HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404
+from django.views import generic
 
-from tutors_hub.decorators import student_required
+from tutors_hub.decorators import student_required, teacher_required
 from users.models import User
-from .models import Subject, Subscription
+from .models import Subject, Subscription, Schedule
 
 
 class SubjectsView(generic.ListView):
@@ -41,7 +41,7 @@ def get_active(request, subject):
 
 
 def subject_view(request, subject_id):
-    subject = Subject.objects.get(pk=subject_id)
+    subject = get_object_or_404(Subject, pk=subject_id)
     if subject:
         active = get_active(request, subject)
         available = request.user and request.user.role == User.Types.Student
@@ -55,7 +55,7 @@ def subject_view(request, subject_id):
 @student_required
 def subscribe_on_subject(request, subject_id):
     if request.POST:
-        subject = Subject.objects.get(pk=subject_id)
+        subject = get_object_or_404(Subject, pk=subject_id)
         if subject:
             subscription = Subscription(student=request.user, subject=subject, comment=request.POST["comment"],
                                         subscribed=datetime.datetime.now(), active=True, lesson_count=0)
@@ -68,19 +68,44 @@ def subscribe_on_subject(request, subject_id):
 
 
 @login_required
-@student_required
 def unsubscribe_on_subject(request, subscription_id):
     if request.POST:
-        subscription = Subscription.objects.get(pk=subscription_id)
-        if subscription:
+        subscription = get_object_or_404(Subscription, pk=subscription_id)
+        if subscription and (subscription.student == request.user or subscription.subject.teacher == request.user):
             subscription.active = False
             subscription.save()
 
-        return HttpResponseRedirect("/student/subscriptions")
+        return HttpResponseRedirect("/subscription/"+str(subscription_id))
 
     return "404.html"
 
 
-class SubscriptionView(generic.DetailView):
-    model = Subscription
-    template_name = "tutors/subscription.html"
+@teacher_required
+@login_required
+def complete_lesson(request, schedule_id):
+    if request.POST:
+        schedule = get_object_or_404(Schedule, pk=schedule_id)
+
+        if schedule and schedule.subscription.subject.teacher == request.user:
+            schedule.done = True
+            schedule.save()
+
+        return HttpResponseRedirect("/subscription/"+str(schedule.subscription.id))
+
+    return "404.html"
+
+
+@login_required
+def subscription_view(request, subscription_id):
+    subscription = get_object_or_404(Subscription, pk=subscription_id)
+
+    if subscription and (subscription.student == request.user or subscription.subject.teacher == request.user):
+        schedules = Schedule.objects.filter(subscription=subscription).order_by("-date", "-start_time")
+        paginator = Paginator(schedules, 12)
+
+        page_number = request.GET.get("page")
+        page_obj = paginator.get_page(page_number)
+
+        return render(request, "tutors/subscription.html", {"subscription": subscription, "page_obj": page_obj})
+
+    return "404.html"

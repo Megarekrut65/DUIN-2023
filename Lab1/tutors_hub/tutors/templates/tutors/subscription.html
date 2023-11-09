@@ -1,4 +1,5 @@
 {% extends "templates/base_generic.html" %}
+{% load custom_filters %}
 
 {% block title %}
     {{ subscription.subject.title }} | Tutors tool
@@ -8,18 +9,162 @@
     <header class="{% if subscription.active %}bg-primary{% else %}bg-secondary{% endif %} bg-gradient text-white"
             style="margin-top: 50px; margin-bottom: 50px; padding: 50px 30px 30px;">
         <div class="container px-4 text-center">
-            <h1 class="fw-bolder"><a class="text-white" href="/subject/{{ subscription.subject.id }}">{{ subscription.subject.title }}</a></h1>
+            <h1 class="fw-bolder"><a class="text-white"
+                                     href="/subject/{{ subscription.subject.id }}">{{ subscription.subject.title }}</a>
+            </h1>
             <p class="lead">Teacher: {{ subscription.subject.teacher.fullname }}</p>
             <p class="lead">Student: {{ subscription.student.fullname }}</p>
             {% if subscription.active and user.role == 'STUDENT' %}
-                <input type="button" class="btn btn-danger" value="Unsubscribe">
+                <form id="unsubscribe-form-{{ subscription.id }}" method="POST"
+                      action="/subject/{{ subscription.id }}/unsubscribe">
+                    {% csrf_token %}
+                </form>
+                <button class="btn btn-danger" type="button"
+                        onclick="openModal('Do you really want to unsubscribe from {{ subscription.subject.title|truncate:20 }}?',
+                                'unsubscribe-form-{{ subscription.id }}')">
+                    Unsubscribe
+                </button>
             {% elif subscription.active and user.role == 'TEACHER' %}
-                <input type="button" class="btn btn-danger" value="Unsubscribe student">
+                <form id="student-unsubscribe-form-{{ subscription.id }}" method="POST"
+                      action="/subject/{{ subscription.id }}/unsubscribe">
+                    {% csrf_token %}
+                </form>
+                <button class="btn btn-danger" type="button"
+                        onclick="openModal('Do you really want to unsubscribe {{ subscription.student.fullname }} from {{ subscription.subject.title|truncate:20 }}?',
+                                'student-unsubscribe-form-{{ subscription.id }}')">
+                    Unsubscribe student
+                </button>
             {% elif not subscription.active %}
                 <input type="button" class="btn btn-outline-dark" value="Unsubscribed">
             {% endif %}
 
         </div>
     </header>
+    <section class="mb-4 mt-4">
+        <div class="container-fluid px-4">
+            <div class="row gx-4 justify-content-center">
+                <div class="col-lg-8">
+                    <h2>Lessons</h2>
+                    <div>
+                        {% if page_obj %}
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Time</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Completed</th>
+                                    {% if request.user.role == "TEACHER" %}
+                                        <th></th>
+                                    {% endif %}
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for schedule in page_obj %}
+                                    <tr class="{% if schedule.done %}table-success{% endif %}">
+                                        <td>{{ forloop.counter }}</td>
+                                        <td>{{ schedule.start_time|time_range:schedule.end_time }}</td>
+                                        <td>{{ schedule.date }}</td>
+                                        {% if schedule.done %}
+                                            <td class="text-success">Yes</td>
+                                        {% else %}
+                                            <td class="text-dark">No</td>
+                                        {% endif %}
+                                        {% if not schedule.done and request.user.role == "TEACHER" %}
+                                            <td class="text-success">
+                                                <form id="complete-form-{{ schedule.id }}" method="POST"
+                                                      action="/schedule/{{ schedule.id }}/complete">
+                                                    {% csrf_token %}
+                                                </form>
+                                                <button class="btn btn-success" type="button"
+                                                        onclick="openModal('Do you really want to complete {{ schedule.date }}, {{ schedule.start_time|time_range:schedule.end_time }}?',
+                                                                'complete-form-{{ schedule.id }}')">
+                                                    Complete
+                                                </button>
+                                            </td>
+                                        {% else %}
+                                            <td></td>
+                                        {% endif %}
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                            <nav>
+                                <ul class="pagination justify-content-center">
+                                    {% if page_obj.has_previous %}
+                                        <li class="page-item">
+                                            <a class="page-link"
+                                               href="{% if request.GET.pattern %}?pattern={{ request.GET.pattern }}&{% else %}?{% endif %}page=1"
+                                               tabindex="-1">First</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link"
+                                               href="{% if request.GET.pattern %}?pattern={{ request.GET.pattern }}&{% else %}?{% endif %}page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a>
+                                        </li>
+                                    {% else %}
+                                        <li class="page-item disabled">
+                                            <a class="page-link" href="#" tabindex="-1">First</a>
+                                        </li>
+                                        <li class="page-item disabled">
+                                            <a class="page-link" href="#" tabindex="-1">...</a>
+                                        </li>
+                                    {% endif %}
+
+
+                                    <li class="page-item active"><a class="page-link" href="#">{{ page_obj.number }}</a>
+                                    </li>
+
+
+                                    {% if page_obj.has_next %}
+                                        <li class="page-item">
+                                            <a class="page-link"
+                                               href="{% if request.GET.pattern %}?pattern={{ request.GET.pattern }}&{% else %}?{% endif %}page={{ page_obj.next_page_number }}"
+                                               tabindex="-1">{{ page_obj.next_page_number }}</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link"
+                                               href="{% if request.GET.pattern %}?pattern={{ request.GET.pattern }}&{% else %}?{% endif %}page={{ page_obj.paginator.num_pages }}"
+                                               tabindex="-1">Last</a>
+                                        </li>
+                                    {% else %}
+                                        <li class="page-item disabled">
+                                            <a class="page-link" href="#" tabindex="-1">...</a>
+                                        </li>
+                                        <li class="page-item disabled">
+                                            <a class="page-link" href="#" tabindex="-1">Last</a>
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                            </nav>
+
+                        {% else %}
+                            <div class="card text-white bg-secondary my-5 py-4 text-center">
+                                <div class="card-body">
+                                    <p class="text-white m-0">
+                                        There no lessons yet!
+                                    </p>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% if subscription.comment %}
+        <section class="mb-4 mt-4 bg-light">
+            <div class="container-fluid px-4">
+                <div class="row gx-4 justify-content-center">
+                    <div class="col-lg-8">
+                        <h2>Comment</h2>
+                        <p style="white-space: pre-wrap">
+                            {{ subscription.comment }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    {% endif %}
 
 {% endblock %}
