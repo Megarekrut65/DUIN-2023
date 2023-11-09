@@ -2,6 +2,7 @@ from functools import wraps
 
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
+from django.shortcuts import render
 
 from users.models import User
 
@@ -13,7 +14,7 @@ def teacher_required(view_func):
         if hasattr(request.user, "role") and request.user.role == User.Types.Teacher:
             return view_func(request, *args, **kwargs)
         else:
-            return HttpResponseForbidden("You don't have permission to access this page.")
+            return HttpResponseForbidden(render(request, "templates/403.html"))
 
     return _wrapped_view
 
@@ -25,7 +26,7 @@ def student_required(view_func):
         if hasattr(request.user, "role") and request.user.role == User.Types.Student:
             return view_func(request, *args, **kwargs)
         else:
-            return HttpResponseForbidden("You don't have permission to access this page.")
+            return HttpResponseForbidden(render(request, "templates/403.html"))
 
     return _wrapped_view
 
