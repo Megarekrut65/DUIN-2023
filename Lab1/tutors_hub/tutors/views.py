@@ -21,9 +21,9 @@ class SubjectsView(generic.ListView):
         pattern = self.request.GET.get("pattern", None)
         pattern = "" if pattern is None else pattern
 
-        return Subject.objects\
-            .filter(visible=True)\
-            .filter(Q(title__icontains=pattern) | Q(description__icontains=pattern))\
+        return Subject.objects \
+            .filter(visible=True) \
+            .filter(Q(title__icontains=pattern) | Q(description__icontains=pattern)) \
             .order_by("-published")
 
 
@@ -75,7 +75,7 @@ def unsubscribe_on_subject(request, subscription_id):
             subscription.active = False
             subscription.save()
 
-        return HttpResponseRedirect("/subscription/"+str(subscription_id))
+        return HttpResponseRedirect("/subscription/" + str(subscription_id))
 
     return "404.html"
 
@@ -90,7 +90,7 @@ def complete_lesson(request, schedule_id):
             schedule.done = True
             schedule.save()
 
-        return HttpResponseRedirect("/subscription/"+str(schedule.subscription.id))
+        return HttpResponseRedirect("/subscription/" + str(schedule.subscription.id))
 
     return "404.html"
 

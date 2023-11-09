@@ -1,4 +1,3 @@
-
 from django.db import models
 
 from users.models import User
@@ -39,4 +38,3 @@ class Schedule(models.Model):
     end_time = models.TimeField()
 
     done = models.BooleanField(default=False)
-

@@ -113,4 +113,3 @@ class ReportFormUser(ReportForm):
         super(ReportFormUser, self).__init__(**kwargs)
         if user:
             self.fields["subscription"].queryset = Subscription.objects.filter(subject__teacher=user)
-

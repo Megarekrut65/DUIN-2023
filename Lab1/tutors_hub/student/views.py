@@ -31,8 +31,8 @@ def account_schedule(request, date=None):
     days = get_week_days(date)
     days = [{"name": day.strftime("%A"), "date": day.strftime(date_format), "selected": (date == day)} for day in days]
 
-    schedules = Schedule.objects\
-        .filter(date=date.date(), subscription__student=request.user)\
+    schedules = Schedule.objects \
+        .filter(date=date.date(), subscription__student=request.user) \
         .order_by("start_time")
 
     return render(request, "student/schedule_tab.html",

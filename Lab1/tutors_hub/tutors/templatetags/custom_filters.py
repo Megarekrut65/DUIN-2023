@@ -15,4 +15,3 @@ def truncate(value, length=20):
 @register.filter
 def time_range(start, end):
     return get_time_range(start, end)
-

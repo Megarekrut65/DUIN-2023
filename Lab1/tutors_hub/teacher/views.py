@@ -95,8 +95,8 @@ def account_schedule(request, date=None):
     days = get_week_days(date)
     days = [{"name": day.strftime("%A"), "date": day.strftime(date_format), "selected": (date == day)} for day in days]
 
-    schedules = Schedule.objects\
-        .filter(date=date.date(), subscription__subject__teacher=request.user)\
+    schedules = Schedule.objects \
+        .filter(date=date.date(), subscription__subject__teacher=request.user) \
         .order_by("start_time")
 
     return render(request, "teacher/schedule_tab.html",
@@ -164,7 +164,7 @@ def get_report_doc(report):
     end = report.end_lesson
 
     lessons = Schedule.objects.filter(subscription=report.subscription)
-    lessons = lessons[start:end+1]
+    lessons = lessons[start:end + 1]
 
     begin = 1 if report.start_from_one else start
 
@@ -216,4 +216,3 @@ def create_report(request):
         form = ReportFormUser(request.user, instance=report)
 
     return render(request, "teacher/report.html", {"form": form})
-

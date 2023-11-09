@@ -21,4 +21,3 @@ def privacy(request):
 
 def index(request):
     return render(request, "templates/index.html")
-

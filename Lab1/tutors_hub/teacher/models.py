@@ -17,4 +17,3 @@ class Report(models.Model):
 
     lesson_prefix = models.CharField(max_length=100, default="Lesson #")
     lesson_suffix = models.CharField(max_length=100, default=".")
-
