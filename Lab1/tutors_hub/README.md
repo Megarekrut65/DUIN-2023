@@ -9,3 +9,6 @@ This project is using for searching tutors to learn sime subject. Includes teach
 3. [CherryPy](https://cherrypy.dev/) - For serving django project on https
 4. [Bootstrap](https://getbootstrap.com/) - Css styles and html templates
 
+## Instructions
+
+Run command ```python serve.py``` to run server
