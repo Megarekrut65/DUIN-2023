@@ -15,6 +15,9 @@ class Subject(models.Model):
     published = models.DateTimeField("date published")
     visible = models.BooleanField(default=True)
 
+    def __str__(self):
+        return f"{self.title} - {self.teacher.fullname}"
+
 
 class Subscription(models.Model):
     student = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
@@ -38,3 +41,6 @@ class Schedule(models.Model):
     end_time = models.TimeField()
 
     done = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.date}, {self.start_time}. {self.subscription.subject.title} - {self.subscription.student.fullname}"

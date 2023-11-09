@@ -20,3 +20,6 @@ class Report(models.Model):
 
     lesson_prefix = models.CharField(max_length=100, default="Lesson #")
     lesson_suffix = models.CharField(max_length=100, default=".")
+
+    def __str__(self):
+        return f"Report of {self.teacher.email}"
