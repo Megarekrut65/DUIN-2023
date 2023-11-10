@@ -32,7 +32,7 @@ def get_active(request, subject):
         Returns true if user have active subscription to this subject
     """
     active = False
-    if request.user:
+    if request.user and hasattr(request.user, "role") and request.user.role == User.Types.Student:
         subscriptions = Subscription.objects.filter(subject=subject, student=request.user, active=True)
 
         active = len(subscriptions) > 0
@@ -44,7 +44,7 @@ def subject_view(request, subject_id):
     subject = get_object_or_404(Subject, pk=subject_id)
     if subject:
         active = get_active(request, subject)
-        available = request.user and request.user.role == User.Types.Student
+        available = request.user and hasattr(request.user, "role") and request.user.role == User.Types.Student
 
         return render(request, "tutors/subject.html", {"subject": subject, "active": active, "available": available})
 
