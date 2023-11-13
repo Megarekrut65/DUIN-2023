@@ -5,7 +5,7 @@
 
 {% block teacher_content %}
     <h1>Report tool</h1>
-    <p>Use $student and $subject to put student fullname and subject title from selected subscription to header or footer</p>
+    <p>Use $student, $subject, $number, $time and $date to put student fullname and subject title from selected subscription to header, footer or lessons title <a href="/report-details/" class="btn-link">Read more</a></p>
     <div>
         <form method="post" class="p-4 m-4" target="_blank">
         {% csrf_token %}

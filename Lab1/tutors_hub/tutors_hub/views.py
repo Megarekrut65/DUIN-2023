@@ -21,3 +21,7 @@ def privacy(request):
 
 def index(request):
     return render(request, "templates/index.html")
+
+
+def report_details(request):
+    return render(request, "templates/report_details.html")

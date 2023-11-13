@@ -1,0 +1,48 @@
+{% extends "templates/base_generic.html" %}
+
+{% block title %}
+    Privacy | Tutors tool
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid" style="margin-top: 70px;">
+    <div class="row m-4">
+        <div class="col-12">
+            <h1>Report creating</h1>
+
+            <p>You can use next words to insert information of selected subscription: <b>$student, $subject, $time, $date, $number</b></p>
+            <ul>
+                <li>
+                    $student - paste in this place fullname of student from subscription.
+                    If student 'Ivan Ivanov' is in subscription, then instead of <b>$student</b> in generated report will
+                    be <b>Ivan Ivanov</b> in same place.
+                </li>
+                <li>
+                    $subject - paste in this place title of subject from subscription.
+                    If subject 'Data analysis' is in subscription, then instead of <b>$subject</b> in generated report will
+                    be <b>Data analysis</b> in same place.
+                </li>
+                <li>
+                    $time - paste in this place time range(start and end time) of each lesson.
+                </li>
+                <li>
+                    $date - paste in this place date of each lesson.
+                </li>
+                <li>
+                    $number - paste in this place number of each lesson.
+                </li>
+                <li>
+                    If there are 3 lessons in subscription, then instead of <b>$number, $time and $date</b> in generated report will
+                    be three rows like:
+                    <b>
+                    <p>1, 09:00-10:00 and 2023-01-01</p>
+                    <p>2, 19:00-20:00 and 2023-01-06</p>
+                    <p>3, 12:00-13:00 and 2023-01-09</p>
+                    </b>
+                </li>
+            </ul>
+        </div>
+    </div>
+    </div>
+
+{% endblock %}

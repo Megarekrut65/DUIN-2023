@@ -101,3 +101,4 @@ def subscription_view(request, subscription_id):
         return render(request, "tutors/subscription.html", {"subscription": subscription, "page_obj": page_obj})
 
     return "404.html"
+

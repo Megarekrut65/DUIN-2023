@@ -28,8 +28,8 @@ class SubjectForm(forms.ModelForm):
             instance.save()
         return instance
 
-    description = forms.CharField(widget=forms.Textarea(attrs={"rows": 4}))
-    work_schedule = forms.CharField(widget=forms.Textarea(attrs={"rows": 4}))
+    description = forms.CharField(widget=forms.Textarea(attrs={"rows": 4, "maxlength": 5000}))
+    work_schedule = forms.CharField(widget=forms.Textarea(attrs={"rows": 4, "maxlength": 1000}))
 
     lesson_price = forms.IntegerField(
         validators=[MinValueValidator(0)]
@@ -38,6 +38,7 @@ class SubjectForm(forms.ModelForm):
     lesson_duration = forms.IntegerField(
         validators=[MinValueValidator(0)]
     )
+    visible = forms.BooleanField(label="Visible for search")
 
     def clean_description(self):
         return self.cleaned_data.get("description").strip()
@@ -127,8 +128,8 @@ class ReportForm(forms.ModelForm):
         fields = "__all__"
         exclude = ["teacher"]
 
-    header = forms.CharField(widget=forms.Textarea(), required=False)
-    footer = forms.CharField(widget=forms.Textarea(), required=False)
+    header = forms.CharField(widget=forms.Textarea(attrs={"rows": 4, "maxlength": 200}), required=False)
+    footer = forms.CharField(widget=forms.Textarea(attrs={"rows": 4, "maxlength": 200}), required=False)
 
 
 class ReportFormUser(ReportForm):

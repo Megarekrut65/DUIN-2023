@@ -2,16 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="746adc9d-b280-400e-a733-ce15fd23ecf6" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/0b1b8052-bd4a-40b3-bd31-0acb848e19b2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/0b1b8052-bd4a-40b3-bd31-0acb848e19b2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/teacher/migrations/0002_rename_start_from_one_report_start_from_number_one_and_more.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/report_details.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/tutors_tool.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/tutors_tool.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/student/templates/student/schedule_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/student/templates/student/schedule_tab.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/custom.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/custom.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/teacher/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teacher/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teacher/templates/teacher/report.html" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/templates/teacher/report.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/teacher/templates/teacher/schedule_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/templates/teacher/schedule_tab.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/teacher/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/teacher/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/base_generic.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base_generic.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tutors/templates/tutors/subscription.html" beforeDir="false" afterPath="$PROJECT_DIR$/tutors/templates/tutors/subscription.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tutors/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/tutors/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tutors_hub/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/tutors_hub/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tutors_hub/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/tutors_hub/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tutors_hub/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/tutors_hub/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,7 +83,7 @@
       <recent name="D:\repos\Megarekrut65\DUIN-2023\Lab1\tutors_hub\users\templates\users" />
     </key>
   </component>
-  <component name="RunManager" selected="Django Server.tutors_hub">
+  <component name="RunManager" selected="Python.serve">
     <configuration name="serve" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="tutors_tool" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -161,7 +167,7 @@
       <workItem from="1699612287776" duration="3044000" />
       <workItem from="1699708840795" duration="10000" />
       <workItem from="1699709892102" duration="2551000" />
-      <workItem from="1699857851017" duration="1839000" />
+      <workItem from="1699857851017" duration="7254000" />
     </task>
     <servers />
   </component>
@@ -186,6 +192,6 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/tutors_hub$serve.coverage" NAME="serve Coverage Results" MODIFIED="1699605723253" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/tutors_hub$serve.coverage" NAME="serve Coverage Results" MODIFIED="1699865682528" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

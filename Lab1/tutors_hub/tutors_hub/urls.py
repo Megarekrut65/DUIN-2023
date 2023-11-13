@@ -29,6 +29,7 @@ urlpatterns = [
     path("teacher/", include("teacher.urls")),
     path("student/", include("student.urls")),
     path("privacy/", views.privacy),
+    path("report-details/", views.report_details),
     path('admin/', admin.site.urls)
 ]
 urlpatterns += [
