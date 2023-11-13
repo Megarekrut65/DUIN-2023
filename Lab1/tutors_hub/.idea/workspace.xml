@@ -2,9 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="746adc9d-b280-400e-a733-ce15fd23ecf6" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/0b1b8052-bd4a-40b3-bd31-0acb848e19b2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/0b1b8052-bd4a-40b3-bd31-0acb848e19b2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/student/templates/student/schedule_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/student/templates/student/schedule_tab.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teacher/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teacher/templates/teacher/schedule_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/templates/teacher/schedule_tab.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teacher/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teacher/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base_generic.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base_generic.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tutors/templates/tutors/subscription.html" beforeDir="false" afterPath="$PROJECT_DIR$/tutors/templates/tutors/subscription.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tutors/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/tutors/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tutors_hub/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/tutors_hub/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,8 +52,8 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/repos/Megarekrut65/DUIN-2023/Lab1/tutors_hub/teacher/templates/teacher&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
+    &quot;last_opened_file_path&quot;: &quot;D:/repos/Megarekrut65/DUIN-2023/Lab1/tutors_hub&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode.Less&quot;
   },
   &quot;keyToStringList&quot;: {
     &quot;DatabaseDriversLRU&quot;: [
@@ -151,6 +158,10 @@
       <workItem from="1699529572571" duration="13331000" />
       <workItem from="1699555312821" duration="2628000" />
       <workItem from="1699604399635" duration="2914000" />
+      <workItem from="1699612287776" duration="3044000" />
+      <workItem from="1699708840795" duration="10000" />
+      <workItem from="1699709892102" duration="2551000" />
+      <workItem from="1699857851017" duration="1839000" />
     </task>
     <servers />
   </component>

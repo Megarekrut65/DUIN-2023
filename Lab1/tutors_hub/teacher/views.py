@@ -117,6 +117,7 @@ def create_schedule(request, date=None):
         if form.is_valid():
             schedule = form.save()
         else:
+            request.method = "GET"
             return render(request, "teacher/schedule.html", {"form": form})
 
         date = schedule.date
@@ -163,6 +164,37 @@ def delete_schedule(request, schedule_id):
             return HttpResponseRedirect("/teacher/schedule")
 
     return "404.html"
+
+
+def complete_schedule(request, schedule_id, redirect_path, add_id=False):
+    """
+        Marks current lesson as completed
+    """
+    if request.POST:
+        schedule = get_object_or_404(Schedule, pk=schedule_id)
+
+        if schedule and schedule.subscription.subject.teacher == request.user:
+            schedule.done = True
+            schedule.save()
+            schedule.subscription.lesson_count += 1
+            schedule.subscription.save()
+
+        if add_id:
+            redirect_path += str(schedule.subscription.id)
+        return HttpResponseRedirect(redirect_path)
+
+    return "404.html"
+
+
+@teacher_required
+@login_required
+def complete_lesson(request, schedule_id, date=None):
+    try:
+        date = datetime.datetime.strptime(date, date_format)
+    except:
+        date = datetime.datetime.now()
+
+    return complete_schedule(request, schedule_id, "/teacher/schedule/" + date.strftime(date_format))
 
 
 def get_report_doc(report):

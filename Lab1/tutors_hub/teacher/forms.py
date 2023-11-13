@@ -12,6 +12,7 @@ class SubjectForm(forms.ModelForm):
     """
         Form for managing Subject
     """
+
     class Meta:
         model = Subject
         fields = "__all__"
@@ -52,10 +53,11 @@ class ScheduleForm(forms.ModelForm):
     """
         Form for managing Schedule
     """
+
     class Meta:
         model = Schedule
         fields = "__all__"
-        exclude = ["time_range"]
+        exclude = ["time_range", "done"]
 
     def save(self, commit=True):
         instance = super(ScheduleForm, self).save(commit=False)
@@ -69,11 +71,18 @@ class ScheduleForm(forms.ModelForm):
 
     subscription = forms.Select()
     date = forms.DateField(widget=forms.DateInput(format="%Y-%m-%d",
-                                                  attrs={"placeholder": "2023-01-01", "value": "2023-01-01"}))
+                                                  attrs={"placeholder": "2023-01-01", "value": "2023-01-01",
+                                                         "type": "date"}))
     start_time = forms.TimeField(widget=forms.TimeInput(format="%H:%M",
-                                                        attrs={"placeholder": "00:00", "value": "09:00"}))
+                                                        attrs={"placeholder": "00:00", "value": "09:00",
+                                                               "pattern": "^(0?[0-9]|1[0-9]|2[0-3]):(0?[0-9]|[1-5]"
+                                                                          "[0-9])$",
+                                                               "maxlength": 5}))
     end_time = forms.TimeField(widget=forms.TimeInput(format="%H:%M",
-                                                      attrs={"placeholder": "00:00", "value": "21:00"}))
+                                                      attrs={"placeholder": "00:00", "value": "21:00",
+                                                             "pattern": "^(0?[0-9]|1[0-9]|2[0-3]):(0?[0-9]|[1-5]"
+                                                                        "[0-9])$",
+                                                             "maxlength": 5}))
 
     def clean(self):
         cleaned_data = super().clean()
@@ -101,6 +110,7 @@ class ScheduleFormUser(ScheduleForm):
     """
         Adds to subscription only active subscription of current teacher
     """
+
     def __init__(self, user=None, **kwargs):
         super(ScheduleForm, self).__init__(**kwargs)
         if user:
@@ -111,6 +121,7 @@ class ReportForm(forms.ModelForm):
     """
         Form for managing Report
     """
+
     class Meta:
         model = Report
         fields = "__all__"
@@ -124,6 +135,7 @@ class ReportFormUser(ReportForm):
     """
         Adds to subscription only subscription of current teacher
     """
+
     def __init__(self, user=None, **kwargs):
         super(ReportFormUser, self).__init__(**kwargs)
         if user:

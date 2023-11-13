@@ -50,6 +50,7 @@
                     <th scope="col">Student</th>
                     <th></th>
                     <th></th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -68,14 +69,26 @@
                                     {% csrf_token %}
                                 </form>
                                 <button class="btn-link" type="button"
-                                        onclick="openModal('Do you really want to remove schedule\n {{ schedule.date }} {{ schedule.start_time|time_range:schedule.end_time }}?',
+                                        onclick="openModal('Do you really want to remove schedule\n {{ schedule.date }} {{ schedule.start_time|time_range:schedule.end_time }}\n{{ schedule.subscription.subject.title }} in {{ schedule.subscription.student.fullname }}?',
                                                 'remove-form-{{ schedule.id }}')">
                                     <i class="ti ti-x"></i>
                                 </button>
                             </td>
+                            <td>
+                                <form id="complete-form-{{ schedule.id }}" method="POST"
+                                      action="/teacher/schedule/{{ schedule.id }}/{{ current }}/complete">
+                                    {% csrf_token %}
+                                </form>
+                                <button class="btn-link" type="button"
+                                        onclick="openModal('Do you really want to complete\n {{ schedule.date }} {{ schedule.start_time|time_range:schedule.end_time }}\n{{ schedule.subscription.subject.title }} in {{ schedule.subscription.student.fullname }}?',
+                                                'complete-form-{{ schedule.id }}')">
+                                    Complete
+                                </button>
+                            </td>
                         {% else %}
                             <td></td>
-                            <th></th>
+                            <td></td>
+                            <td></td>
                         {% endif %}
                     </tr>
                 {% endfor %}
@@ -86,7 +99,7 @@
             <div class="card text-white bg-secondary my-5 py-4 text-center">
                 <div class="card-body">
                     <p class="text-white m-0">
-                        There no lessons today!
+                        There no lessons this day!
                     </p>
                 </div>
             </div>

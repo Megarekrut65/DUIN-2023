@@ -77,7 +77,7 @@
                                                     {% csrf_token %}
                                                 </form>
                                                 <button class="btn btn-success" type="button"
-                                                        onclick="openModal('Do you really want to complete {{ schedule.date }}, {{ schedule.start_time|time_range:schedule.end_time }}?',
+                                                        onclick="openModal('Do you really want to complete\n {{ schedule.date }} {{ schedule.start_time|time_range:schedule.end_time }}\n{{ schedule.subscription.subject.title }} in {{ schedule.subscription.student.fullname }}?',
                                                                 'complete-form-{{ schedule.id }}')">
                                                     Complete
                                                 </button>

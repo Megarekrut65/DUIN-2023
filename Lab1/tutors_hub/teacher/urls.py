@@ -8,6 +8,7 @@ urlpatterns = [
     path("schedule/<int:schedule_id>/delete", views.delete_schedule, name="delete_schedule"),
     path("schedule/create/", views.create_schedule, name="create_schedule"),
     path("schedule/create/<str:date>/", views.create_schedule, name="create_schedule"),
+    path("schedule/<int:schedule_id>/<str:date>/complete", views.complete_lesson, name="complete_lesson"),
 
     path("schedule/", views.account_schedule, name="teacher"),
     path("schedule/<str:date>/", views.account_schedule, name="schedule"),

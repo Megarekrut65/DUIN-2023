@@ -7,6 +7,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
 
+from teacher.views import complete_schedule
 from tutors_hub.decorators import student_required, teacher_required
 from users.models import User
 from .models import Subject, Subscription, Schedule
@@ -83,21 +84,7 @@ def unsubscribe_on_subject(request, subscription_id):
 @teacher_required
 @login_required
 def complete_lesson(request, schedule_id):
-    """
-        Marks current lesson as completed
-    """
-    if request.POST:
-        schedule = get_object_or_404(Schedule, pk=schedule_id)
-
-        if schedule and schedule.subscription.subject.teacher == request.user:
-            schedule.done = True
-            schedule.save()
-            schedule.subscription.lesson_count += 1
-            schedule.subscription.save()
-
-        return HttpResponseRedirect("/subscription/" + str(schedule.subscription.id))
-
-    return "404.html"
+    return complete_schedule(request, schedule_id, "/subscription/", add_id=True)
 
 
 @login_required
