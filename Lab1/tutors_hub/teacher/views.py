@@ -44,7 +44,7 @@ def delete_subject(request, subject_id):
             subject.delete()
             return HttpResponseRedirect("/teacher/subjects")
 
-    return "404.html"
+    return HttpResponseRedirect("404.html")
 
 
 @teacher_required
@@ -52,7 +52,7 @@ def delete_subject(request, subject_id):
 def change_subject(request, subject_id):
     subject = get_object_or_404(Subject, pk=subject_id)
     if not subject or subject.teacher != request.user:
-        return "404.html"
+        return HttpResponseRedirect("404.html")
 
     if request.method == "POST":
         form = SubjectForm(request.POST, instance=subject)
@@ -139,7 +139,7 @@ def change_schedule(request, schedule_id):
     schedule = get_object_or_404(Schedule, pk=schedule_id)
 
     if not schedule or schedule.subscription.subject.teacher != request.user:
-        return "404.html"
+        return HttpResponseRedirect("404.html")
 
     if request.method == "POST":
         form = ScheduleForm(request.POST, instance=schedule)
@@ -147,6 +147,7 @@ def change_schedule(request, schedule_id):
         if form.is_valid():
             schedule = form.save()
             return HttpResponseRedirect("/teacher/schedule/" + schedule.date.strftime(date_format))
+
         return render(request, "teacher/schedule.html", {"form": form})
     else:
         form = ScheduleFormUser(user=request.user, instance=schedule)
@@ -163,7 +164,7 @@ def delete_schedule(request, schedule_id):
             schedule.delete()
             return HttpResponseRedirect("/teacher/schedule")
 
-    return "404.html"
+    return HttpResponseRedirect("404.html")
 
 
 def complete_schedule(request, schedule_id, redirect_path, add_id=False):
@@ -183,7 +184,7 @@ def complete_schedule(request, schedule_id, redirect_path, add_id=False):
             redirect_path += str(schedule.subscription.id)
         return HttpResponseRedirect(redirect_path)
 
-    return "404.html"
+    return HttpResponseRedirect("404.html")
 
 
 @teacher_required
@@ -210,7 +211,7 @@ def get_report_doc(report):
     lessons = Schedule.objects.filter(subscription=report.subscription)
     lessons = lessons[start-1:end]
 
-    begin = 1 if report.start_from_one else start
+    begin = 1 if report.start_from_number_one else start
 
     lessons = [{"number": begin + i,
                 "date": lesson.date.strftime(date_format),
@@ -223,6 +224,14 @@ def get_report_doc(report):
     report.header = report.header.replace("$student", student_name).replace("$subject", subject_name)
     report.footer = report.footer.replace("$student", student_name).replace("$subject", subject_name)
 
+    lessons = [report.lesson_title
+               .replace("$student", student_name)
+               .replace("$subject", subject_name)
+               .replace("$number", str(lesson["number"]))
+               .replace("$time", lesson["time_range"])
+               .replace("$date", lesson["date"])
+               for lesson in lessons]
+
     return {"report": report, "lessons": lessons}
 
 
@@ -233,7 +242,7 @@ def report_doc(request, report_id):
     if report and report.teacher == request.user:
         return render(request, "teacher/report_doc.html", get_report_doc(report))
 
-    return "404.html"
+    return HttpResponseRedirect("404.html")
 
 
 @teacher_required
