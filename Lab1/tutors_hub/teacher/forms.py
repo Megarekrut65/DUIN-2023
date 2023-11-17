@@ -31,14 +31,10 @@ class SubjectForm(forms.ModelForm):
     description = forms.CharField(widget=forms.Textarea(attrs={"rows": 4, "maxlength": 5000}))
     work_schedule = forms.CharField(widget=forms.Textarea(attrs={"rows": 4, "maxlength": 1000}))
 
-    lesson_price = forms.IntegerField(
-        validators=[MinValueValidator(0)]
-    )
+    lesson_price = forms.IntegerField(widget=forms.NumberInput(attrs={"min": 0}))
 
-    lesson_duration = forms.IntegerField(
-        validators=[MinValueValidator(0)]
-    )
-    visible = forms.BooleanField(label="Visible for search")
+    lesson_duration = forms.IntegerField(widget=forms.NumberInput(attrs={"min": 0}))
+    visible = forms.BooleanField(label="Visible for search", required=False)
 
     def clean_description(self):
         return self.cleaned_data.get("description").strip()
