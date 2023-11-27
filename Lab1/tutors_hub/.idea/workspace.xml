@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="746adc9d-b280-400e-a733-ce15fd23ecf6" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/teacher/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tutors/templates/tutors/subscription.html" beforeDir="false" afterPath="$PROJECT_DIR$/tutors/templates/tutors/subscription.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tutors_hub/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/tutors_hub/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,7 +43,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/repos/Megarekrut65/DUIN-2023/Lab1/tutors_hub&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/repos/Megarekrut65/LAKEWOODS-MARKETING-PARTNERS-INC/SharpTrader/SharpTraderServer&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode.Less&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -161,6 +157,8 @@
       <workItem from="1700076026739" duration="961000" />
       <workItem from="1700077505849" duration="117000" />
       <workItem from="1700209986784" duration="1454000" />
+      <workItem from="1700315413523" duration="14000" />
+      <workItem from="1700833881299" duration="111000" />
     </task>
     <servers />
   </component>
