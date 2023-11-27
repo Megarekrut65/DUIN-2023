@@ -17,12 +17,20 @@ namespace UniVerify.Controllers
         private readonly ILogger<UserController> _logger;
         private readonly IUserService _userService;
 
+        private readonly string _jwtKey;
+        private readonly SymmetricSecurityKey _key;
+        private readonly SigningCredentials _creds;
+
         public UserController(ILogger<UserController> logger, IUserService userService, 
             IConfiguration configuration)
         {
             _logger = logger;
             _userService = userService;
             _configuration = configuration;
+
+            _jwtKey = _configuration["Jwt:Key"];
+            _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtKey));
+            _creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha256);
         }
 
         [HttpPost("Login")]
@@ -71,7 +79,7 @@ namespace UniVerify.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(new { Error = ex.Message });
             }
 
             return Login(new UserModelAuth { Username=model.Username, Password=model.Password});
@@ -79,15 +87,13 @@ namespace UniVerify.Controllers
 
         private string GenerateJwtToken(string username)
         {
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
             var claims = new List<Claim> { new Claim(ClaimTypes.Name, username) };
 
             var token = new JwtSecurityToken(
                 issuer: _configuration["Jwt:Issuer"],
                 audience: _configuration["Jwt:Audience"],
-                expires: DateTime.Now.AddHours(1),
-                signingCredentials: creds,
+                expires: DateTime.Now.AddMonths(1),
+                signingCredentials: _creds,
                 claims: claims
             );
 
