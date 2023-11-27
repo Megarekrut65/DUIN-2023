@@ -34,8 +34,8 @@ namespace UniVerify.Models
             Content = content;
             Owner = owner;
 
-            LastUpdate = DateTime.Now;
-            Created = DateTime.Now;
+            LastUpdate = DateTime.UtcNow;
+            Created = DateTime.UtcNow;
             LastSimilarity = 100;
         }
     }

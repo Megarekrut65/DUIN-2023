@@ -1,4 +1,5 @@
-﻿using UniVerify.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using UniVerify.Models;
 
 namespace UniVerify.Services
 {
@@ -20,12 +21,15 @@ namespace UniVerify.Services
 
         public IEnumerable<Text> GetList(User user)
         {
-            return _dbContext.Texts?.Where(text => text.Owner.Equals(user)).ToList() ?? new List<Text>();
+            return _dbContext.Texts?.Where(text => text.Owner.Equals(user))
+                .Include(text => text.Owner)
+                .ToList() ?? new List<Text>();
         }
 
         public Text? GetText(Guid id)
         {
-            return _dbContext.Texts?.FirstOrDefault(text => text.Id.Equals(id));
+            return _dbContext.Texts?.Where(text => text.Id.Equals(id))
+                .Include(text=>text.Owner).FirstOrDefault();
         }
 
         public void RemoveText(Guid id, User user)
@@ -50,7 +54,7 @@ namespace UniVerify.Services
 
             text.Title = model.Title;
             text.Content = model.Content;
-            text.LastUpdate = DateTime.Now;
+            text.LastUpdate = DateTime.UtcNow;
 
             try
             {
