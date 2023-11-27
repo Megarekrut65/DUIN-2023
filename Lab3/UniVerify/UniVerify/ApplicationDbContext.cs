@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using UniVerify.Models;
 
 public class ApplicationDbContext : DbContext
 {
@@ -7,7 +8,7 @@ public class ApplicationDbContext : DbContext
         base(options)
     { }
 
-    public DbSet<IdentityUser>? Users { get; set; }
+    public DbSet<User>? Users { get; set; }
 
 
 }
