@@ -31,7 +31,7 @@ namespace UniVerify.Controllers
             }
 
             User user = _userService.GetUser(User.Identity!.Name!)!;
-            Text text = new Text(model.Title, model.Content, user);
+            Text text = new Text(model.Title, model.Content, model.PrivateContent, user);
 
             _textService.AddText(text, user);
 
@@ -52,7 +52,19 @@ namespace UniVerify.Controllers
                 return BadRequest(new { Error = "Incorrect id!" });
             }
 
-            Text? text = _textService.GetText(guid);
+            User user = _userService.GetUser(User.Identity!.Name!)!;
+
+            Text? text;
+
+            try
+            {
+                text = _textService.GetText(guid, user);   
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { Error = ex.Message });
+            }
+
             if (text == null)
             {
                 return BadRequest(new { Error = "Text not found!" });
@@ -133,8 +145,15 @@ namespace UniVerify.Controllers
 
         private object ConvertText(Text text)
         {
-            return new { Id = text.Id, Title = text.Title, Content = text.Content, LastUpdate = text.LastUpdate, 
-                Created=text.Created, LastSimilarity = text.LastSimilarity, Owner=text.Owner.Username};
+            return new { Id = text.Id, 
+                
+                Title = text.Title, 
+                Content = text.Content, 
+                PrivateContent = text.PrivateContent,
+                LastUpdate = text.LastUpdate, 
+                Created=text.Created, 
+                LastSimilarity = text.LastSimilarity, 
+                Owner=text.Owner.Username};
         }
     }
 }

@@ -11,5 +11,10 @@ namespace UniVerify.Models
         [Required]
         [MaxLength(100)]
         public string Title { get; set; }
+
+        /// <summary>
+        /// If true - don't allow to verify text by other users
+        /// </summary>
+        public bool PrivateContent { get; set; }
     }
 }

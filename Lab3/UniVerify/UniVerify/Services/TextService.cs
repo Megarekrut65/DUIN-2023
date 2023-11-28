@@ -26,15 +26,23 @@ namespace UniVerify.Services
                 .ToList() ?? new List<Text>();
         }
 
-        public Text? GetText(Guid id)
+        public Text? GetText(Guid id, User user)
         {
-            return _dbContext.Texts?.Where(text => text.Id.Equals(id))
+            Text? text = _dbContext.Texts?
+                .Where(text => text.Id.Equals(id))
                 .Include(text=>text.Owner).FirstOrDefault();
+
+            if (text != null && text.PrivateContent && !text.Owner.Equals(user))
+            {
+                throw new Exception("You don't have access to this text!");
+            }
+
+            return text;
         }
 
         public void RemoveText(Guid id, User user)
         {
-            Text? text = GetText(id);
+            Text? text = GetText(id, user);
             if (text == null) throw new Exception("Text not found");
             if (text.Owner != user) throw new Exception("You don't have access to this text!");
 
@@ -48,12 +56,13 @@ namespace UniVerify.Services
 
         public void UpdateText(Guid id, TextModel model, User user)
         {
-            Text? text = GetText(id);
+            Text? text = GetText(id, user);
             if (text == null) throw new Exception("Text not found");
             if (text.Owner != user) throw new Exception("You don't have access to this text!");
 
             text.Title = model.Title;
             text.Content = model.Content;
+            text.PrivateContent = model.PrivateContent;
             text.LastUpdate = DateTime.UtcNow;
 
             try

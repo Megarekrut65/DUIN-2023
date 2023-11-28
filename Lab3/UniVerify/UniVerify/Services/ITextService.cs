@@ -8,7 +8,7 @@ namespace UniVerify.Services
         void RemoveText(Guid id, User user);
         void UpdateText(Guid id, TextModel model, User user);
 
-        Text? GetText(Guid id);
+        Text? GetText(Guid id, User user);
 
         IEnumerable<Text> GetList(User user);
     }

@@ -23,15 +23,19 @@ namespace UniVerify.Models
         public float LastSimilarity { get; set; }
 
         [Required]
+        public bool PrivateContent { get; set; }
+
+        [Required]
         public User Owner { get; set; }
 
         public Text() { }
 
-        public Text(string title, string content, User owner)
+        public Text(string title, string content, bool privateContent, User owner)
         {
             Id = Guid.NewGuid();
             Title = title;
             Content = content;
+            PrivateContent = privateContent;
             Owner = owner;
 
             LastUpdate = DateTime.UtcNow;
