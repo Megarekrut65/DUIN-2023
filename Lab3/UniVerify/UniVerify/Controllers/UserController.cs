@@ -63,14 +63,9 @@ namespace UniVerify.Controllers
                 return BadRequest(ModelState);
             }
 
-            if(!_userService.IsUserUnique(model.Username))
+            if(!_userService.IsUserUnique(model.Username) || !_userService.IsEmailUnique(model.Email))
             {
-                return BadRequest(new {Error="User with this name already exists!"});
-            }
-
-            if (!_userService.IsEmailUnique(model.Email))
-            {
-                return BadRequest(new { Error = "User with this email already exists!" });
+                return BadRequest(new {Error="User with these username or email already exists!"});
             }
 
             try

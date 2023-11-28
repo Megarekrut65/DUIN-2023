@@ -5,16 +5,16 @@
 namespace UniVerify.Migrations
 {
     /// <inheritdoc />
-    public partial class Init4 : Migration
+    public partial class Update1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
-                name: "Title",
+                name: "Content",
                 table: "Texts",
-                type: "character varying(100)",
-                maxLength: 100,
+                type: "character varying(10000)",
+                maxLength: 10000,
                 nullable: false,
                 defaultValue: "");
         }
@@ -23,7 +23,7 @@ namespace UniVerify.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "Title",
+                name: "Content",
                 table: "Texts");
         }
     }

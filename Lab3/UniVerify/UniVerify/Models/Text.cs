@@ -7,8 +7,8 @@ namespace UniVerify.Models
         public Guid Id { get; set; }
 
         [Required]
-        [StringLength(maximumLength:10000, MinimumLength = 200)]
-        public string Content;
+        [StringLength(maximumLength:10000)]
+        public string Content { get; set; }
 
         [Required]
         [MaxLength(100)]

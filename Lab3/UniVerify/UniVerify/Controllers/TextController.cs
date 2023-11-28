@@ -133,7 +133,7 @@ namespace UniVerify.Controllers
 
         private object ConvertText(Text text)
         {
-            return new { Id = text.Id, Content = text.Content, LastUpdate = text.LastUpdate, 
+            return new { Id = text.Id, Title = text.Title, Content = text.Content, LastUpdate = text.LastUpdate, 
                 Created=text.Created, LastSimilarity = text.LastSimilarity, Owner=text.Owner.Username};
         }
     }

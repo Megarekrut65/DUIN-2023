@@ -27,6 +27,11 @@ namespace UniVerify.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasMaxLength(10000)
+                        .HasColumnType("character varying(10000)");
+
                     b.Property<DateTime>("Created")
                         .HasColumnType("timestamp with time zone");
 
