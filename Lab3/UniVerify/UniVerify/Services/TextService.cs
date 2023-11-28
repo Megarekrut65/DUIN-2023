@@ -54,6 +54,18 @@ namespace UniVerify.Services
             finally { _dbContext.SaveChanges(); }
         }
 
+        public void UpdateFull(Text text)
+        {
+            text.LastUpdate = DateTime.UtcNow;
+
+            try
+            {
+                _dbContext.Texts!.Update(text);
+            }
+            catch { throw; }
+            finally { _dbContext.SaveChanges(); }
+        }
+
         public void UpdateText(Guid id, TextModel model, User user)
         {
             Text? text = GetText(id, user);

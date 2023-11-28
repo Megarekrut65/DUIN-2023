@@ -20,7 +20,7 @@ namespace UniVerify.Models
         [Required]
         public DateTime Created { get; set; }
 
-        public float LastSimilarity { get; set; }
+        public double LastSimilarity { get; set; }
 
         [Required]
         public bool PrivateContent { get; set; }

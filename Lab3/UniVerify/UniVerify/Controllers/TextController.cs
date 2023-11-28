@@ -14,12 +14,16 @@ namespace UniVerify.Controllers
         private readonly ITextService _textService;
         private readonly IUserService _userService;
 
+        private readonly TextUtility _textUtility;
+
         public TextController(ILogger<TextController> logger, ITextService textService,
             IUserService userService)
         {
             _logger = logger;
             _textService = textService;
             _userService = userService;
+
+            _textUtility = new TextUtility(_textService, _userService);
         }
 
         [Authorize]
@@ -42,32 +46,15 @@ namespace UniVerify.Controllers
         [HttpGet("{id}")]
         public IActionResult GetText(string id)
         {
-            Guid guid;
-            try
-            {
-                guid = Guid.Parse(id);
-            }
-            catch
-            {
-                return BadRequest(new { Error = "Incorrect id!" });
-            }
-
-            User user = _userService.GetUser(User.Identity!.Name!)!;
-
-            Text? text;
+            Text text;
 
             try
             {
-                text = _textService.GetText(guid, user);   
+                text = _textUtility.GetText(id, User.Identity!.Name!);
             }
             catch (Exception ex)
             {
                 return BadRequest(new { Error = ex.Message });
-            }
-
-            if (text == null)
-            {
-                return BadRequest(new { Error = "Text not found!" });
             }
 
             return Ok(ConvertText(text));
