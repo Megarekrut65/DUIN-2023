@@ -71,7 +71,7 @@ namespace UniVerify
             return text.Split(new[] { '.', '!', '?', ';', '\n' },
             StringSplitOptions.RemoveEmptyEntries)
                 .Select(item => Regex.Replace(item, @"[^a-zA-Z0-9]", "").Trim())
-                .Where(item=>item.Length > 0)
+                .Where(item => item.Length > 0)
                 .ToList();
         }
         private static SimilarityResult FindMostSimilarSentence(string referenceSentence, List<string> sentences)
@@ -122,21 +122,24 @@ namespace UniVerify
             {
                 if ((currentCombinedString + str).Length >= 20)
                 {
-                    combinedList.Add(currentCombinedString);
-                    currentCombinedString = str;
+                    combinedList.Add(currentCombinedString + " " + str);
+                    currentCombinedString = "";
                 }
                 else
                 {
-                    currentCombinedString += str;
+                    currentCombinedString += " " + str;
                 }
             }
 
-            if (!string.IsNullOrEmpty(currentCombinedString))
+            if (currentCombinedString.Length > 0)
             {
                 combinedList.Add(currentCombinedString);
             }
 
-            return combinedList;
+            return combinedList
+                .Select(item=>item.Trim())
+                .Where(item => item.Length > 0)
+                .ToList();
         }
     }
 }
