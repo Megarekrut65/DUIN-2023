@@ -130,6 +130,16 @@ namespace UniVerify.Controllers
             return _textService.GetList(user).Select(ConvertText);
         }
 
+        [Authorize]
+        [HttpGet("HeaderOnly")]
+        public IEnumerable<object> GetHeaders()
+        {
+            User user = _userService.GetUser(User.Identity!.Name!)!;
+
+            return _textService.GetList(user)
+                .Select(item => new {Id=item.Id, Title=item.Title, Created=item.Created});
+        }
+
         private object ConvertText(Text text)
         {
             return new { Id = text.Id, 
