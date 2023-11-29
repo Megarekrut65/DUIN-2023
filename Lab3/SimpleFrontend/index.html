@@ -10,42 +10,7 @@
 
     <title>UniVerify - Demo</title>
 
-    <style>
-        .node {
-            display: flex;
-            justify-content: space-between;
-            flex-direction: row;
-        }
-
-        .texts {
-            max-height: 50vh;
-            overflow-y: auto;
-        }
-        .header{
-            display: flex;
-            justify-content: space-between;
-        }
-        .hide{
-            display: none;
-        }
-        #error, #error-box{
-            color: red;
-        }
-        .form-group{
-            display: flex;
-            justify-content: space-between;
-        }
-        .link-btn{
-            color:cornflowerblue;
-        }
-        .link-btn:hover{
-            color:rgb(147, 178, 236);
-            cursor: pointer;
-        }
-        #logout{
-            margin-left: 10px;
-        }
-    </style>
+    <link href="styles.css" type="text/css" rel="stylesheet">
 </head>
 
 <body>
@@ -94,7 +59,7 @@
                             <p class="link-btn" id="logout">Logout</p>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
@@ -107,7 +72,7 @@
             <div class="col-12">
                 <form id="text-form" onsubmit="return false;">
                     <div class="mb-3">
-                        <label for="id" class="form-label">Id*</label>
+                        <label for="id" class="form-label">Id</label>
                         <input type="text" class="form-control" id="id" readonly maxlength="100">
                     </div>
 
@@ -147,6 +112,30 @@
         </div>
     </div>
 
+    <div id="verify-modal">
+        <div id="verify-container" class="card">
+            <div class="card-body">
+                <div class="mt-3"><strong>Best Matched Sentences:</strong>
+                    <ul class="list-group" id="match-list">
+                        
+                    </ul>
+                </div>
+
+                <div class="mt-3"><strong>Unique Percent:</strong> <span id="unique"></span>%</div>
+                <div class="mt-3"><strong>Verify Date:</strong> <span id="date"></span></div>
+
+                <button class="btn btn-primary mt-3" id="ok-btn">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <template id="match-row">
+        <li class="list-group-item">
+            <div><strong>Target Text:</strong> <span id="target" class="text"></span></div>
+            <div><strong>Found Text:</strong> <span id="found" class="text"></span></div>
+            <div><strong>Local Similarity:</strong> <span id="similarity"></span>%</div>
+        </li>
+    </template>
     <template id="text-row">
         <div class="col-12">
             <div class="mt-1 card p-3 node">

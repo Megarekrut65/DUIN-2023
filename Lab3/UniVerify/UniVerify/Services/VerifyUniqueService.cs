@@ -44,7 +44,7 @@ namespace UniVerify.Services
             }
 
             maxResult.TextId = target.Id;
-            maxResult.UniquePercent = uniqueSum / texts.Count;
+            maxResult.UniquePercent = Math.Round(uniqueSum / texts.Count, 2);
             maxResult.VerifyDate = DateTime.UtcNow;
 
             return maxResult;

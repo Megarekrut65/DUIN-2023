@@ -104,3 +104,27 @@ export const editTextRequest = (id, body) =>{
 
     return sendAsync(`${SERVER_URL}text/${id}`, request);
 };
+
+export const removeTextRequest = (id) =>{
+    const request = {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${getToken()}`
+        }
+    };
+
+    return sendAsync(`${SERVER_URL}text/${id}`, request);
+};
+
+export const verifyTextRequest = (id) =>{
+    const request = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${getToken()}`
+        }
+    };
+
+    return sendAsync(`${SERVER_URL}verifyunique/full/${id}`, request);
+};

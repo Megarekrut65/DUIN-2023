@@ -1,4 +1,4 @@
-import { createTextRequest, editTextRequest, textRequest, textsListRequest } from "./requests.js";
+import { createTextRequest, editTextRequest, removeTextRequest, textRequest, textsListRequest, verifyTextRequest } from "./requests.js";
 import { getToken, parseError } from "./utilities.js";
 
 const template = document.getElementById("text-row");
@@ -15,7 +15,11 @@ const createTextRow = (data, append=true)=>{
     row.querySelector("#text-private").textContent = data.privateContent ?? "";
 
     row.querySelector("#edit").addEventListener("click", ()=>changeState("edit", data.id));
-    row.querySelector("#remove").addEventListener("click", ()=>changeState("remove", data.id));
+    row.querySelector("#remove").addEventListener("click", ()=>{
+        removeTextRequest(data.id).then(res=>{
+            window.location.reload();
+        }).catch(handleError);
+    });
 
     if(append) place.appendChild(row);
     else place.insertBefore(row, place.firstChild);
@@ -55,6 +59,8 @@ const changeState = (newState, id)=>{
 };
 
 const submitTextForm = ()=>{
+    error.textContent = "";
+
     const id = textFrom.querySelector('#id').value;
 
     const formData = {
@@ -66,7 +72,7 @@ const submitTextForm = ()=>{
     if(state === "add"){
         createTextRequest(formData).then(res=>{
             textRequest(res.id).then(res=>createTextRow(res, false)).catch(handleError);
-            changeState("add");
+            changeState("edit", res.id);
         }).catch(handleError);
         return false;
     }
@@ -76,11 +82,47 @@ const submitTextForm = ()=>{
             window.location.reload();
         }).catch(handleError);
         return false;
-    }
-    
+    }    
     
     return false;
-}
+};
+
+const verifyContainer = document.getElementById("verify-modal");
+const verifyBtn = document.getElementById("ok-btn");
+const verifyTemplate = document.getElementById("match-row");
+const matchList = document.getElementById("match-list");
+
+const loadVerify = (data)=>{
+    matchList.innerHTML = "";
+
+    for(let item of data.bestMatchedSentences){
+        const row = verifyTemplate.content.cloneNode(true);
+
+        row.querySelector('#target').textContent = item.targetText;
+        row.querySelector('#found').textContent = item.foundText;
+        row.querySelector('#similarity').textContent = item.localSimilarity;
+
+        matchList.appendChild(row);
+    }
+
+    verifyContainer.querySelector('#unique').textContent = data.uniquePercent;
+    verifyContainer.querySelector('#date').textContent = data.verifyDate;
+};
+
+const verifyText = ()=>{
+    if(state !== "edit") return;
+    const id = textFrom.querySelector('#id').value;
+
+    verifyTextRequest(id).then(data=>{
+        verifyContainer.style.display = "flex";
+        loadVerify(data);
+
+    }).catch(handleError);
+};
+
+const verifyClose = ()=>{
+    verifyContainer.style.display = "none";
+};
 
 window.addEventListener("load", ()=>{
     const token = getToken();
@@ -98,4 +140,8 @@ window.addEventListener("load", ()=>{
     });
 
     addBtn.addEventListener("click", ()=>changeState("add"));
+
+    verify.addEventListener("click", verifyText);
+
+    verifyBtn.addEventListener("click", verifyClose);
 });
