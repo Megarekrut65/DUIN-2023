@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using UniVerify.Models;
+using UniVerify.Models.Text;
 
 public class ApplicationDbContext : DbContext
 {

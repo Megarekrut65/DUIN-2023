@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace UniVerify.Models
+namespace UniVerify.Models.Text
 {
     public class TextModel
     {

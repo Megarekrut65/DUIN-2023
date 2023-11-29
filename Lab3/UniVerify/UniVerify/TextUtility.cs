@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using UniVerify.Controllers;
 using UniVerify.Models;
+using UniVerify.Models.Text;
 using UniVerify.Services;
 
 namespace UniVerify

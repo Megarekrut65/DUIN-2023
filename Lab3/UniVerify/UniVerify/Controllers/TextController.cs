@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using UniVerify.Models;
+using UniVerify.Models.Text;
 using UniVerify.Services;
 
 namespace UniVerify.Controllers
@@ -44,7 +45,7 @@ namespace UniVerify.Controllers
 
         [Authorize]
         [HttpGet("{id}")]
-        public IActionResult GetText(string id)
+        public ActionResult<TextResult> GetText(string id)
         {
             Text text;
 
@@ -57,7 +58,7 @@ namespace UniVerify.Controllers
                 return BadRequest(new { Error = ex.Message });
             }
 
-            return Ok(ConvertText(text));
+            return Ok(ToTextResult(text));
         }
 
         [Authorize]
@@ -90,7 +91,7 @@ namespace UniVerify.Controllers
 
         [Authorize]
         [HttpPut("{id}")]
-        public IActionResult UpdateText(string id, [FromBody][Required] TextModel model)
+        public ActionResult<TextResult> UpdateText(string id, [FromBody][Required] TextModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -123,34 +124,47 @@ namespace UniVerify.Controllers
 
         [Authorize]
         [HttpGet]
-        public IEnumerable<object> GetTexts()
+        public IEnumerable<TextResult> GetTexts()
         {
             User user = _userService.GetUser(User.Identity!.Name!)!;
             
-            return _textService.GetList(user).Select(ConvertText);
+            return _textService.GetList(user).Select(ToTextResult);
         }
 
         [Authorize]
         [HttpGet("HeaderOnly")]
-        public IEnumerable<object> GetHeaders()
+        public IEnumerable<TextHeader> GetHeaders()
         {
             User user = _userService.GetUser(User.Identity!.Name!)!;
 
             return _textService.GetList(user)
-                .Select(item => new {Id=item.Id, Title=item.Title, Created=item.Created});
+                .Select(ToTextHeader);
         }
 
-        private object ConvertText(Text text)
+        private TextResult ToTextResult(Text text)
         {
-            return new { Id = text.Id, 
-                
+  
+            return new TextResult{ 
+                Id = text.Id, 
                 Title = text.Title, 
                 Content = text.Content, 
                 PrivateContent = text.PrivateContent,
                 LastUpdate = text.LastUpdate, 
                 Created=text.Created, 
                 LastSimilarity = text.LastSimilarity, 
-                Owner=text.Owner.Username};
+                Owner=text.Owner.Username
+            };
+        }
+        private TextHeader ToTextHeader(Text text)
+        {
+
+            return new TextHeader
+            {
+                Id = text.Id,
+                Title = text.Title,
+                PrivateContent = text.PrivateContent,
+                Created = text.Created,
+            };
         }
     }
 }

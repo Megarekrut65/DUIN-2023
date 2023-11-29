@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using UniVerify.Models;
+using UniVerify.Models.Text;
 
 namespace UniVerify.Services
 {

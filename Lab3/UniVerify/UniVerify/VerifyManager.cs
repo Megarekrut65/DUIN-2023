@@ -2,6 +2,7 @@
 using System.Text.RegularExpressions;
 using UniVerify.Migrations;
 using UniVerify.Models;
+using UniVerify.Models.Text;
 
 namespace UniVerify
 {
@@ -38,10 +39,10 @@ namespace UniVerify
                 .OrderByDescending(match => match.LocalSimilarity).Take(MaxCount).ToArray();
 
 
-            VerifyResult result = new VerifyResult {BestMatchedSentences=sentences, 
-                UniquePercent=100-similarity};
-
-            return result;
+            return new VerifyResult {
+                BestMatchedSentences=sentences, 
+                UniquePercent=Math.Round(100-similarity, 2)
+            };
         }
         public static double VerifyShort(Text target, Text other)
         {
@@ -64,13 +65,13 @@ namespace UniVerify
             double similarity = sumSimilarity / sentences1.Count;
 
 
-            return 100 - similarity;
+            return Math.Round(100 - similarity, 2);
         }
         private static List<string> GetSentences(string text)
         {
             return text.Split(new[] { '.', '!', '?', ';', '\n' },
             StringSplitOptions.RemoveEmptyEntries)
-                .Select(item => Regex.Replace(item, @"[^a-zA-Z0-9]", "").Trim())
+                .Select(item => Regex.Replace(item, @"[^a-zA-Z0-9]", " ").Trim())
                 .Where(item => item.Length > 0)
                 .ToList();
         }
@@ -92,8 +93,11 @@ namespace UniVerify
 
             sentences.Remove(mostSimilarSentence);
 
-            return new SimilarityResult { TargetText= referenceSentence, FoundText=mostSimilarSentence, 
-                LocalSimilarity=maxSimilarity*100};
+            return new SimilarityResult { 
+                TargetText= referenceSentence, 
+                FoundText=mostSimilarSentence, 
+                LocalSimilarity=Math.Round(maxSimilarity*100, 2)
+            };
         }
 
         private static double GetCosineSimilarity(string text1, string text2)

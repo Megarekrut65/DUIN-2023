@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using UniVerify.Models;
+using UniVerify.Models.Text;
 using UniVerify.Services;
 
 namespace UniVerify.Controllers
@@ -25,7 +26,7 @@ namespace UniVerify.Controllers
         }
 
         [HttpGet("Full/{textId}")]
-        public IActionResult VerifyUniqueFull(string textId) {
+        public ActionResult<VerifyResult> VerifyUniqueFull(string textId) {
             Text text;
 
             try
@@ -53,7 +54,7 @@ namespace UniVerify.Controllers
         }
 
         [HttpGet("Short/{textId}")]
-        public IActionResult VerifyUniqueShort(string textId)
+        public ActionResult<VerifyResultShort> VerifyUniqueShort(string textId)
         {
             Text text;
 
@@ -79,7 +80,7 @@ namespace UniVerify.Controllers
                 return BadRequest(new { Error = ex.Message });
             }
 
-            return Ok(new {UniquePercent=result});
+            return Ok(new VerifyResultShort{UniquePercent=result});
         }
     }
 }
