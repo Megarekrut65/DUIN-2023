@@ -31,9 +31,25 @@ export const loginRequest = (username, password) =>{
         body: JSON.stringify(body)
     };
 
-    return sendAsync(`${SERVER_URL}User/Login`, request);
+    return sendAsync(`${SERVER_URL}user/login`, request);
 };
 
+export const registerRequest = (username, email, password) =>{
+    const body = {
+        username: username,
+        email : email,
+        password: password
+    };
+    const request = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(body)
+    };
+
+    return sendAsync(`${SERVER_URL}user/register`, request);
+};
 
 
 export const parseError = (err) => {

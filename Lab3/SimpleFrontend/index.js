@@ -1,4 +1,4 @@
-import {loginRequest, parseError} from "./requests.js"
+import {loginRequest, parseError, registerRequest} from "./requests.js"
 
 const getToken = ()=>localStorage.getItem("token");
 const getUsername = ()=>localStorage.getItem("username");
@@ -45,6 +45,10 @@ const loginBtn = ()=>{
 };
 
 
+const login = (username, password)=>{
+
+}
+
 const submitLogin = ()=>{
     const username = loginForm.querySelector("#username").value;
     const password = loginForm.querySelector("#password").value;
@@ -61,7 +65,18 @@ const submitLogin = ()=>{
 
 
 const submitRegister = ()=>{
+    const username = registerForm.querySelector("#username").value;
+    const email = registerForm.querySelector("#email").value;
+    const password = registerForm.querySelector("#password").value;
 
+    registerRequest(username, email, password).then((res) => {
+        setUserData({username:username, token:res.token});
+        window.location.reload();
+    }).catch((err) => {
+        registerForm.querySelector("#error").textContent = parseError(err);
+    });
+
+    return false;
 };
 
 window.addEventListener("load", ()=>{
@@ -69,6 +84,7 @@ window.addEventListener("load", ()=>{
     registerLink.addEventListener("click", registerBtn);
 
     loginForm.addEventListener("submit", submitLogin);
+    registerForm.addEventListener("submit", submitRegister);
 
     const token = getToken();
     if(!token || token === ""){
