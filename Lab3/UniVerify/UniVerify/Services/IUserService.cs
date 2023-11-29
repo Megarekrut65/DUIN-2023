@@ -8,7 +8,7 @@ namespace UniVerify.Services
         public bool IsUserUnique(string username);
         public bool IsEmailUnique(string email);
 
-        public void AddUser(UserModel model);
+        public void AddUser(UserRegisterInput model);
 
         public User? GetUser(string username);
     }

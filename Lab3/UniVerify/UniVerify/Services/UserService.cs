@@ -13,7 +13,7 @@ namespace UniVerify.Services
         }
 
 
-        public void AddUser(UserModel model)
+        public void AddUser(UserRegisterInput model)
         {
             User user = new User(model.Username, model.Email, model.Password);
 

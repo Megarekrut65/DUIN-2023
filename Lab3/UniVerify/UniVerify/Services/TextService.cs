@@ -67,7 +67,7 @@ namespace UniVerify.Services
             finally { _dbContext.SaveChanges(); }
         }
 
-        public void UpdateText(Guid id, TextModel model, User user)
+        public void UpdateText(Guid id, TextInput model, User user)
         {
             Text? text = GetText(id, user);
             if (text == null) throw new Exception("Text not found");

@@ -86,6 +86,9 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.UseStaticFiles();
+app.UseCors(builder => builder
+     .AllowAnyOrigin()
+     .AllowAnyMethod()
+     .AllowAnyHeader());
 
 app.Run();

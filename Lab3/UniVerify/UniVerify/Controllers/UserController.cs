@@ -34,7 +34,7 @@ namespace UniVerify.Controllers
         }
 
         [HttpPost("Login")]
-        public IActionResult Login([FromBody][Required] UserModelAuth model)
+        public IActionResult Login([FromBody][Required] UserLoginInput model)
         {
             if (!ModelState.IsValid)
             {
@@ -56,7 +56,7 @@ namespace UniVerify.Controllers
         }
 
         [HttpPost("Register")]
-        public IActionResult Register([FromBody][Required] UserModel model)
+        public IActionResult Register([FromBody][Required] UserRegisterInput model)
         {
             if(!ModelState.IsValid)
             {
@@ -77,7 +77,7 @@ namespace UniVerify.Controllers
                 return BadRequest(new { Error = ex.Message });
             }
 
-            return Login(new UserModelAuth { Username=model.Username, Password=model.Password});
+            return Login(new UserLoginInput { Username=model.Username, Password=model.Password});
         }
 
         private string GenerateJwtToken(string username)

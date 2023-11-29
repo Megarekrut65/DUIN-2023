@@ -29,7 +29,7 @@ namespace UniVerify.Controllers
 
         [Authorize]
         [HttpPost]
-        public IActionResult PostText([FromBody][Required] TextModel model) {
+        public IActionResult PostText([FromBody][Required] TextInput model) {
             if(!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -91,7 +91,7 @@ namespace UniVerify.Controllers
 
         [Authorize]
         [HttpPut("{id}")]
-        public ActionResult<TextResult> UpdateText(string id, [FromBody][Required] TextModel model)
+        public ActionResult<TextResult> UpdateText(string id, [FromBody][Required] TextInput model)
         {
             if (!ModelState.IsValid)
             {

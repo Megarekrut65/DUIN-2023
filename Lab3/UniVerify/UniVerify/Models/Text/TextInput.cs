@@ -2,7 +2,7 @@
 
 namespace UniVerify.Models.Text
 {
-    public class TextModel
+    public class TextInput
     {
         [Required]
         [StringLength(maximumLength: 10000, MinimumLength = 200)]

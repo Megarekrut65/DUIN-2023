@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace UniVerify.Models
 {
 
-    public class UserModel
+    public class UserRegisterInput
     {
         [Required]
         [MaxLength(100)]
@@ -21,7 +21,7 @@ namespace UniVerify.Models
         
     }
 
-    public class UserModelAuth
+    public class UserLoginInput
     {
         [Required]
         [MaxLength(100)]
