@@ -1,3 +1,5 @@
+import { getToken } from "./utilities.js";
+
 /**
  * 
  * @param {string} endpoint - path to server request
@@ -52,16 +54,53 @@ export const registerRequest = (username, email, password) =>{
 };
 
 
-export const parseError = (err) => {
-    try {
-        const obj = JSON.parse(err.message);
-        const message = obj.error ? obj.error : JSON.stringify(obj);
-        if (typeof message !== "string"){
-            return message.message?message.message:JSON.stringify(message);
-        } 
+export const textsListRequest = () =>{
+    const request = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${getToken()}`
+        }
+    };
 
-        return message;
-    } catch (error) {
-        return err;
-    }
+    return sendAsync(`${SERVER_URL}text/headeronly`, request);
+};
+
+
+export const textRequest = (id) =>{
+    const request = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${getToken()}`
+        }
+    };
+
+    return sendAsync(`${SERVER_URL}text/${id}`, request);
+};
+
+export const createTextRequest = (body) =>{
+    const request = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${getToken()}`
+        },
+        body: JSON.stringify(body)
+    };
+
+    return sendAsync(`${SERVER_URL}text`, request);
+};
+
+export const editTextRequest = (id, body) =>{
+    const request = {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${getToken()}`
+        },
+        body: JSON.stringify(body)
+    };
+
+    return sendAsync(`${SERVER_URL}text/${id}`, request);
 };

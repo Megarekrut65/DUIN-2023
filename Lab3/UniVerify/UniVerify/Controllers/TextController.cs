@@ -128,7 +128,8 @@ namespace UniVerify.Controllers
         {
             User user = _userService.GetUser(User.Identity!.Name!)!;
             
-            return _textService.GetList(user).Select(ToTextResult);
+            return _textService.GetList(user).Select(ToTextResult)
+                .OrderByDescending(text=>text.Created);
         }
 
         [Authorize]
@@ -138,7 +139,8 @@ namespace UniVerify.Controllers
             User user = _userService.GetUser(User.Identity!.Name!)!;
 
             return _textService.GetList(user)
-                .Select(ToTextHeader);
+                .Select(ToTextHeader)
+                .OrderByDescending(text => text.Created);
         }
 
         private TextResult ToTextResult(Text text)

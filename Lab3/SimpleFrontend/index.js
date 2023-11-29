@@ -1,101 +1,101 @@
-import {loginRequest, parseError, registerRequest} from "./requests.js"
-
-const getToken = ()=>localStorage.getItem("token");
-const getUsername = ()=>localStorage.getItem("username");
-
-const setUserData = (data)=>{
-    localStorage.setItem("username", data.username);
-    localStorage.setItem("token", data.token);
-};
-
-const logout = ()=>{
-    localStorage.clear();
-    window.location.reload();
-};
+import { createTextRequest, editTextRequest, textRequest, textsListRequest } from "./requests.js";
+import { getToken, parseError } from "./utilities.js";
 
 const template = document.getElementById("text-row");
 const place = document.getElementById("text-place");
+const verify = document.getElementById("verify");
 
-const createTextRow = (data)=>{
-    const row = template.content.close(true);
 
-    row.querySelector("#text-id").textNode = data.id;
-    row.querySelector("#text-title").textNode = data.title;
-    row.querySelector("#text-created").textNode = data.created;
-    row.querySelector("#text-private").textNode = data.privateContent;
+const createTextRow = (data, append=true)=>{
+    const row = template.content.cloneNode(true);
 
-    place.appendChild(data);
+    row.querySelector("#text-id").textContent = data.id ?? "";
+    row.querySelector("#text-title").textContent = data.title ?? "";
+    row.querySelector("#text-created").textContent = data.created ?? "";
+    row.querySelector("#text-private").textContent = data.privateContent ?? "";
+
+    row.querySelector("#edit").addEventListener("click", ()=>changeState("edit", data.id));
+    row.querySelector("#remove").addEventListener("click", ()=>changeState("remove", data.id));
+
+    if(append) place.appendChild(row);
+    else place.insertBefore(row, place.firstChild);
 };
 
-const loginLink = document.getElementById("login-link");
-const registerLink = document.getElementById("register-link");
+const textFrom = document.getElementById("text-form");
+const addBtn = document.getElementById("add-btn");
+const error = document.getElementById("error-box");
 
-const loginForm = document.getElementById("login-form");
-const registerForm = document.getElementById("register-form");
-const usernameBox = document.getElementById("username-box");
-const logoutNode = document.getElementById("logout");
-
-const registerBtn = ()=>{
-    loginForm.classList.add("hide");
-    registerForm.classList.remove("hide");
-};
-const loginBtn = ()=>{
-    registerForm.classList.add("hide");
-    loginForm.classList.remove("hide");
-};
-
-
-const login = (username, password)=>{
-
+const handleError = (err)=>{
+    error.textContent = parseError(err);
 }
 
-const submitLogin = ()=>{
-    const username = loginForm.querySelector("#username").value;
-    const password = loginForm.querySelector("#password").value;
+let state = "add";
 
-    loginRequest(username, password).then((res) => {
-        setUserData({username:username, token:res.token});
-        window.location.reload();
-    }).catch((err) => {
-        loginForm.querySelector("#error").textContent = parseError(err);
-    });
-
-    return false;
+const loadForm = (data)=>{
+    textFrom.querySelector('#id').value = data.id ?? "";
+    textFrom.querySelector('#title').value = data.title ?? "";
+    textFrom.querySelector('#privateContent').checked = data.privateContent ?? "";
+    textFrom.querySelector('#content').value = data.content ?? "";
 };
 
+const changeState = (newState, id)=>{
+    state = newState;
 
-const submitRegister = ()=>{
-    const username = registerForm.querySelector("#username").value;
-    const email = registerForm.querySelector("#email").value;
-    const password = registerForm.querySelector("#password").value;
-
-    registerRequest(username, email, password).then((res) => {
-        setUserData({username:username, token:res.token});
-        window.location.reload();
-    }).catch((err) => {
-        registerForm.querySelector("#error").textContent = parseError(err);
-    });
-
-    return false;
-};
-
-window.addEventListener("load", ()=>{
-    loginLink.addEventListener("click", loginBtn);
-    registerLink.addEventListener("click", registerBtn);
-
-    loginForm.addEventListener("submit", submitLogin);
-    registerForm.addEventListener("submit", submitRegister);
-
-    const token = getToken();
-    if(!token || token === ""){
-        loginForm.classList.remove("hide");
-
+    error.textContent = "";
+    if (newState === "add"){
+        verify.classList.add("hide");
+        loadForm({});
         return;
     }
+
+    if (newState === "edit"){
+        textRequest(id).then(loadForm).catch(handleError);
+        verify.classList.remove("hide");
+    }
+};
+
+const submitTextForm = ()=>{
+    const id = textFrom.querySelector('#id').value;
+
+    const formData = {
+        title: textFrom.querySelector('#title').value,
+        privateContent: textFrom.querySelector('#privateContent').checked,
+        content: textFrom.querySelector('#content').value
+    };
+
+    if(state === "add"){
+        createTextRequest(formData).then(res=>{
+            textRequest(res.id).then(res=>createTextRow(res, false)).catch(handleError);
+            changeState("add");
+        }).catch(handleError);
+        return false;
+    }
+
+    if(state === "edit"){
+        editTextRequest(id, formData).then(res=>{
+            window.location.reload();
+        }).catch(handleError);
+        return false;
+    }
     
-    usernameBox.classList.remove("hide");
+    
+    return false;
+}
 
-    usernameBox.querySelector("#username").textContent = getUsername();
+window.addEventListener("load", ()=>{
+    const token = getToken();
+    if(!token || token === ""){
+        place.textContent = "Empty list";
+        return;
+    }
 
-    logoutNode.addEventListener("click", logout);
+    textFrom.addEventListener("submit", submitTextForm);
+
+    textsListRequest().then(res=>{
+        for(let text of res){
+            createTextRow(text);
+        }
+    });
+
+    addBtn.addEventListener("click", ()=>changeState("add"));
 });
