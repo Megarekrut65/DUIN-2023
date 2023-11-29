@@ -35,7 +35,11 @@ namespace UniVerify.Controllers
                 return BadRequest(ModelState);
             }
 
-            User user = _userService.GetUser(User.Identity!.Name!)!;
+            User? user = _userService.GetUser(User.Identity?.Name??"");
+            if(user == null)
+            {
+                return BadRequest(new {Error="Invalid token"});
+            }
             Text text = new Text(model.Title, model.Content, model.PrivateContent, user);
 
             _textService.AddText(text, user);
@@ -65,7 +69,11 @@ namespace UniVerify.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteText(string id)
         {
-            User user = _userService.GetUser(User.Identity!.Name!)!;
+            User? user = _userService.GetUser(User.Identity?.Name ?? "");
+            if (user == null)
+            {
+                return BadRequest(new { Error = "Invalid token" });
+            }
 
             Guid guid;
             try
@@ -98,7 +106,11 @@ namespace UniVerify.Controllers
                 return BadRequest(ModelState);
             }
 
-            User user = _userService.GetUser(User.Identity!.Name!)!;
+            User? user = _userService.GetUser(User.Identity?.Name ?? "");
+            if (user == null)
+            {
+                return BadRequest(new { Error = "Invalid token" });
+            }
 
             Guid guid;
             try
@@ -126,8 +138,12 @@ namespace UniVerify.Controllers
         [HttpGet]
         public IEnumerable<TextResult> GetTexts()
         {
-            User user = _userService.GetUser(User.Identity!.Name!)!;
-            
+            User? user = _userService.GetUser(User.Identity?.Name ?? "");
+            if (user == null)
+            {
+                return new List<TextResult>();
+            }
+
             return _textService.GetList(user).Select(ToTextResult)
                 .OrderByDescending(text=>text.Created);
         }
@@ -136,7 +152,11 @@ namespace UniVerify.Controllers
         [HttpGet("HeaderOnly")]
         public IEnumerable<TextHeader> GetHeaders()
         {
-            User user = _userService.GetUser(User.Identity!.Name!)!;
+            User? user = _userService.GetUser(User.Identity?.Name ?? "");
+            if (user == null)
+            {
+                return new List<TextResult>();
+            }
 
             return _textService.GetList(user)
                 .Select(ToTextHeader)
