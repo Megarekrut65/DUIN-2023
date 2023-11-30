@@ -136,31 +136,42 @@ namespace UniVerify.Controllers
 
         [Authorize]
         [HttpGet]
-        public IEnumerable<TextResult> GetTexts()
+        public IEnumerable<TextResult> GetTexts([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 50)
         {
             User? user = _userService.GetUser(User.Identity?.Name ?? "");
             if (user == null)
+            {
+                return new List<TextResult>();
+            }
+            if (pageNumber < 1 || pageSize < 1)
             {
                 return new List<TextResult>();
             }
 
             return _textService.GetList(user).Select(ToTextResult)
-                .OrderByDescending(text=>text.Created);
+                .OrderByDescending(text=>text.Created)
+                .Skip(pageSize * (pageNumber - 1))
+                .Take(pageSize);
         }
 
         [Authorize]
         [HttpGet("HeaderOnly")]
-        public IEnumerable<TextHeader> GetHeaders()
+        public IEnumerable<TextHeader> GetHeaders([FromQuery] int pageNumber=1, [FromQuery] int pageSize=50)
         {
             User? user = _userService.GetUser(User.Identity?.Name ?? "");
-            if (user == null)
-            {
+            if (user == null){
+                return new List<TextResult>();
+            }
+
+            if(pageNumber < 1 || pageSize < 1) {
                 return new List<TextResult>();
             }
 
             return _textService.GetList(user)
                 .Select(ToTextHeader)
-                .OrderByDescending(text => text.Created);
+                .OrderByDescending(text => text.Created)
+                .Skip(pageSize * (pageNumber - 1))
+                .Take(pageSize);
         }
 
         private TextResult ToTextResult(Text text)
