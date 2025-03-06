@@ -1,8 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="746adc9d-b280-400e-a733-ce15fd23ecf6" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/0b1b8052-bd4a-40b3-bd31-0acb848e19b2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/0b1b8052-bd4a-40b3-bd31-0acb848e19b2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/tutors_tool.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/tutors_tool.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/System/cert.pem" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/System/key.pem" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/System/server.conf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/System/ssl.conf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/serve.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssl_manager.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tutors_hub/.env" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tutors_hub/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/tutors_hub/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +45,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 4
+}]]></component>
   <component name="ProjectId" id="2XZRntN78CHIKdlRp53UqHpPsmG" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -35,30 +56,41 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/repos/Megarekrut65/LAKEWOODS-MARKETING-PARTNERS-INC/SharpTrader/SharpTraderServer&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode.Less&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "DefaultHtmlFileTemplate": "HTML File",
+    "Django Server.tutors_hub.executor": "Run",
+    "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "pythonanywere",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Megarekrut65/DUIN-2023/Lab1/tutors_hub",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.sourceCode.Less",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;postgresql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Megarekrut65\DUIN-2023\Lab1\tutors_hub" />
       <recent name="D:\repos\Megarekrut65\DUIN-2023\Lab1\tutors_hub\teacher\templates\teacher" />
       <recent name="D:\repos\Megarekrut65\DUIN-2023\Lab1\tutors_hub\student" />
       <recent name="D:\repos\Megarekrut65\DUIN-2023\Lab1\tutors_hub\teacher" />
       <recent name="D:\repos\Megarekrut65\DUIN-2023\Lab1\tutors_hub\templates" />
-      <recent name="D:\repos\Megarekrut65\DUIN-2023\Lab1\tutors_hub\users\templates" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\repos\Megarekrut65\DUIN-2023\Lab1\tutors_hub\tutors_hub" />
@@ -68,9 +100,10 @@
       <recent name="D:\repos\Megarekrut65\DUIN-2023\Lab1\tutors_hub\users\templates\users" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.serve">
+  <component name="RunManager" selected="Django Server.tutors_hub">
     <configuration name="serve" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="tutors_tool" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -93,6 +126,7 @@
     </configuration>
     <configuration name="tutors_hub" type="Python.DjangoServer" factoryName="Django server">
       <module name="tutors_tool" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -101,7 +135,7 @@
       </envs>
       <option name="SDK_HOME" value="E:\Variables\tutors_tool\Scripts\python.exe" />
       <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
+      <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="launchJavascriptDebuger" value="false" />
@@ -120,6 +154,14 @@
         <item itemvalue="Python.serve" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-deb605915726-JavaScript-PY-243.22562.220" />
+        <option value="bundled-python-sdk-0fc6c617c4bd-9a18a617cbe4-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-243.22562.220" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -160,6 +202,7 @@
       <workItem from="1700315413523" duration="14000" />
       <workItem from="1700833881299" duration="111000" />
       <workItem from="1701288427177" duration="4390000" />
+      <workItem from="1741255673346" duration="1268000" />
     </task>
     <servers />
   </component>
